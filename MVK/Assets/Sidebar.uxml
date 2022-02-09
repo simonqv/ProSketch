@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/sidebar.uss?fileID=7433441132597879392&amp;guid=7e1ac6c554c4b4bb3ab0234257569343&amp;type=3#sidebar" />
+    <ui:VisualElement name="Container" class="fullscreen">
+        <ui:VisualElement name="Header" class="header">
+            <ui:VisualElement name="EditingButtons" />
+            <ui:VisualElement name="ExportModeButtons" />
+        </ui:VisualElement>
+        <ui:VisualElement name="SidebarContainer" class="container">
+            <ui:VisualElement name="CategoryButtons" class="icon-stack" style="justify-content: flex-start;">
+            </ui:VisualElement>
+            <ui:ListView focusable="true" name="ItemList" class="item-list" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

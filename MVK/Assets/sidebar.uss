@@ -1,0 +1,62 @@
+.item-list {
+    width: 30%;
+    background-color: rgba(255, 255, 255, 255);
+    height: 100%;
+}
+
+.container {
+    flex-direction: row;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.icon-stack {
+    width: 5%;
+}
+
+#Hamburger {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.hidden {
+    display: none;
+}
+
+
+.icon {
+    background-color: #2568DA;
+    height: 10%;
+    margin-top: 50%;
+    padding: 10%;
+    border-top-left-radius: 15%;
+    border-bottom-left-radius: 15%;
+}
+
+.icon.selected {
+    background-color: rgba(250, 219, 0, 255);
+}
+
+.icon-image {
+    -unity-background-scale-mode: scale-to-fit;
+    height: 100%;
+    width: 100%;
+}
+
+.fullscreen {
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    height: 10%;
+    background-color: rgba(255, 179, 0, 255);
+}
+
+#ExportModeButtons {
+    visibility: visible;
+    display: none;
+}
+
+#EditingButtons {
+    background-color: rgba(255, 152, 0, 255);
+}
