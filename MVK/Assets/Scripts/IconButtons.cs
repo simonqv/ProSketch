@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class IconButtons
+public static class IconButtons
 {
     private static Button CreateButtonWithClass(string className, string name = "")
     {
@@ -18,8 +18,9 @@ public class IconButtons
     {
         Button element = CreateButtonWithClass("icon", containerName);
         Texture2D backgroundImage = Resources.Load(path) as Texture2D;
-        VisualElement backgroundElement = CreateButtonWithClass("icon-image", iconName);
+        Button backgroundElement = CreateButtonWithClass("icon-image", iconName);
         backgroundElement.style.backgroundImage = new StyleBackground(backgroundImage);
+        backgroundElement.clicked += () => UIController.SetButton(element);
         element.Add(backgroundElement);
         return element;
     }
