@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI-Styles/Style.uss?fileID=7433441132597879392&amp;guid=dd925ea8c01f54191a385109a3edbb10&amp;type=3#Style" />
+    <ui:VisualElement name="Background" style="width: 100%; height: 100%; left: 0; top: 0; right: 0; bottom: 0; background-color: rgb(250, 125, 46); align-items: center; justify-content: flex-start; flex-direction: row;">
+        <ui:VisualElement name="Left-list" class="container" style="background-color: rgb(170, 202, 255); width: 298px; height: 100%; align-items: center; justify-content: center;">
+            <ui:Label text="ProSketch" display-tooltip-when-elided="true" name="title" class="title" />
+            <ui:Button text="Skapa ny lektion" display-tooltip-when-elided="true" name="Create-new-lesson-button" class="button-style" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+            <ui:Button text="Ladda lektion" display-tooltip-when-elided="true" name="Load-lesson-button" class="button-style" style="background-color: rgb(250, 125, 46);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Right-list" class="container" style="flex-direction: column; align-items: center; flex-grow: 1; flex-shrink: 0; height: 100%; background-color: rgba(250, 125, 46, 255); justify-content: center;">
+            <ui:Label text="Favoriter" display-tooltip-when-elided="true" name="favourite-list-title" class="title" />
+            <ui:ListView focusable="true" name="favourites-list" style="flex-grow: 0; height: 75px; align-items: center; flex-shrink: 0; justify-content: flex-start;" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
+            <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -9,6 +9,7 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
+[Uu]serSettings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -110,3 +111,11 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/MVK/UserSettings/Layouts/default-2021.dwlt
+/MVK/UserSettings/EditorUserSettings.asset
+/MVK/.idea/.idea.MVK/.idea/encodings.xml
+/MVK/.idea/.idea.MVK/.idea/indexLayout.xml
+/MVK/UserSettings/Search.settings
+/MVK/.idea/.idea.MVK/.idea/vcs.xml
+
+
