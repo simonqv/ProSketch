@@ -4,14 +4,15 @@
         <ui:VisualElement name="Left-list" class="container" style="background-color: rgb(170, 202, 255); width: 298px; height: 100%; align-items: center; justify-content: center;">
             <ui:Label text="ProSketch" display-tooltip-when-elided="true" name="title" class="title" />
             <ui:Button text="Skapa ny lektion" display-tooltip-when-elided="true" name="Create-new-lesson-button" class="button-style" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
-            <ui:Button text="Ladda lektion" display-tooltip-when-elided="true" name="Load-lesson-button" class="button-style" style="background-color: rgb(250, 125, 46);" />
+            <ui:Button text="Öppna lektion" display-tooltip-when-elided="true" name="Load-lesson-button" class="button-style" />
         </ui:VisualElement>
-        <ui:VisualElement name="Right-list" class="container" style="flex-direction: column; align-items: center; flex-grow: 1; flex-shrink: 0; height: 100%; background-color: rgba(250, 125, 46, 255); justify-content: center;">
+        <ui:VisualElement name="Right-list" class="container" style="flex-direction: column; align-items: center; flex-grow: 1; flex-shrink: 0; height: 100%; background-color: rgb(250, 125, 46); justify-content: center;">
             <ui:Label text="Favoriter" display-tooltip-when-elided="true" name="favourite-list-title" class="title" />
-            <ui:ListView focusable="true" name="favourites-list" style="flex-grow: 0; height: 75px; align-items: center; flex-shrink: 0; justify-content: flex-start;" />
-            <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
-            <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
-            <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
+            <ui:VisualElement style="background-color: rgb(250, 125, 46); width: 75%; height: 75%; margin-top: auto; align-items: center; justify-content: flex-start; padding-top: 0; margin-bottom: 0; padding-bottom: 10%;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 70px; width: 100%; background-color: rgb(170, 202, 255); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" style="height: 46px; width: 480px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -9,7 +9,36 @@
     border-bottom-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    background-color: rgba(250, 125, 46, 255);
+    background-color: rgb(250, 125, 46);
+}
+
+.button-style:hover {
+    height: 70px;
+    width: 75%;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgb(207, 95, 24);
+}
+
+.button-style:active {
+    height: 70px;
+    width: 75%;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgb(161, 62, 0);
+    color: rgba(255, 255, 255, 255);
 }
 
 .title {
