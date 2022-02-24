@@ -111,11 +111,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-/MVK/UserSettings/Layouts/default-2021.dwlt
-/MVK/UserSettings/EditorUserSettings.asset
-/MVK/.idea/.idea.MVK/.idea/encodings.xml
-/MVK/.idea/.idea.MVK/.idea/indexLayout.xml
-/MVK/UserSettings/Search.settings
-/MVK/.idea/.idea.MVK/.idea/vcs.xml
 
-
+/MVK/.idea
+/MVK/.idea/*
+/MVK/UserSettings
