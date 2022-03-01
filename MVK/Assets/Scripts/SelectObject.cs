@@ -30,6 +30,7 @@ public class SelectObject : MonoBehaviour
                 var selection = hit.transform;
                 var selectionRenderer = selection.GetComponent<Renderer>();
                 if (selectionRenderer != null) {
+                    previousMaterial = selectionRenderer.material;
                     selectionRenderer.material = highlightMaterial;
                 }
                 _selection = selection;
