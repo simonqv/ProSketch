@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7237dda4b05a1084096d0b1b53e8b29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectableTag: nonSelectable
   highlightMaterial: {fileID: 2100000, guid: 63796a6f6e0933541a44bb5e417121d4, type: 2}
   previousMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &532717768
@@ -401,6 +402,10 @@ PrefabInstance:
     - target: {fileID: 7047686969029614226, guid: 04e72c87ce178a645b5da8a1a0b71f53, type: 3}
       propertyPath: m_Name
       value: CubeTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047686969029614226, guid: 04e72c87ce178a645b5da8a1a0b71f53, type: 3}
+      propertyPath: m_TagString
+      value: nonSelectable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04e72c87ce178a645b5da8a1a0b71f53, type: 3}
