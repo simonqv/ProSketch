@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SelectObject : MonoBehaviour
 {
+    [SerializeField] private string selectableTag = "nonSelectable";
     [SerializeField] private Material highlightMaterial;
     [SerializeField] private Material previousMaterial;
 
@@ -19,6 +20,7 @@ public class SelectObject : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) {
+            
             if (_selection != null) {
                 var selectionRenderer = _selection.GetComponent<Renderer>();
                 selectionRenderer.material = previousMaterial;
@@ -28,12 +30,14 @@ public class SelectObject : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
                 var selection = hit.transform;
-                var selectionRenderer = selection.GetComponent<Renderer>();
-                if (selectionRenderer != null) {
-                    previousMaterial = selectionRenderer.material;
-                    selectionRenderer.material = highlightMaterial;
+                if(!selection.CompareTag(selectableTag)) {
+                    var selectionRenderer = selection.GetComponent<Renderer>();
+                    if (selectionRenderer != null) {
+                        previousMaterial = selectionRenderer.material;
+                        selectionRenderer.material = highlightMaterial;
+                    }
+                    _selection = selection;
                 }
-                _selection = selection;
             }
         }
     }
