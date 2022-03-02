@@ -1,5 +1,5 @@
 .button-style {
-    height: 70px;
+    height: 8%;
     width: 75%;
     border-left-width: 0;
     border-right-width: 0;
@@ -13,7 +13,7 @@
 }
 
 .button-style:hover {
-    height: 70px;
+    height: 8%;
     width: 75%;
     border-left-width: 0;
     border-right-width: 0;
@@ -27,7 +27,7 @@
 }
 
 .button-style:active {
-    height: 70px;
+    height: 8%;
     width: 75%;
     border-left-width: 0;
     border-right-width: 0;
@@ -38,7 +38,7 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: rgb(161, 62, 0);
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .title {
@@ -50,4 +50,82 @@
 }
 
 .container {
+}
+
+.right-button-style {
+    height: 10%;
+    width: 100%;
+    background-color: rgb(170, 202, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.room-input-field-style {
+    width: 40%;
+    height: auto;
+    max-width: 1000px;
+    min-width: 350px;
+    top: 15%;
+    -unity-font-style: normal;
+    -unity-text-align: middle-right;
+    font-size: 25px;
+    justify-content: flex-start;
+    margin-bottom: 1%;
+}
+
+.confirm-cancel-style {
+    width: 50%;
+    height: 100%;
+    background-color: rgba(71, 190, 48, 255);
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgba(255, 255, 255, 255);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.confirm-cancel-style:hover {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(57, 156, 38);
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.confirm-cancel-style:active {
+    width: 50%;
+    height: 100%;
+    background-color: rgb(87, 241, 58);
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
 }

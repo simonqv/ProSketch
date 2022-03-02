@@ -3,11 +3,17 @@
     <ui:VisualElement name="Container" class="fullscreen">
         <ui:VisualElement name="Header" class="header">
             <ui:VisualElement name="EditingButtons" />
-            <ui:VisualElement name="ExportModeButtons" />
+            <ui:VisualElement class="dropDown_button">
+                <ui:Label text="Exportera Vy" display-tooltip-when-elided="true" style="left: 0; -unity-text-align: upper-center; height: 100%; width: 100%; top: 25%;" />
+            </ui:VisualElement>
+            
+            <ui:VisualElement name="VisualElement" >
+                <ui:Foldout class="dropDown_button" />
+                <ui:Label text="Fil" display-tooltip-when-elided="true" name="Fil" enable-rich-text="true" tabindex="0" style="position: absolute; -unity-text-align: upper-left; display: flex; overflow: visible; visibility: visible; align-items: stretch; justify-content: flex-start; left: 45%; top: 3px; -unity-font-style: bold; font-size: 16px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="SidebarContainer" class="container">
-            <ui:VisualElement name="CategoryButtons" class="icon-stack" style="justify-content: flex-start;">
-            </ui:VisualElement>
+            <ui:VisualElement name="CategoryButtons" class="icon-stack" style="justify-content: flex-start;" />
             <ui:ListView focusable="true" name="ItemList" class="item-list" />
         </ui:VisualElement>
     </ui:VisualElement>
