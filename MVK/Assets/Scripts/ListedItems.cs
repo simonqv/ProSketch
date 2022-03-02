@@ -7,8 +7,8 @@ using UnityEngine.UIElements;
 
 public static class ListedItems
 {
-/*
 
+/*
     private static IEnumerable<Object> LoadPrefabsFromCategory(string category)
     {
         var gameObjects = Resources.LoadAll("Equipment/" + category, typeof(GameObject));

@@ -47,12 +47,12 @@ public class UIController : MonoBehaviour
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
         _hamburgerButton.clicked += ToggleItemList;
-        /*
+/*        
         foreach (var button in ListedItems.GetAllItemsInCategory("Ball"))
         {
             _itemList.hierarchy.Add(button);
         }
-        */
+  */      
     }
 
     public static void SetButton(Button button)
