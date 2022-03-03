@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject prefab;
-   
-    public void Spawn()
+    public void Spawn(GameObject prefab)
     {
-        Instantiate(prefab);
+        var instance = Instantiate(prefab);
     }
 }

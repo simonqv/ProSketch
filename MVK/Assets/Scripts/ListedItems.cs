@@ -1,13 +1,11 @@
 
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public static class ListedItems
 {
-
 
     private static Object[] LoadPrefabsFromCategory(string category)
     {
@@ -24,10 +22,16 @@ public static class ListedItems
         foreach (var prefab in prefabs)
         {
             var item = IconButtons.CreateButtonWithClass("list-item");
-            var buttonImage = IconButtons.CreateButtonWithClass("list-item-bg");
+            var buttonImage = IconButtons.CreateDivWithClass("list-item-bg");
             var icon = AssetPreview.GetAssetPreview(prefab as GameObject);
             buttonImage.style.backgroundImage = new StyleBackground(icon);
             buttonImage.AddToClassList("equipment-button-icon");
+            Spawner s = UIController.spawnerContainer.AddComponent<Spawner>();
+            item.clicked += () =>
+            {
+                s.Spawn(prefab as GameObject);
+                Debug.Log(s);
+            };
             item.Add(buttonImage);
             item.AddToClassList("equipment-button");
             allItems.Add(item);

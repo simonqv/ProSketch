@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     private static Button _savedSelection;
     private Button _hamburgerButton;
     private static VisualElement _itemList;
+    public static GameObject spawnerContainer;
 
     void ToggleItemList()
     {
@@ -62,9 +63,9 @@ public class UIController : MonoBehaviour
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
         _hamburgerButton.clicked += ToggleItemList;
-      
-        
-        
+        spawnerContainer = GameObject.Find("SpawnerContainer");
+
+
     }
 
     public static void SetButton(Button button)
