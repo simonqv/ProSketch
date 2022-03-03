@@ -2,14 +2,36 @@
     <Style src="project://database/Assets/sidebar.uss?fileID=7433441132597879392&amp;guid=7e1ac6c554c4b4bb3ab0234257569343&amp;type=3#sidebar" />
     <ui:VisualElement name="Container" class="fullscreen">
         <ui:VisualElement name="Header" class="header">
-            <ui:VisualElement name="EditingButtons" />
-            <ui:VisualElement class="dropDown_button">
-                <ui:Label text="Exportera Vy" display-tooltip-when-elided="true" style="left: 0; -unity-text-align: upper-center; height: 100%; width: 100%; top: 25%;" />
+            <ui:VisualElement style="top: 25%; left: 4%; height: 50%; width: 10%; position: absolute;">
+                <ui:DropdownField index="-1" choices="System.Collections.Generic.List`1[System.String]" focusable="true" label=" " class="dropDown_button" style="-unity-background-image-tint-color: rgb(0, 33, 255);" />
+                <ui:Label text="Fil" display-tooltip-when-elided="true" enable-rich-text="true" style="-unity-text-align: middle-center; width: 100%; height: 100%; font-size: 17%; -unity-font-style: bold; -unity-text-outline-color: rgb(255, 255, 255); color: rgb(255, 255, 255); position: absolute;" />
             </ui:VisualElement>
-            
-            <ui:VisualElement name="VisualElement" >
-                <ui:Foldout class="dropDown_button" />
-                <ui:Label text="Fil" display-tooltip-when-elided="true" name="Fil" enable-rich-text="true" tabindex="0" style="position: absolute; -unity-text-align: upper-left; display: flex; overflow: visible; visibility: visible; align-items: stretch; justify-content: flex-start; left: 45%; top: 3px; -unity-font-style: bold; font-size: 16px;" />
+            <ui:VisualElement style="height: 50%; width: 10%; right: auto; left: 86%; top: 25%; position: absolute;">
+                <ui:Button text="Exportera Vyn" display-tooltip-when-elided="true" class="dropDown_button" />
+            </ui:VisualElement>
+            <ui:VisualElement class="ButtonTemplate" style="left: 17%; top: 20%;">
+                <ui:VisualElement style="height: 75%; width: 50%; left: 35%; right: auto; top: 15%; bottom: auto; background-image: resource(&apos;category-icons/mouse_icon&apos;); position: absolute;" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" />
+            </ui:VisualElement>
+            <ui:VisualElement class="ButtonTemplate" style="left: 22%; top: 20%;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" />
+                <ui:VisualElement style="background-image: resource(&apos;category-icons/hand_icon&apos;); width: 90%; height: 90%; left: 7%; top: 7%; position: absolute;" />
+            </ui:VisualElement>
+            <ui:VisualElement class="ButtonTemplate" style="left: 27%; top: 20%;">
+                <ui:VisualElement style="position: absolute; width: 90%; height: 100%; left: 10%; top: 5%; background-image: resource(&apos;category-icons/rotate_icon&apos;);" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" />
+            </ui:VisualElement>
+            <ui:VisualElement class="ButtonTemplate" style="left: 32%;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" />
+                <ui:VisualElement style="width: 100%; height: 100%; background-image: resource(&apos;category-icons/paint_bucket&apos;); position: absolute; left: 5%; top: 5%;" />
+            </ui:VisualElement>
+            <ui:VisualElement class="ButtonTemplate" style="left: 80%;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
+                <ui:VisualElement style="background-image: resource(&apos;category-icons/minus_icon&apos;); width: 90%; height: 90%; position: absolute; left: 10%; top: 10%;" />
+            </ui:VisualElement>
+            <ui:VisualElement class="ButtonTemplate" style="left: 75%;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
+                <ui:VisualElement style="background-image: resource(&apos;category-icons/plus_icon&apos;); width: 95%; height: 95%; position: absolute; left: 5%; top: 5%;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="SidebarContainer" class="container">
