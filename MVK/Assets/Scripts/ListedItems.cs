@@ -8,11 +8,13 @@ using UnityEngine.UIElements;
 public static class ListedItems
 {
 
-/*
-    private static IEnumerable<Object> LoadPrefabsFromCategory(string category)
+
+    private static Object[] LoadPrefabsFromCategory(string category)
     {
-        var gameObjects = Resources.LoadAll("Equipment/" + category, typeof(GameObject));
-        return gameObjects;
+        
+        
+        Object[] gameObjects = Resources.LoadAll("equipment/" + category, typeof(GameObject));
+        return gameObjects; 
     }
 
     public static List<Button> GetAllItemsInCategory(string category)
@@ -23,14 +25,16 @@ public static class ListedItems
         {
             var item = IconButtons.CreateButtonWithClass("list-item");
             var buttonImage = IconButtons.CreateButtonWithClass("list-item-bg");
-            var icon = PrefabUtility.GetIconForGameObject(prefab);
+            var icon = AssetPreview.GetAssetPreview(prefab as GameObject);
             buttonImage.style.backgroundImage = new StyleBackground(icon);
+            buttonImage.AddToClassList("equipment-button-icon");
             item.Add(buttonImage);
+            item.AddToClassList("equipment-button");
             allItems.Add(item);
         }
 
         return allItems;
     }
-    */
+    
 
 }
