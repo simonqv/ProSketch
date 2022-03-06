@@ -35,32 +35,47 @@ public class MainMenuController : MonoBehaviour
         CreateNewLessonButton.clicked += CreateNewLessonButtonPressed;
         LoadLessonButton.clicked += LoadLessonButtonPressed;
         ContinueToSceneButton.clicked += ContinueToSceneButtonPressed;
+        CancelDimsInputButton.clicked += CancelDimsInputButtonPressed;
     }
 
     void CreateNewLessonButtonPressed()
     {
         _setDimsBox.style.display = DisplayStyle.Flex;
-        
+
     }
 
     void ContinueToSceneButtonPressed()
     {
         var widthField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-width-input").value;
         var lengthField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-length-input").value;
-
+        Debug.Log(widthField);
+        Debug.Log(lengthField);
         try
         {
             int width = Int32.Parse(widthField);
             int length = Int32.Parse(lengthField);
+
+            if (length is < 150 and > 15 && width is < 100 and > 15)
+            {
+                // TODO: with Celina create new scene
+                SceneManager.LoadScene("SampleScene");
+            }
         }
         catch (FormatException e)
         {
             Console.WriteLine(e.Message);
         }
         
-        // TODO: with Celina create new scene
-        SceneManager.LoadScene("SampleScene");
 
+
+    }
+
+    void CancelDimsInputButtonPressed()
+    {
+        GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-width-input").value = "";
+        GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-length-input").value = "";
+
+        _setDimsBox.style.display = DisplayStyle.None;
     }
 
     void LoadLessonButtonPressed()
