@@ -22,8 +22,7 @@
                 <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" />
             </ui:VisualElement>
             <ui:VisualElement name="Bucket" class="ButtonTemplate" style="left: 32%;">
-                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" />
-                <ui:VisualElement style="width: 100%; height: 100%; background-image: resource(&apos;category-icons/paint_bucket&apos;); position: absolute; left: 5%; top: 5%;" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" name="Paint_button" class="clickButton" style="background-image: resource(&apos;category-icons/paint_bucket&apos;);" />
             </ui:VisualElement>
             <ui:VisualElement name="Plus" class="ButtonTemplate" style="left: 80%;">
                 <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0;" />
@@ -41,8 +40,8 @@
                 <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" />
                 <ui:VisualElement style="width: 100%; height: 100%; background-image: resource(&apos;category-icons/hammer&apos;); position: absolute; left: 5%; top: 5%;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Colors" style="width: 12%; height: 40%; bottom: auto; position: absolute; top: 101%; left: 28.5%; display: none; visibility: visible; overflow: visible;">
-                <ui:Button display-tooltip-when-elided="true" name="Red" style="width: 17%; background-color: rgba(255, 0, 0, 255); height: 100%; position: absolute; left: 1%;" />
+            <ui:VisualElement name="Colors" class="hidden" style="width: 12%; height: 40%; bottom: auto; position: absolute; top: 101%; left: 28.5%; overflow: visible;">
+                <ui:Button display-tooltip-when-elided="true" name="Red" style="width: 17%; background-color: rgb(255, 0, 0); height: 100%; position: absolute; left: 1%;" />
                 <ui:Button display-tooltip-when-elided="true" name="Orange" style="width: 17%; background-color: rgb(255, 165, 0); height: 100%; position: absolute; left: 19%;" />
                 <ui:Button display-tooltip-when-elided="true" name="Yellow" style="width: 17%; background-color: rgb(255, 255, 0); height: 100%; position: absolute; left: 37%;" />
                 <ui:Button display-tooltip-when-elided="true" name="Green" style="width: 17%; background-color: rgb(0, 255, 0); height: 100%; position: absolute; left: 55%;" />
