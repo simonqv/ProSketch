@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,7 @@ public class MainMenuController : MonoBehaviour
 
     private GroupBox _setDimsBox;
     
-
+    
    
     // Start is called before the first frame update
     void Start()
@@ -48,17 +49,25 @@ public class MainMenuController : MonoBehaviour
     {
         var widthField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-width-input").value;
         var lengthField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-length-input").value;
+        
         Debug.Log(widthField);
         Debug.Log(lengthField);
+        
         try
         {
             int width = Int32.Parse(widthField);
             int length = Int32.Parse(lengthField);
-
+            
             if (length is < 150 and > 15 && width is < 100 and > 15)
             {
                 // TODO: with Celina create new scene
-                SceneManager.LoadScene("SampleScene");
+                RoomClass.Setter(length, width);
+                SceneManager.LoadScene("Scenes/CreateTemplate");
+                
+                //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                
+                //cube.transform.position = new Vector3(0, 0, 0);
+                
             }
         }
         catch (FormatException e)
