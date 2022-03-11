@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour
         
     }
 
-    void PopulateItemList()
+    static void ClearItemList()
 
     {
         if (_itemList.hierarchy.childCount <= 0) return;
@@ -72,7 +72,8 @@ public class UIController : MonoBehaviour
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
         _paintButton = root.Q<Button>("Paint_button");
-        
+
+        spawnerContainer = GameObject.Find("SpawnerContainer");
         _hamburgerButton.clicked += ToggleItemList;
 
 
