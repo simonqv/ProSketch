@@ -26,7 +26,7 @@ public class UIController : MonoBehaviour
         }
         
     }
-
+//Solved
     static void ClearItemList()
     {
         if (_itemList.hierarchy.childCount <= 0) return;
