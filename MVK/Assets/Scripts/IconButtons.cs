@@ -40,10 +40,10 @@ public static class IconButtons
     public static readonly Button[] CategoryButtons = new Button[]
     {
         CreateIcon("category-icons/hamburger-menu", "Hamburger", iconName:"HamburgerIcon", true),
-        CreateIcon("category-icons/plinth"),
-        CreateIcon("category-icons/hula-hoop"),
-        CreateIcon("category-icons/mat"),
-        CreateIcon("category-icons/ball"),
-        CreateIcon("category-icons/racket"),
+        CreateIcon("category-icons/plinth", "_Plinth"),
+        CreateIcon("category-icons/hula-hoop", "_HulaHoop"),
+        CreateIcon("category-icons/mat", "_Mat"),
+        CreateIcon("category-icons/ball", "_Ball"),
+        CreateIcon("category-icons/racket", "_Racket"),
     };
 }

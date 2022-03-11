@@ -1,4 +1,4 @@
-using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,6 +10,15 @@ public class UIController : MonoBehaviour
     private static Button _savedSelection;
     private Button _hamburgerButton;
     private static VisualElement _itemList;
+    public static GameObject spawnerContainer;
+
+    private static Button _paintButton;
+    private static VisualElement _Colors;
+    private static Button _Red;
+    private static Button _Orange;
+    private static Button _Green;
+    private static Button _Blue;
+    private static Button _Yellow;
 
     void ToggleItemList()
     {
@@ -26,9 +35,25 @@ public class UIController : MonoBehaviour
         
     }
 
-    void PopulateItemList()
+    static void ClearItemList()
+
     {
-        
+        if (_itemList.hierarchy.childCount <= 0) return;
+        _itemList.hierarchy.Clear();
+    }
+
+    static void PopulateItemList(string category)
+    {
+        if (category[0] != '_')
+        {
+            Debug.Log("too bad");
+            return;
+        };
+        ClearItemList();
+        foreach (var button in ListedItems.GetAllItemsInCategory(category.ToLower()[1..]))
+        {
+            _itemList.hierarchy.Add(button);
+        }
     }
     
     // Start is called before the first frame update
@@ -46,13 +71,25 @@ public class UIController : MonoBehaviour
 
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
+        _paintButton = root.Q<Button>("Paint_button");
+        
         _hamburgerButton.clicked += ToggleItemList;
-/*        
-        foreach (var button in ListedItems.GetAllItemsInCategory("Ball"))
-        {
-            _itemList.hierarchy.Add(button);
-        }
-  */      
+
+
+        _Colors = root.Q<VisualElement>("Colors");
+        _paintButton.clicked += HandleColors;
+        _Red.clicked += ChoseColor;
+        _Orange.clicked += ChoseColor;
+        _Green.clicked += ChoseColor;
+        _Blue.clicked += ChoseColor;
+        _Yellow.clicked += ChoseColor;
+        /*        
+                foreach (var button in ListedItems.GetAllItemsInCategory("Ball"))
+                {
+                    _itemList.hierarchy.Add(button);
+                }
+          */
+
     }
 
     public static void SetButton(Button button)
@@ -64,6 +101,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
+            PopulateItemList(button.name);
             _selectedCategory.RemoveFromClassList("selected");
             _selectedCategory = button;
             _selectedCategory.AddToClassList("selected");
@@ -73,6 +111,31 @@ public class UIController : MonoBehaviour
             _itemList.RemoveFromClassList("hidden");
         }
     }
+
+    public static void HandleColors()
+    {
+        if (_Colors.ClassListContains("hidden"))
+        {
+            _Colors.RemoveFromClassList("hidden");
+        }
+        else if (!_Colors.ClassListContains("hidden"))
+        {
+            _Colors.AddToClassList("hidden");
+        }
+    }
+
+    public static void ChoseColor()
+    {
+        if (_Colors.ClassListContains("hidden"))
+        {
+            return;
+        }
+        else
+        {
+
+        }
+    }
+
 
     public static void UnsetButton()
     {
