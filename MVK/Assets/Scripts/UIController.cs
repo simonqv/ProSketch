@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour
         
     }
 
-    void PopulateItemList()
+    static void ClearItemList()
 
     {
         if (_itemList.hierarchy.childCount <= 0) return;
