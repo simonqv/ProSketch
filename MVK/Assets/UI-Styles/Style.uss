@@ -82,10 +82,10 @@
 .confirm-cancel-style {
     width: 50%;
     height: 100%;
-    background-color: rgba(71, 190, 48, 255);
+    background-color: rgb(71, 190, 48);
     font-size: 20px;
     -unity-font-style: bold;
-    color: rgba(255, 255, 255, 255);
+    color: rgb(255, 255, 255);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -128,4 +128,16 @@
     border-right-width: 0;
     border-top-width: 0;
     border-bottom-width: 0;
+}
+
+.cancel-button-style {
+    background-color: rgb(190, 59, 48);
+}
+
+.cancel-button-style:hover {
+    background-color: rgb(137, 39, 30);
+}
+
+.cancel-button-style:active {
+    background-color: rgb(241, 95, 83);
 }
