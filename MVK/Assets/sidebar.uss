@@ -77,12 +77,57 @@
 }
 
 .dropDown_button {
-    background-color: rgba(37, 104, 218, 255);
+    background-color: rgb(37, 104, 218);
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    width: 50px;
-    height: 70%;
+    width: 100%;
+    height: 100%;
     position: absolute;
+    -unity-text-outline-color: rgba(245, 29, 29, 255);
+    border-left-color: rgba(248, 36, 36, 255);
+    border-right-color: rgba(248, 36, 36, 255);
+    border-top-color: rgba(248, 36, 36, 255);
+    border-bottom-color: rgba(248, 36, 36, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    font-size: 100%;
+    color: rgba(255, 255, 255, 255);
+    -unity-font-style: bold;
+}
+
+.clickButton {
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 0;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-left-color: rgba(0, 0, 0, 255);
+    border-right-color: rgba(0, 0, 0, 255);
+    border-top-color: rgba(0, 0, 0, 255);
+    border-bottom-color: rgba(0, 0, 0, 255);
+}
+
+.ButtonTemplate {
+    width: 4%;
+    height: 65%;
+    background-color: rgba(37, 104, 218, 0);
+    left: auto;
+    position: absolute;
+    top: 20%;
 }
