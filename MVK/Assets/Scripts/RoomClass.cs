@@ -13,7 +13,7 @@ public class RoomClass : MonoBehaviour
 
     private GameObject _roomPrefab;
     private Camera _camera;
-    private Camera cam;
+    public Camera cam;
     private float[] _pos;
     private float[] _angles;
 
