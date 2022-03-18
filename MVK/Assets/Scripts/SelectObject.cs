@@ -19,12 +19,16 @@ public class SelectObject : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        UI_script = paintButton.GetComponent<UIController>();
         if (Input.GetMouseButtonDown(0)) {
             
             if (_selection != null) {
                 var selectionRenderer = _selection.GetComponent<Renderer>();
-                selectionRenderer.material = previousMaterial;
-                _selection = null;
+                if (!_paintButton.clicked) {                                     //FIXA med flagga
+                    selectionRenderer.material = previousMaterial;                      
+                    _selection.tag= "Untagged";
+                    _selection = null;
+                }
             }
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -33,6 +37,7 @@ public class SelectObject : MonoBehaviour
                 if(!selection.CompareTag(selectableTag)) {
                     var selectionRenderer = selection.GetComponent<Renderer>();
                     if (selectionRenderer != null) {
+                        selection.tag="Selected";
                         previousMaterial = selectionRenderer.material;
                         selectionRenderer.material = highlightMaterial;
                     }

@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
     private static VisualElement _itemList;
     public static GameObject spawnerContainer;
 
-    private static Button _paintButton;
+    public static Button _paintButton;
     private static VisualElement _Colors;
     private static Button _Red;
     private static Button _Orange;
@@ -79,11 +79,11 @@ public class UIController : MonoBehaviour
 
         _Colors = root.Q<VisualElement>("Colors");
         _paintButton.clicked += HandleColors;
-        _Red.clicked += ChoseColor;
-        _Orange.clicked += ChoseColor;
-        _Green.clicked += ChoseColor;
-        _Blue.clicked += ChoseColor;
-        _Yellow.clicked += ChoseColor;
+        /*_Red.clicked += ChoseColor(0);
+        _Orange.clicked += ChoseColor(1);
+        _Green.clicked += ChoseColor(2);
+        _Blue.clicked += ChoseColor(3);
+        _Yellow.clicked += ChoseColor(4);*/
         /*        
                 foreach (var button in ListedItems.GetAllItemsInCategory("Ball"))
                 {
@@ -125,7 +125,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public static void ChoseColor()
+    public static void ChoseColor(int n)
     {
         if (_Colors.ClassListContains("hidden"))
         {
@@ -133,7 +133,21 @@ public class UIController : MonoBehaviour
         }
         else
         {
+            if (n == 0) {
+                
+            }
+            if (n == 1) {
 
+            }
+            if (n == 2) {
+
+            }
+            if (n == 3) {
+
+            }
+            if (n == 4) {
+
+            }
         }
     }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - nonSelectable
   - Selected
+  - room
   layers:
   - Default
   - TransparentFX
