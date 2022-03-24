@@ -11,6 +11,8 @@ public class RoomManager : MonoBehaviour
     private RoomClass _room;
 
     private Ray _ray;
+
+    private Vector3 movePos;
     //private MoveObject _moveCTRL;
     void Start()
     {
@@ -55,10 +57,15 @@ public class RoomManager : MonoBehaviour
         {
             _ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(_ray, out RaycastHit raycastHit)) {
+                
+                //Lägg till att kolla om current pos n+ next pos har intersecting colliders,
+                //skapa trigger: Om det blir intersect ignore action
+                
                 // Avoid selectedObject collider
-                if (raycastHit.collider != selectedObject.gameObject.GetComponent<Collider>()) {
+                //if (raycastHit.collider != selectedObject.gameObject.GetComponent<Collider>()) {
+                    
                     selectedObject.position = new Vector3(raycastHit.point.x,0.2f,raycastHit.point.z);
-                }
+                //}
                 // Debug.Log(Input.mousePosition); // Debug print out mouseposition when moving mouse
             }
         }
