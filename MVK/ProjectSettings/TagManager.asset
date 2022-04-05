@@ -6,6 +6,8 @@ TagManager:
   tags:
   - nonSelectable
   - Selected
+  - room
+  - GameObject
   layers:
   - Default
   - TransparentFX

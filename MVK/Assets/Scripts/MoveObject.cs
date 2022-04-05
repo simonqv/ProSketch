@@ -7,7 +7,7 @@ using UnityEngine;
 */
 public class MoveObject : MonoBehaviour
 {
-      [SerializeField] private Camera mainCamera;
+      public Camera cam;
       public bool isSelected;
       public Transform selectedObject;  // Transform of object
 
@@ -26,11 +26,14 @@ public class MoveObject : MonoBehaviour
 
 
     // Initialize
-    void Start()
+    public void Starter(Camera came)
     {
       isSelected = false;
       moves = false;
       rotates = false;
+      //var room = gameObject.AddComponent<RoomClass>();
+      cam = came;
+      
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class MoveObject : MonoBehaviour
       if (!isSelected) {
         if (Input.GetMouseButtonDown(MOUSEBUTTON)) {
           isSelected = true;
-          Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+          Ray ray = cam.ScreenPointToRay(Input.mousePosition);
           if (Physics.Raycast(ray, out RaycastHit objectHit)) {
               if (objectHit.transform.gameObject.tag != "room") {
                 selectedObject = objectHit.transform;
@@ -46,10 +49,12 @@ public class MoveObject : MonoBehaviour
           }
         }
       }
-      else if (isSelected) {
+      if (isSelected) {
         SelectOperation(selectedObject);
         if (moves) {
-          if (Input.GetKey("d")) {
+          if (Input.GetKey("d"))
+          {
+            isSelected = false;
             Drop();
           }
             Move();
@@ -86,7 +91,7 @@ public class MoveObject : MonoBehaviour
 
   void Move() {
     // Move object with mouse
-    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
     if (Physics.Raycast(ray, out RaycastHit raycastHit)) {
       // Avoid selectedObject collider
       if (raycastHit.collider != selectedObject.gameObject.GetComponent<Collider>()) {
@@ -99,6 +104,7 @@ public class MoveObject : MonoBehaviour
   void Drop() {
     moves = false;
     selectedObject.position = new Vector3(selectedObject.position.x,0,selectedObject.position.z);
+    isSelected = false;
   }
 
   void RotateObject() {
