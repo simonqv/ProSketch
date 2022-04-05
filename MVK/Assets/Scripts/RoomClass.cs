@@ -24,6 +24,11 @@ public class RoomClass : MonoBehaviour
         
     }
 
+    public int GetLength() { return _length; }
+
+    public int GetWidth() { return _width; }
+
+    public int GetHeight() { return Height; }
     public static void Setter(int len, int wid)
     {
         _length = len;
