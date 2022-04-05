@@ -62,7 +62,7 @@ public class MainMenuController : MonoBehaviour
             {
                 // TODO: with Celina create new scene
                 RoomClass.Setter(length, width);
-                SceneManager.LoadScene("Scenes/CreateTemplate");
+                SceneManager.LoadScene("Scenes/UI");
                 
                 //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 
