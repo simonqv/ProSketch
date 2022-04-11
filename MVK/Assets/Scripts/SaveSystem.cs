@@ -3,44 +3,44 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public static class SaveSystem 
+public static class SaveSystem
 {
+    
+    private static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
+
     public static void SaveRoom(RoomClass room)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        // Should probably have some sort of string for "room" in the path... so different rooms have different names
-        // Probably let user input name or something. 
-        // Because it is binary, the filetype can be called whatever we want. I just put .fun for now
-        string path = Application.persistentDataPath + "/room.fun";
+        // Test to see if save folder exists
+        if (!Directory.Exists(SAVE_FOLDER))
+        {
+            Directory.CreateDirectory(SAVE_FOLDER);
+        }
         
-        // This is to create a new save file... Gotta look up updating already existing ones as well
-        FileStream stream = new FileStream(path, FileMode.Create);
-
+        // Borde funka så här?
+        // Behöver ha någon mata in namn på scenen grej, så att man kan spara olika
         SceneData sceneData = new SceneData(room);
-        
-        formatter.Serialize(stream, sceneData);
-        stream.Close();
+        string json = JsonUtility.ToJson(sceneData);
+        File.WriteAllText(SAVE_FOLDER + "/room_name.txt", json);
     }
 
-    public static SceneData LoadRoom()
+    
+    public static void LoadRoom()
     {
-        // Same as above... this should be for a specific file we want to load, not just generic room
-        string path = Application.persistentDataPath + "/room.fun";
-        if (File.Exists(path))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            SceneData sceneData =   formatter.Deserialize(stream) as SceneData;
-            stream.Close();
+        // Problem... välja vilken som ska laddas... hmmmm
+        // Kan väl göra nån lista som visar alla ens sceners namn så kan man välja från den...
+        if (File.Exists(SAVE_FOLDER + "/room_name.txt")) {
+            string saveString = File.ReadAllText(SAVE_FOLDER + "/room_name.txt");
+            Debug.Log("Loaded " + saveString);
+            SceneData sceneData = JsonUtility.FromJson<SceneData>(saveString);
             
-            return sceneData;
-
-        }
+            
+            // Borde väl göra om så att denna placerar ut allt också... 
+            // return sceneData;
+        } 
         else
         {
-            Debug.LogError("Save file not found in " + path );
-            return null;
+            Debug.LogError("Save file not found in " + SAVE_FOLDER + "/room_name.txt" );
+            // return null;
         }
 
     }

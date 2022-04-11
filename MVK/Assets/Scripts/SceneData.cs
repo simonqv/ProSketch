@@ -31,19 +31,11 @@ public class SceneData
             if (!EditorUtility.IsPersistent(go.transform.root.gameObject) && !(go.hideFlags == HideFlags.NotEditable || go.hideFlags == HideFlags.HideAndDontSave))
             {
                 objects.Add(go);
-                Vector3 pos = go.transform.position;
-                positions.Add(pos);
+                
+                // förmodligen onödigt... då detta finns i Game Object
+                positions.Add(go.transform.position);
                 angles.Add(go.transform.rotation);
             }
         }
-        
-        
-        // int num_objects_in_scene = 10;  // Placeholder 
-        // objects = new GameObject[num_objects_in_scene];
-        // positions = new Vector3[num_objects_in_scene];
-        // angles = new Vector3[num_objects_in_scene];
-        
     }
-    
-    
 }
