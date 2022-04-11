@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CreateTemplate.unity
     guid: 5c2a345c56c32449d8c558afdfee93bc
+  - enabled: 1
+    path: Assets/Scenes/Celina Test.unity
+    guid: 2a6d2471565cf45a28c0c0cc4afc1f55
   m_configObjects: {}
