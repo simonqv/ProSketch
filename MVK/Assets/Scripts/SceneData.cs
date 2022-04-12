@@ -1,41 +1,28 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+/*
+ * Class to store scene information.
+ * Used for saving files. 
+ */
 [System.Serializable]
 public class SceneData
 {
-    // Room data
-    public int roomWidth;
-    public int roomHeight;
-    public int roomLength;
-    
     // Object data
-    public List<GameObject> objects;
-    public List<Vector3> positions;
-    public List<Quaternion> angles;
-    public int color; // placeholder, should be something else... gotta ask textures
+    public List<ObjectInfo> objects;
     
-    public SceneData(RoomClass room)
+    public SceneData()
     {
-        // Room data
-        roomWidth = room.GetWidth() ;
-        roomHeight = room.GetHeight();
-        roomLength = room.GetLength();
+        objects = new List<ObjectInfo>();
+        List<GameObject> rootObjects = new List<GameObject>();
+        var scene = SceneManager.GetActiveScene();
+        scene.GetRootGameObjects(rootObjects);
 
-        // this should add all objects...??
-        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        // This stores every object in the scene, even light and camera etc. 
+        foreach (var go in rootObjects)
         {
-            if (!EditorUtility.IsPersistent(go.transform.root.gameObject) && !(go.hideFlags == HideFlags.NotEditable || go.hideFlags == HideFlags.HideAndDontSave))
-            {
-                objects.Add(go);
-                
-                // förmodligen onödigt... då detta finns i Game Object
-                positions.Add(go.transform.position);
-                angles.Add(go.transform.rotation);
-            }
+            objects.Add(new ObjectInfo(go));
         }
     }
 }

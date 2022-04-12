@@ -1,46 +1,39 @@
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class SaveSystem
 {
+    // Change to this one later
+    // public static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
+    private static readonly string SaveFolder = Application.dataPath + "/Saves/";
     
-    private static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
-
-    public static void SaveRoom(RoomClass room)
+    // TODO: Let user input file name
+    public static void SaveRoom(SceneData sceneData)
     {
         // Test to see if save folder exists
-        if (!Directory.Exists(SAVE_FOLDER))
+        if (!Directory.Exists(SaveFolder))
         {
-            Directory.CreateDirectory(SAVE_FOLDER);
+            Directory.CreateDirectory(SaveFolder);
         }
         
-        // Borde funka så här?
-        // Behöver ha någon mata in namn på scenen grej, så att man kan spara olika
-        SceneData sceneData = new SceneData(room);
-        string json = JsonUtility.ToJson(sceneData);
-        File.WriteAllText(SAVE_FOLDER + "/room_name.txt", json);
+        // Translate scene data to json format and write file
+        var json = JsonUtility.ToJson(sceneData);
+        File.WriteAllText(SaveFolder + "/room_name.txt", json);
     }
 
-    
+    // TODO: Let user see all files and choose one.
+    // TODO: Place all objects in scene.
     public static void LoadRoom()
     {
-        // Problem... välja vilken som ska laddas... hmmmm
-        // Kan väl göra nån lista som visar alla ens sceners namn så kan man välja från den...
-        if (File.Exists(SAVE_FOLDER + "/room_name.txt")) {
-            string saveString = File.ReadAllText(SAVE_FOLDER + "/room_name.txt");
+        // If file exists: open and read file
+        if (File.Exists(SaveFolder + "room_name.txt")) {
+            var saveString = File.ReadAllText(SaveFolder + "room_name.txt");
             Debug.Log("Loaded " + saveString);
-            SceneData sceneData = JsonUtility.FromJson<SceneData>(saveString);
-            
-            
-            // Borde väl göra om så att denna placerar ut allt också... 
-            // return sceneData;
+            var sceneData = JsonUtility.FromJson<SceneData>(saveString);
         } 
         else
         {
-            Debug.LogError("Save file not found in " + SAVE_FOLDER + "/room_name.txt" );
-            // return null;
+            Debug.Log("Save file not found in " + SaveFolder + "room_name.txt" );
         }
 
     }
