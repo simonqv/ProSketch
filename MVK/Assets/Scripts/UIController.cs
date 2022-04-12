@@ -71,7 +71,7 @@ public class UIController : MonoBehaviour
 
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
-        _paintButton = root.Q<Button>("Paint_button");
+        _paintButton = root.Q<Button>("Paint_Button");
 
         spawnerContainer = GameObject.Find("SpawnerContainer");
         _hamburgerButton.clicked += ToggleItemList;
