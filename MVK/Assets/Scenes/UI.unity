@@ -413,9 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7237dda4b05a1084096d0b1b53e8b29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableTag: nonSelectable
-  highlightMaterial: {fileID: 2100000, guid: 63796a6f6e0933541a44bb5e417121d4, type: 2}
-  previousMaterial: {fileID: 0}
 --- !u!4 &674511743
 Transform:
   m_ObjectHideFlags: 0
@@ -692,7 +689,7 @@ GameObject:
   - component: {fileID: 1418919183}
   m_Layer: 0
   m_Name: RoomManager
-  m_TagString: Untagged
+  m_TagString: roomManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -45,6 +45,22 @@ public class RoomManager : MonoBehaviour
         _room = selectedObject.GetComponent<RoomClass>();
         Debug.Log("Select");
     }
+    
+    public void SetSelectedObject(Transform obj)
+    {
+        if (selectedObject != null)
+        {
+            var selectionRenderer = selectedObject.GetComponentInChildren<Renderer>();
+            selectionRenderer.material = previousMaterial;
+            selectedObject.tag = "GameObject";
+        }
+        selectedObject = obj;
+        var selectionRenderer2 = selectedObject.GetComponentInChildren<Renderer>();
+        previousMaterial = selectionRenderer2.material;
+        selectionRenderer2.material = highlightMaterial;
+        selectedObject.tag = "Selected";
+        _room = selectedObject.GetComponent<RoomClass>();
+    }
 
     void UnselectObject()
     {
