@@ -124,7 +124,7 @@ public class RoomManager : MonoBehaviour
         {
             if (Input.GetAxis("Horizontal") != 0)
             {
-                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,Input.GetAxis("Horizontal"));
+                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,Input.GetAxis("Horizontal") * 3);
             }
             if (Input.GetAxis("Vertical") != 0)
             {

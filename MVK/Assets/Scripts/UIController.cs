@@ -12,7 +12,10 @@ public class UIController : MonoBehaviour
     private static VisualElement _itemList;
     public static GameObject spawnerContainer;
 
-    public static Button _paintButton;                 //Tog bort static
+    private RoomManager _roomManager;
+    public static Button _paintButton;  
+    public static Button _rotateButton;  
+    private static VisualElement _rotateOptions;             //Tog bort static
     private static VisualElement _Colors;
     private static Button _Red;
     private static Button _Orange;
@@ -59,8 +62,10 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 50;
         var root = GetComponent<UIDocument>().rootVisualElement;
         var categoryButtons = root.Q<VisualElement>("CategoryButtons");
+        _roomManager = GameObject.FindObjectOfType<RoomManager>();
         foreach (Button categoryButton in IconButtons.CategoryButtons)
         {
             categoryButtons.Add(
@@ -72,13 +77,17 @@ public class UIController : MonoBehaviour
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
         _paintButton = root.Q<Button>("Paint_Button");
+        _rotateButton = root.Q<Button>("Rotate_Button");
+
 
         spawnerContainer = GameObject.Find("SpawnerContainer");
         _hamburgerButton.clicked += ToggleItemList;
 
-
+        _rotateOptions = root.Q<VisualElement>("Rotate_Options");
         _Colors = root.Q<VisualElement>("Colors");
         _paintButton.clicked += HandleColors;
+        _rotateButton.clicked += HandleRotation;
+
         /*_Red.clicked += ChoseColor(0);
         _Orange.clicked += ChoseColor(1);
         _Green.clicked += ChoseColor(2);
@@ -151,6 +160,23 @@ public class UIController : MonoBehaviour
         }
     }
 
+
+    public void HandleRotation()
+    {
+        if(_roomManager.selectedObject != null){
+            if (_rotateOptions.ClassListContains("hidden"))
+            {
+                _rotateOptions.RemoveFromClassList("hidden");
+            }
+            else if (!_rotateOptions.ClassListContains("hidden"))
+            {
+                _rotateOptions.AddToClassList("hidden");
+            }
+        }
+        else{
+            Debug.Log("Inget objekt selected");
+        }
+    }
 
     public static void UnsetButton()
     {
