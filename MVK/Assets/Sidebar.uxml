@@ -22,7 +22,7 @@
                 <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
             </ui:VisualElement>
             <ui:VisualElement name="Bucket" class="ButtonTemplate" style="left: 32%;">
-                <ui:Button text="Button" display-tooltip-when-elided="true" class="clickButton" style="-unity-text-align: middle-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+                <ui:Button text="Button" name="Paint_Button" display-tooltip-when-elided="true" class="clickButton" style="-unity-text-align: middle-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
                 <ui:VisualElement style="position: absolute; width: 90%; height: 100%; left: 10%; top: 5%; background-image: resource(&apos;category-icons/paint_bucket&apos;);" />
             </ui:VisualElement>
             <ui:VisualElement name="Plus" class="ButtonTemplate" style="left: 80%;">
