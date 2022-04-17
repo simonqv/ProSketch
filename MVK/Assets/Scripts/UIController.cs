@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
     private static VisualElement _itemList;
     public static GameObject spawnerContainer;
 
-    public Button _paintButton;                 //Tog bort static
+    public static Button _paintButton;                 //Tog bort static
     private static VisualElement _Colors;
     private static Button _Red;
     private static Button _Orange;
