@@ -18,7 +18,7 @@ public static class SaveSystem
         
         // Translate scene data to json format and write file
         var json = JsonUtility.ToJson(sceneData);
-        File.WriteAllText(SaveFolder + "/room_name.txt", json);
+        File.WriteAllText(SaveFolder + sceneData.fileName + ".txt", json);
     }
 
     // TODO: Let user see all files and choose one.

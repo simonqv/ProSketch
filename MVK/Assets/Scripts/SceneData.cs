@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 /*
  * Class to store scene information.
@@ -11,7 +12,7 @@ public class SceneData
 {
     // Object data
     public List<ObjectInfo> objects;
-    
+    public string fileName;
     public SceneData()
     {
         objects = new List<ObjectInfo>();
@@ -25,4 +26,11 @@ public class SceneData
             objects.Add(new ObjectInfo(go));
         }
     }
+
+    public void SetFileName(string s)
+    {
+        fileName = s;
+        Debug.Log(s);
+    }
+    
 }

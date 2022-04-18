@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SceneHandler : MonoBehaviour
 {
+    private static string _filename;
     
     // Start is called before the first frame update
     private void Start()
@@ -13,6 +14,7 @@ public class SceneHandler : MonoBehaviour
     {
         // TODO: Let user input name of file.
         SceneData sceneData = new SceneData();
+        sceneData.SetFileName(_filename);
         SaveSystem.SaveRoom(sceneData);
     }
 
@@ -25,6 +27,7 @@ public class SceneHandler : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // TODO: make the pop-up for saving first
         if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("Saving file");
@@ -35,5 +38,11 @@ public class SceneHandler : MonoBehaviour
             Debug.Log("Loading file");
             Load();
         }
+    }
+
+    public void ReadInputString(string s)
+    {
+        _filename = s;
+        Debug.Log(_filename);
     }
 }
