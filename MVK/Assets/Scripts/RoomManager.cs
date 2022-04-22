@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -91,6 +92,13 @@ public class RoomManager : MonoBehaviour
         _room.CreateRoom();
         camera = _room.cam;
     }
+
+    public void Reset()
+    { 
+        _room.CreateRoom();
+        camera = _room.cam;    
+    }
+    
     // Update is called once per frame
     void Update()
     {

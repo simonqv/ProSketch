@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class RoomClass : MonoBehaviour
 {
-    private static int _length;
-    private static int _width;
+    private static int _length = 20;
+    private static int _width = 20;
     private double _angle;
     private int _height;
     private const int Height = 8;
@@ -24,6 +24,11 @@ public class RoomClass : MonoBehaviour
         
     }
 
+    public int GetLength() { return _length; }
+
+    public int GetWidth() { return _width; }
+
+    public int GetHeight() { return Height; }
     public static void Setter(int len, int wid)
     {
         _length = len;
