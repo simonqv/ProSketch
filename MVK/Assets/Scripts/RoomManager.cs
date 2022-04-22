@@ -15,6 +15,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private Material previousMaterial;
 
     private Ray _ray;
+    public bool movebool = false;
 
     private Vector3 movePos;
     //private MoveObject _moveCTRL;
