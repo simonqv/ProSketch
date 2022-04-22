@@ -103,7 +103,7 @@ public class RoomManager : MonoBehaviour
                 pickUp = true;
             }
         }
-        else if (selectedObject != null && Input.GetKeyDown(KeyCode.Mouse0) && pickUp)
+        else if (selectedObject != null && Input.GetKeyDown(KeyCode.Mouse1) && pickUp)
         {
             Debug.Log("Mouse1");
             pickUp = false;
@@ -140,14 +140,10 @@ public class RoomManager : MonoBehaviour
     {
         if (selectedObject != null)
         {
-            if (Input.GetAxis("Horizontal") != 0)
-            {
-                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,dir * 3);
-            }
-            if (Input.GetAxis("Vertical") != 0)
-            {
-                // selectedObject.transform.RotateAround(selectedObject.position,selectedObject.right,Input.GetAxis("Vertical"));
-            }
+           
+                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,dir);
+            
+            
         }
     }
 }

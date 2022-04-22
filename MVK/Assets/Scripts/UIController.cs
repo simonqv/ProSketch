@@ -128,18 +128,18 @@ public class UIController : MonoBehaviour
 
     public void RotateRight()
     {
-        Debug.Log("Right");
+        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
-            _roomManager.Rotate(1f);
+            _roomManager.Rotate(10f);
         }
     }
     public void RotateLeft()
     {
-        Debug.Log("Left");
+        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
-            _roomManager.Rotate(-1f);
+            _roomManager.Rotate(-10f);
         }
     }
 
