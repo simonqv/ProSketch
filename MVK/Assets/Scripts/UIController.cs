@@ -22,8 +22,10 @@ public class UIController : MonoBehaviour
     private static Button _Green;
     private static Button _Blue;
     private static Button _Yellow;
-    public Button _leftRotateBtn;    
-    public Button _rightRotateBtn;
+    public static Button _leftRotateBtn;    
+    public static Button _rightRotateBtn;
+    public Button moveButton;
+    public Button selectButton;
 
     public bool rotateBool = false;
 
@@ -85,8 +87,9 @@ public class UIController : MonoBehaviour
         _rotateButton = root.Q<Button>("Rotate_Button");
         _leftRotateBtn = root.Q<Button>("LeftRotate_Button");
         _rightRotateBtn = root.Q<Button>("RightRotate_Button");
-
-
+        moveButton = root.Q<Button>("Hand_Button");
+        selectButton = root.Q<Button>("Select_Button");
+            
         spawnerContainer = GameObject.Find("SpawnerContainer");
         _hamburgerButton.clicked += ToggleItemList;
 
@@ -97,6 +100,8 @@ public class UIController : MonoBehaviour
 
         _rightRotateBtn.clicked += RotateRight;
         _leftRotateBtn.clicked += RotateLeft;
+        moveButton.clicked += handMove;
+        selectButton.clicked += selectTool;
 
         /*_Red.clicked += ChoseColor(0);
         _Orange.clicked += ChoseColor(1);
@@ -110,6 +115,15 @@ public class UIController : MonoBehaviour
                 }
           */
 
+    }
+
+    public void selectTool()
+    {
+        _roomManager.movebool = false;
+    }
+    public void handMove()
+    {
+        _roomManager.movebool = true;
     }
 
     public void RotateRight()
