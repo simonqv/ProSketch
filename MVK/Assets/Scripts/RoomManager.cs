@@ -77,7 +77,8 @@ public class RoomManager : MonoBehaviour
         
         var selectionRenderer = selectedObject.GetComponentInChildren<Renderer>();
         if (selectionRenderer == null) return;
-        selectionRenderer.material = previousMaterial;
+        var prevMat = selectedObject.GetComponent<ObjProperties>().mainColor;
+        selectionRenderer.material = prevMat;
         Debug.Log("Deselect");
         
         selectedObject = null;

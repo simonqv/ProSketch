@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjProperties : MonoBehaviour
 {
     public GameObject prefab;
-    public Color mainColor;
+    public Material mainColor;
     public Color selectColor;
 
     public Renderer pre;
@@ -13,13 +13,13 @@ public class ObjProperties : MonoBehaviour
     void Start()
     {
         pre = prefab.GetComponent<Renderer>();
-        pre.material.SetColor("_Color",mainColor);
+        pre.material = mainColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             pre.material.SetColor("_Color",selectColor);
             prefab.transform.gameObject.tag = "Selected";
@@ -28,7 +28,7 @@ public class ObjProperties : MonoBehaviour
         {
             pre.material.SetColor("_Color",mainColor);
             prefab.transform.gameObject.tag = "Untagged";
-        }
+        }*/
 
     }
 }
