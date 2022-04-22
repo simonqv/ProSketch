@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3941649944976321637}
   - component: {fileID: 6074267745130080061}
+  - component: {fileID: -3278665739062652335}
   m_Layer: 0
   m_Name: plint7del
   m_TagString: GameObject
@@ -47,6 +48,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3099183463934272234, guid: b528a8ea8ed774895aa960a7d94f2c0f, type: 3}
+--- !u!114 &-3278665739062652335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4465421358770173663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2791ddeaf296bb34eb7f62c0fb43ab72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4465421358770173663}
+  mainColor: {fileID: 2100000, guid: 9b1dad2432e9d6e4a9183a92f1611f4d, type: 2}
+  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  pre: {fileID: 0}
 --- !u!1 &5780488694861741724
 GameObject:
   m_ObjectHideFlags: 0
