@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4465421358770173663}
-  mainColor: {fileID: 2100000, guid: 212510f346cdc124d8ee65a9c630beb7, type: 2}
+  mainColor: {fileID: 2100000, guid: 9b1dad2432e9d6e4a9183a92f1611f4d, type: 2}
   selectColor: {r: 0, g: 0, b: 0, a: 0}
   pre: {fileID: 0}
 --- !u!1 &5780488694861741724

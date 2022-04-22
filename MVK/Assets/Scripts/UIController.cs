@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     private Button _hamburgerButton;
     private static VisualElement _itemList;
     public static GameObject spawnerContainer;
+    private static Object[] materials; 
 
     private RoomManager _roomManager;
     public static Button _paintButton;  
@@ -79,6 +80,8 @@ public class UIController : MonoBehaviour
                 categoryButton);
         }
 
+        materials = Resources.LoadAll("material/");
+        
         _selectedCategory = categoryButtons[1] as Button;
 
         _itemList = root.Q<VisualElement>("ItemList");
@@ -95,6 +98,11 @@ public class UIController : MonoBehaviour
 
         _rotateOptions = root.Q<VisualElement>("Rotate_Options");
         _Colors = root.Q<VisualElement>("Colors");
+        _Red = root.Q<Button>("Red");
+        _Blue = root.Q<Button>("Blue");
+        _Orange = root.Q<Button>("Orange");
+        _Green = root.Q<Button>("Green");
+        _Yellow = root.Q<Button>("Yellow");
         _paintButton.clicked += HandleColors;
         _rotateButton.clicked += HandleRotation;
 
@@ -103,11 +111,11 @@ public class UIController : MonoBehaviour
         moveButton.clicked += handMove;
         selectButton.clicked += selectTool;
 
-        /*_Red.clicked += ChoseColor(0);
-        _Orange.clicked += ChoseColor(1);
-        _Green.clicked += ChoseColor(2);
-        _Blue.clicked += ChoseColor(3);
-        _Yellow.clicked += ChoseColor(4);*/
+        _Red.clicked += () => ChoseColor(0);
+        _Orange.clicked += () => ChoseColor(1);
+        _Green.clicked += () => ChoseColor(2);
+        _Blue.clicked += () => ChoseColor(3);
+        _Yellow.clicked += () => ChoseColor(4);
         /*        
                 foreach (var button in ListedItems.GetAllItemsInCategory("Ball"))
                 {
@@ -165,6 +173,7 @@ public class UIController : MonoBehaviour
 
     public static void HandleColors()
     {
+        Debug.Log(materials[0]);
         if (_Colors.ClassListContains("hidden"))
         {
             _Colors.RemoveFromClassList("hidden");
@@ -175,28 +184,33 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public static void ChoseColor(int n)
+    public void ChoseColor(int n)
     {
+        Debug.Log("Color");
         if (_Colors.ClassListContains("hidden"))
         {
             return;
         }
         else
         {
-            if (n == 0) {
-                
+            Debug.Log("Color");
+            if (n == 0)
+            {
+                Debug.Log("RED");
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[4];
             }
             if (n == 1) {
-
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[3];
             }
             if (n == 2) {
-
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[2];
             }
             if (n == 3) {
-
+                Debug.Log("Blue");
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[0];
             }
             if (n == 4) {
-
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[6];
             }
         }
     }
