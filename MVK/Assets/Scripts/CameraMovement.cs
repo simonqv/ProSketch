@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public GameObject camera;
+    public new GameObject camera;
     // Start is called before the first frame update
     void Start()
     {
