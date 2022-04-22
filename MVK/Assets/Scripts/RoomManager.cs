@@ -16,6 +16,7 @@ public class RoomManager : MonoBehaviour
 
     private Ray _ray;
     public bool movebool = false;
+    public bool pickUp;
 
     private Vector3 movePos;
     //private MoveObject _moveCTRL;
@@ -86,24 +87,27 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !pickUp)
         {   
             Debug.Log("Mouse0");
+            pickUp = true;
             TrySelectObject();
         }
-        else if (selectedObject != null && Input.GetKeyDown(KeyCode.Mouse1))
+        else if (selectedObject != null && Input.GetKeyDown(KeyCode.Mouse0) && pickUp)
         {
             Debug.Log("Mouse1");
+            pickUp = false;
             UnselectObject();
+            
         }
         Move();
-        Rotate();
+        //Rotate();
     }
 
     private void Move()
     {
         if (selectedObject == null) return;
-        Debug.Log("Move");
+        //Debug.Log("Move");
         _ray = camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(_ray, out RaycastHit raycastHit)) {
                 
@@ -119,13 +123,13 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    public void Rotate()
+    public void Rotate(float dir)
     {
         if (selectedObject != null)
         {
             if (Input.GetAxis("Horizontal") != 0)
             {
-                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,Input.GetAxis("Horizontal") * 3);
+                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,dir * 3);
             }
             if (Input.GetAxis("Vertical") != 0)
             {

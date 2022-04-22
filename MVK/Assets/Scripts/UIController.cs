@@ -15,13 +15,18 @@ public class UIController : MonoBehaviour
     private RoomManager _roomManager;
     public static Button _paintButton;  
     public static Button _rotateButton;  
-    private static VisualElement _rotateOptions;             //Tog bort static
+    public static VisualElement _rotateOptions;             //Tog bort static
     private static VisualElement _Colors;
     private static Button _Red;
     private static Button _Orange;
     private static Button _Green;
     private static Button _Blue;
     private static Button _Yellow;
+    public Button _leftRotateBtn;    
+    public Button _rightRotateBtn;
+
+    public bool rotateBool = false;
+
 
     void ToggleItemList()
     {
@@ -78,6 +83,8 @@ public class UIController : MonoBehaviour
         _hamburgerButton = root.Q<Button>("Hamburger");
         _paintButton = root.Q<Button>("Paint_Button");
         _rotateButton = root.Q<Button>("Rotate_Button");
+        _leftRotateBtn = root.Q<Button>("LeftRotate_Button");
+        _rightRotateBtn = root.Q<Button>("RightRotate_Button");
 
 
         spawnerContainer = GameObject.Find("SpawnerContainer");
@@ -87,6 +94,9 @@ public class UIController : MonoBehaviour
         _Colors = root.Q<VisualElement>("Colors");
         _paintButton.clicked += HandleColors;
         _rotateButton.clicked += HandleRotation;
+
+        _rightRotateBtn.clicked += RotateRight;
+        _leftRotateBtn.clicked += RotateLeft;
 
         /*_Red.clicked += ChoseColor(0);
         _Orange.clicked += ChoseColor(1);
@@ -100,6 +110,23 @@ public class UIController : MonoBehaviour
                 }
           */
 
+    }
+
+    public void RotateRight()
+    {
+        Debug.Log("Right");
+        if (rotateBool)
+        {
+            _roomManager.Rotate(1f);
+        }
+    }
+    public void RotateLeft()
+    {
+        Debug.Log("Left");
+        if (rotateBool)
+        {
+            _roomManager.Rotate(-1f);
+        }
     }
 
     public static void SetButton(Button button)
@@ -166,11 +193,13 @@ public class UIController : MonoBehaviour
         if(_roomManager.selectedObject != null){
             if (_rotateOptions.ClassListContains("hidden"))
             {
-                _rotateOptions.RemoveFromClassList("hidden");
+                _rotateOptions.RemoveFromClassList("hidden"); //Synlig'
+                rotateBool = true;
             }
             else if (!_rotateOptions.ClassListContains("hidden"))
             {
-                _rotateOptions.AddToClassList("hidden");
+                _rotateOptions.AddToClassList("hidden"); // ej synlig
+                rotateBool = false;
             }
         }
         else{
