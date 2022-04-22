@@ -8,7 +8,7 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Camera camera;
+    public new Camera camera;
     public Transform selectedObject = null;
     private RoomClass _room;
 
