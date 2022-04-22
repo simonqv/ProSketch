@@ -5,6 +5,7 @@ using UnityEngine;
   MoveObject lets user left-click with mouse to "select" an object in the scene.
   Then the user can move and rotate object. 
 */
+/*
 public class MoveObject : MonoBehaviour
 {
       public Camera cam;
@@ -115,3 +116,4 @@ public class MoveObject : MonoBehaviour
 
 
 }
+*/

@@ -29,7 +29,7 @@ public static class ListedItems
             Spawner s = UIController.spawnerContainer.AddComponent<Spawner>();
             item.clicked += () =>
             {
-                s.Spawn(prefab as GameObject);
+                s.Spawn(prefab as GameObject, category);
                 Debug.Log(s);
             };
             item.Add(buttonImage);

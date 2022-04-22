@@ -14,7 +14,7 @@ public class ObjectInfo
     public Vector3 objectPosition;
     public Vector3 objectScale;
     public Quaternion objectRotation;
-
+    public string objectCategory;
     public string GetTag()
     {
         return objectTag;
@@ -31,8 +31,20 @@ public class ObjectInfo
         objectTag = go.tag;
         objectName = go.name;
         objectPosition = go.transform.position;
-        objectScale = go.transform.localScale;
+        objectScale = go.transform.lossyScale;
         objectRotation = go.transform.rotation;
+        var cat = go.GetComponent<ObjectCategory>();
+        if (cat != null)
+        {
+            objectCategory = cat.category;
+        }
+        else if (objectName == "RoomManager")
+        {
+            objectCategory = "room";
+        }
+        else
+        {
+            objectCategory = "_";
+        }
     }
-
 }
