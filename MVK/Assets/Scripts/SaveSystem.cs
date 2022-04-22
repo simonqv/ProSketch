@@ -21,6 +21,11 @@ public static class SaveSystem
         File.WriteAllText(SaveFolder + sceneData.fileName + ".txt", json);
     }
 
+    public static string getSaveFolderString()
+    {
+        return SaveFolder;
+    }
+    
     // TODO: Let user see all files and choose one.
     // TODO: Place all objects in scene.
     public static void LoadRoom()

@@ -32,5 +32,12 @@ public class SceneData
         fileName = s;
         Debug.Log(s);
     }
+
+    // @ Gustav fix :3
+    public string ChooseFile()
+    {
+        var s = SaveSystem.getSaveFolderString();
+        return "hej";
+    }
     
 }

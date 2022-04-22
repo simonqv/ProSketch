@@ -21,6 +21,7 @@ public class SceneHandler : MonoBehaviour
     // TODO: search for specific file, place objects in scene.
     private static void Load()
     {
+        // anrop
         SaveSystem.LoadRoom();
     }
     
