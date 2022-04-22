@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SceneHandler : MonoBehaviour
@@ -19,10 +20,15 @@ public class SceneHandler : MonoBehaviour
     }
 
     // TODO: search for specific file, place objects in scene.
-    private static void Load()
+    private void Load()
     {
         // anrop
-        SaveSystem.LoadRoom();
+        var sceneData = SaveSystem.LoadRoom("room_name");
+        if (sceneData != null)
+        {
+            var spawner = GameObject.Find("SpawnerContainer");
+            spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
+        }
     }
     
     // Update is called once per frame

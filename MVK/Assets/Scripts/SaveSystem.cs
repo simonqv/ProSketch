@@ -7,6 +7,7 @@ public static class SaveSystem
     // public static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
     private static readonly string SaveFolder = Application.dataPath + "/Saves/";
     
+    
     // TODO: Let user input file name
     public static void SaveRoom(SceneData sceneData)
     {
@@ -28,18 +29,19 @@ public static class SaveSystem
     
     // TODO: Let user see all files and choose one.
     // TODO: Place all objects in scene.
-    public static void LoadRoom()
-    {
+    public static SceneData LoadRoom(string name)
+    { 
         // If file exists: open and read file
-        if (File.Exists(SaveFolder + "room_name.txt")) {
-            var saveString = File.ReadAllText(SaveFolder + "room_name.txt");
-            Debug.Log("Loaded " + saveString);
+        if (File.Exists(SaveFolder + name + ".txt")) {
+            var saveString = File.ReadAllText(SaveFolder + name + ".txt");
             var sceneData = JsonUtility.FromJson<SceneData>(saveString);
+            // GameObject.FindObjectOfType<Spawner>().SpawnLoadedScene(sceneData);
+            return sceneData;
         } 
         else
         {
-            Debug.Log("Save file not found in " + SaveFolder + "room_name.txt" );
+            Debug.Log("Save file not found in " + SaveFolder + name+ ".txt" );
+            return null;
         }
-
     }
 }

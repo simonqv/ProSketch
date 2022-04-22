@@ -27,10 +27,10 @@ public class SceneData
         }
     }
 
-    public void SetFileName(string s)
+    public void SetFileName(string name)
     {
-        fileName = s;
-        Debug.Log(s);
+        fileName = name;
+        Debug.Log(name);
     }
 
     // @ Gustav fix :3
