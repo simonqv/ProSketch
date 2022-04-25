@@ -1,8 +1,5 @@
 using System;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 
 public class RoomClass : MonoBehaviour
 {
@@ -51,16 +48,8 @@ public class RoomClass : MonoBehaviour
         try
         {
             _roomPrefab = Resources.Load<GameObject>("Room/Room");
-            
-            //_height = (int)Math.Ceiling(lw / Math.Tan(_angle));
             var room = Instantiate(_roomPrefab);
-            room.transform.localScale = new Vector3(_length, Height, _width); 
-            //var position = room.transform.position;
-            //var xpos = position.x;
-            //var ypos = position.y;
-            //var zpos = position.z;
-            //Debug.Log(xpos + " " + ypos + " " + zpos);
-            
+            room.transform.localScale = new Vector3(_length, Height, _width);
             CreateCamera();
         }
         catch (Exception e)
@@ -89,12 +78,25 @@ public class RoomClass : MonoBehaviour
         
 
     }
+    
 
+    
     // Input: P = 1 for camera position 1, P = -1 for camera position 2
     private void MoveCamera(int p)
     {
         cam.transform.position = new Vector3(_pos[0] * p,_pos[1], _pos[2] * p);
         cam.transform.Rotate(0, 180, 0, Space.World);
         
+    }
+    
+    public void InvertCamera()
+    {
+        var transform1 = cam.transform;
+        var position = transform1.position;
+        var x = position.x;
+        var y = position.y;
+        var z = position.z;
+        transform1.position = new Vector3(-x, y, -z);
+        transform1.Rotate(0, 180, 0, Space.World);
     }
 }

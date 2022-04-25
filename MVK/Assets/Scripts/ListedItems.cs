@@ -26,7 +26,7 @@ public static class ListedItems
             var icon = AssetPreview.GetAssetPreview(prefab as GameObject);
             buttonImage.style.backgroundImage = new StyleBackground(icon);
             buttonImage.AddToClassList("equipment-button-icon");
-            Spawner s = UIController.spawnerContainer.AddComponent<Spawner>();
+            Spawner s = UIController.SpawnerContainer.AddComponent<Spawner>();
             item.clicked += () =>
             {
                 s.Spawn(prefab as GameObject, category);

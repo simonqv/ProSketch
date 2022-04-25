@@ -10,28 +10,30 @@ public class UIController : MonoBehaviour
     private static Button _savedSelection;
     private Button _hamburgerButton;
     private static VisualElement _itemList;
-    public static GameObject spawnerContainer;
-    private static Object[] materials; 
+    public static GameObject SpawnerContainer;
+    private static Object[] _materials; 
 
     private RoomManager _roomManager;
-    public static Button _paintButton;  
-    public static Button _rotateButton;  
-    public static VisualElement _rotateOptions;             //Tog bort static
-    private static VisualElement _Colors;
-    private static Button _Red;
-    private static Button _Orange;
-    private static Button _Green;
-    private static Button _Blue;
-    private static Button _Yellow;
-    public static Button _leftRotateBtn;    
-    public static Button _rightRotateBtn;
-    public Button moveButton;
-    public Button selectButton;
+    private static Button _paintButton;
+    private static Button _rotateButton;
+    private static VisualElement _rotateOptions;             //Tog bort static
+    private static VisualElement _colors;
+    private static Button _red;
+    private static Button _orange;
+    private static Button _green;
+    private static Button _blue;
+    private static Button _yellow;
+    private static Button _leftRotateBtn;
+    private static Button _rightRotateBtn;
+    private Button moveButton;
+    private Button selectButton;
+    private Button _cameraButton;
+    private RoomClass _room;
 
     public bool rotateBool = false;
 
 
-    void ToggleItemList()
+    private static void ToggleItemList()
     {
         if (_itemList.ClassListContains("hidden"))
         {
@@ -46,14 +48,15 @@ public class UIController : MonoBehaviour
         
     }
 
-    static void ClearItemList()
+
+    private static void ClearItemList()
 
     {
         if (_itemList.hierarchy.childCount <= 0) return;
         _itemList.hierarchy.Clear();
     }
 
-    static void PopulateItemList(string category)
+    private static void PopulateItemList(string category)
     {
         if (category[0] != '_')
         {
@@ -68,19 +71,19 @@ public class UIController : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Application.targetFrameRate = 50;
         var root = GetComponent<UIDocument>().rootVisualElement;
         var categoryButtons = root.Q<VisualElement>("CategoryButtons");
-        _roomManager = GameObject.FindObjectOfType<RoomManager>();
         foreach (Button categoryButton in IconButtons.CategoryButtons)
         {
             categoryButtons.Add(
                 categoryButton);
         }
+        
 
-        materials = Resources.LoadAll("material/");
+        _materials = Resources.LoadAll("material/");
         
         _selectedCategory = categoryButtons[1] as Button;
 
@@ -90,48 +93,50 @@ public class UIController : MonoBehaviour
         _rotateButton = root.Q<Button>("Rotate_Button");
         _leftRotateBtn = root.Q<Button>("LeftRotate_Button");
         _rightRotateBtn = root.Q<Button>("RightRotate_Button");
+        _cameraButton = root.Q<Button>("Camera_Button");
         moveButton = root.Q<Button>("Hand_Button");
         selectButton = root.Q<Button>("Select_Button");
+        _roomManager = FindObjectOfType<RoomManager>(); 
             
-        spawnerContainer = GameObject.Find("SpawnerContainer");
-        _hamburgerButton.clicked += ToggleItemList;
+        SpawnerContainer = GameObject.Find("SpawnerContainer");
 
         _rotateOptions = root.Q<VisualElement>("Rotate_Options");
-        _Colors = root.Q<VisualElement>("Colors");
-        _Red = root.Q<Button>("Red");
-        _Blue = root.Q<Button>("Blue");
-        _Orange = root.Q<Button>("Orange");
-        _Green = root.Q<Button>("Green");
-        _Yellow = root.Q<Button>("Yellow");
+        _colors = root.Q<VisualElement>("Colors");
+        _red = root.Q<Button>("Red");
+        _blue = root.Q<Button>("Blue");
+        _orange = root.Q<Button>("Orange");
+        _green = root.Q<Button>("Green");
+        _yellow = root.Q<Button>("Yellow");
+        
+        _hamburgerButton.clicked += ToggleItemList;
+        _cameraButton.clicked += InvertCamera;
         _paintButton.clicked += HandleColors;
         _rotateButton.clicked += HandleRotation;
-
         _rightRotateBtn.clicked += RotateRight;
         _leftRotateBtn.clicked += RotateLeft;
-        moveButton.clicked += handMove;
-        selectButton.clicked += selectTool;
-
-        _Red.clicked += () => ChoseColor(0);
-        _Orange.clicked += () => ChoseColor(1);
-        _Green.clicked += () => ChoseColor(2);
-        _Blue.clicked += () => ChoseColor(3);
-        _Yellow.clicked += () => ChoseColor(4);
-        /*        
-                foreach (var button in ListedItems.GetAllItemsInCategory("Ball"))
-                {
-                    _itemList.hierarchy.Add(button);
-                }
-          */
+        moveButton.clicked += HandMove;
+        selectButton.clicked += SelectTool;
+        _red.clicked += () => ChoseColor(0);
+        _orange.clicked += () => ChoseColor(1);
+        _green.clicked += () => ChoseColor(2);
+        _blue.clicked += () => ChoseColor(3);
+        _yellow.clicked += () => ChoseColor(4);
 
     }
 
-    public void selectTool()
+    private void SelectTool()
     {
         _roomManager.movebool = false;
     }
-    public void handMove()
+
+    private void HandMove()
     {
         _roomManager.movebool = true;
+    }
+    
+    private static void InvertCamera()
+    {
+        FindObjectOfType<RoomClass>().InvertCamera();
     }
 
     public void RotateRight()
@@ -142,7 +147,7 @@ public class UIController : MonoBehaviour
             _roomManager.Rotate(10f);
         }
     }
-    public void RotateLeft()
+    private void RotateLeft()
     {
         Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
@@ -171,52 +176,54 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public static void HandleColors()
+    private static void HandleColors()
     {
-        Debug.Log(materials[0]);
-        if (_Colors.ClassListContains("hidden"))
+        Debug.Log(_materials[0]);
+        if (_colors.ClassListContains("hidden"))
         {
-            _Colors.RemoveFromClassList("hidden");
+            _colors.RemoveFromClassList("hidden");
         }
-        else if (!_Colors.ClassListContains("hidden"))
+        else if (!_colors.ClassListContains("hidden"))
         {
-            _Colors.AddToClassList("hidden");
+            _colors.AddToClassList("hidden");
         }
     }
 
-    public void ChoseColor(int n)
+    private void ChoseColor(int n)
     {
         Debug.Log("Color");
-        if (_Colors.ClassListContains("hidden"))
+        if (_colors.ClassListContains("hidden"))
         {
             return;
         }
         else
         {
             Debug.Log("Color");
-            if (n == 0)
+            switch (n)
             {
-                Debug.Log("RED");
-                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[4];
-            }
-            if (n == 1) {
-                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[3];
-            }
-            if (n == 2) {
-                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[2];
-            }
-            if (n == 3) {
-                Debug.Log("Blue");
-                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[0];
-            }
-            if (n == 4) {
-                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[6];
+                case 0:
+                    Debug.Log("RED");
+                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[4];
+                    break;
+                case 1:
+                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[3];
+                    break;
+                case 2:
+                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[2];
+                    break;
+                case 3:
+                    Debug.Log("Blue");
+                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[0];
+                    break;
+                case 4:
+                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[6];
+                    break;
             }
         }
     }
 
 
-    public void HandleRotation()
+    private void HandleRotation()
     {
         if(_roomManager.selectedObject != null){
             if (_rotateOptions.ClassListContains("hidden"))
@@ -235,7 +242,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public static void UnsetButton()
+    private static void UnsetButton()
     {
         if (_selectedCategory != null)
         {
@@ -247,19 +254,12 @@ public class UIController : MonoBehaviour
 
     }
 
-    public static void SetButtonToSaved()
+    private static void SetButtonToSaved()
     {
-        if (_savedSelection != null)
-        {
-            _selectedCategory = _savedSelection;
-            _savedSelection = null;
-            _selectedCategory.AddToClassList("selected");
-        }
+        if (_savedSelection == null) return;
+        _selectedCategory = _savedSelection;
+        _savedSelection = null;
+        _selectedCategory.AddToClassList("selected");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

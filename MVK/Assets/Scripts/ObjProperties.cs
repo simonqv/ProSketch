@@ -12,7 +12,7 @@ public class ObjProperties : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pre = prefab.GetComponent<Renderer>();
+        pre = prefab.GetComponentInChildren<Renderer>();
         pre.material = mainColor;
     }
 
