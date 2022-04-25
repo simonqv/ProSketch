@@ -8,6 +8,8 @@ TagManager:
   - Selected
   - room
   - GameObject
+  - spawner
+  - roomManager
   layers:
   - Default
   - TransparentFX

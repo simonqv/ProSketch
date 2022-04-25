@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,13 @@ public class SceneHandler : MonoBehaviour
     {
         ChooseFile();
         // May have to wait until "chosenFile" is initialized in ChooseFile()
-        SaveSystem.LoadRoom();
+        // anrop
+        var sceneData = SaveSystem.LoadRoom("room_name");
+        if (sceneData != null)
+        {
+            var spawner = GameObject.Find("SpawnerContainer");
+            spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
+        }
     }
     
     // Update is called once per frame

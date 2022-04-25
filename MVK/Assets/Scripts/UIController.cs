@@ -11,14 +11,25 @@ public class UIController : MonoBehaviour
     private Button _hamburgerButton;
     private static VisualElement _itemList;
     public static GameObject spawnerContainer;
+    private static Object[] materials; 
 
-    private static Button _paintButton;
+    private RoomManager _roomManager;
+    public static Button _paintButton;  
+    public static Button _rotateButton;  
+    public static VisualElement _rotateOptions;             //Tog bort static
     private static VisualElement _Colors;
     private static Button _Red;
     private static Button _Orange;
     private static Button _Green;
     private static Button _Blue;
     private static Button _Yellow;
+    public static Button _leftRotateBtn;    
+    public static Button _rightRotateBtn;
+    public Button moveButton;
+    public Button selectButton;
+
+    public bool rotateBool = false;
+
 
     void ToggleItemList()
     {
@@ -59,31 +70,52 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 50;
         var root = GetComponent<UIDocument>().rootVisualElement;
         var categoryButtons = root.Q<VisualElement>("CategoryButtons");
+        _roomManager = GameObject.FindObjectOfType<RoomManager>();
         foreach (Button categoryButton in IconButtons.CategoryButtons)
         {
             categoryButtons.Add(
                 categoryButton);
         }
 
+        materials = Resources.LoadAll("material/");
+        
         _selectedCategory = categoryButtons[1] as Button;
 
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
-        _paintButton = root.Q<Button>("Paint_button");
-
+        _paintButton = root.Q<Button>("Paint_Button");
+        _rotateButton = root.Q<Button>("Rotate_Button");
+        _leftRotateBtn = root.Q<Button>("LeftRotate_Button");
+        _rightRotateBtn = root.Q<Button>("RightRotate_Button");
+        moveButton = root.Q<Button>("Hand_Button");
+        selectButton = root.Q<Button>("Select_Button");
+            
         spawnerContainer = GameObject.Find("SpawnerContainer");
         _hamburgerButton.clicked += ToggleItemList;
 
-
+        _rotateOptions = root.Q<VisualElement>("Rotate_Options");
         _Colors = root.Q<VisualElement>("Colors");
+        _Red = root.Q<Button>("Red");
+        _Blue = root.Q<Button>("Blue");
+        _Orange = root.Q<Button>("Orange");
+        _Green = root.Q<Button>("Green");
+        _Yellow = root.Q<Button>("Yellow");
         _paintButton.clicked += HandleColors;
-        _Red.clicked += ChoseColor;
-        _Orange.clicked += ChoseColor;
-        _Green.clicked += ChoseColor;
-        _Blue.clicked += ChoseColor;
-        _Yellow.clicked += ChoseColor;
+        _rotateButton.clicked += HandleRotation;
+
+        _rightRotateBtn.clicked += RotateRight;
+        _leftRotateBtn.clicked += RotateLeft;
+        moveButton.clicked += handMove;
+        selectButton.clicked += selectTool;
+
+        _Red.clicked += () => ChoseColor(0);
+        _Orange.clicked += () => ChoseColor(1);
+        _Green.clicked += () => ChoseColor(2);
+        _Blue.clicked += () => ChoseColor(3);
+        _Yellow.clicked += () => ChoseColor(4);
         /*        
                 foreach (var button in ListedItems.GetAllItemsInCategory("Ball"))
                 {
@@ -91,6 +123,32 @@ public class UIController : MonoBehaviour
                 }
           */
 
+    }
+
+    public void selectTool()
+    {
+        _roomManager.movebool = false;
+    }
+    public void handMove()
+    {
+        _roomManager.movebool = true;
+    }
+
+    public void RotateRight()
+    {
+        Debug.Log(_roomManager.selectedObject);
+        if (rotateBool)
+        {
+            _roomManager.Rotate(10f);
+        }
+    }
+    public void RotateLeft()
+    {
+        Debug.Log(_roomManager.selectedObject);
+        if (rotateBool)
+        {
+            _roomManager.Rotate(-10f);
+        }
     }
 
     public static void SetButton(Button button)
@@ -115,6 +173,7 @@ public class UIController : MonoBehaviour
 
     public static void HandleColors()
     {
+        Debug.Log(materials[0]);
         if (_Colors.ClassListContains("hidden"))
         {
             _Colors.RemoveFromClassList("hidden");
@@ -125,18 +184,56 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public static void ChoseColor()
+    public void ChoseColor(int n)
     {
+        Debug.Log("Color");
         if (_Colors.ClassListContains("hidden"))
         {
             return;
         }
         else
         {
-
+            Debug.Log("Color");
+            if (n == 0)
+            {
+                Debug.Log("RED");
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[4];
+            }
+            if (n == 1) {
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[3];
+            }
+            if (n == 2) {
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[2];
+            }
+            if (n == 3) {
+                Debug.Log("Blue");
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[0];
+            }
+            if (n == 4) {
+                _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) materials[6];
+            }
         }
     }
 
+
+    public void HandleRotation()
+    {
+        if(_roomManager.selectedObject != null){
+            if (_rotateOptions.ClassListContains("hidden"))
+            {
+                _rotateOptions.RemoveFromClassList("hidden"); //Synlig'
+                rotateBool = true;
+            }
+            else if (!_rotateOptions.ClassListContains("hidden"))
+            {
+                _rotateOptions.AddToClassList("hidden"); // ej synlig
+                rotateBool = false;
+            }
+        }
+        else{
+            Debug.Log("Inget objekt selected");
+        }
+    }
 
     public static void UnsetButton()
     {
