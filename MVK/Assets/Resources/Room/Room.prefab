@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3184419861381881605}
   m_Layer: 0
   m_Name: pPlane1
-  m_TagString: Untagged
+  m_TagString: room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 2563993598754842091}
   m_Layer: 0
   m_Name: Colider
-  m_TagString: Untagged
+  m_TagString: room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
