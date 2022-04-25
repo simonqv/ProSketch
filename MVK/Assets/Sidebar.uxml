@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/sidebar.uss?fileID=7433441132597879392&amp;guid=7e1ac6c554c4b4bb3ab0234257569343&amp;type=3#sidebar" />
     <ui:VisualElement name="Container" class="fullscreen">
-        <ui:VisualElement name="Header" class="header">
+        <ui:VisualElement name="Header" class="header" style="height: 10%;">
             <ui:VisualElement name="Fil" style="top: 25%; left: 4%; height: 50%; width: 10%; position: absolute; font-size: 12%;">
                 <ui:DropdownField index="-1" choices="System.Collections.Generic.List`1[System.String]" focusable="true" label=" " class="dropDown_button" style="-unity-background-image-tint-color: rgb(0, 33, 255);" />
                 <ui:Label text="Fil" display-tooltip-when-elided="true" enable-rich-text="true" style="-unity-text-align: middle-center; width: 100%; height: 100%; font-size: 17%; -unity-font-style: bold; -unity-text-outline-color: rgb(255, 255, 255); color: rgb(255, 255, 255); position: absolute;" />
@@ -35,7 +35,7 @@
                 <ui:Button text="Button" display-tooltip-when-elided="true" name="Hammer_Button" class="clickButton" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/hammer&apos;);" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="SidebarContainer" class="container">
+        <ui:VisualElement name="SidebarContainer" class="container" style="height: 90%;">
             <ui:VisualElement name="CategoryButtons" class="icon-stack" style="justify-content: flex-start;" />
             <ui:VisualElement name="Rotate_Options" class="hidden" style="width: 5%; height: 5%; bottom: auto; position: absolute; top: 0; left: 27%; overflow: visible;">
                 <ui:Button display-tooltip-when-elided="true" name="LeftRotate_Button" style="width: 17%; background-color: rgba(255, 0, 0, 0); height: 100%; position: absolute; left: 0; background-image: resource(&apos;category-icons/left_arrow&apos;);" />
