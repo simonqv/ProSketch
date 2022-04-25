@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 /*
@@ -33,11 +34,5 @@ public class SceneData
         Debug.Log(name);
     }
 
-    // @ Gustav fix :3
-    public string ChooseFile()
-    {
-        var s = SaveSystem.getSaveFolderString();
-        return "hej";
-    }
     
 }
