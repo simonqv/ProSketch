@@ -34,13 +34,13 @@ public class ObjectInfo
         objectScale = go.transform.lossyScale;
         objectRotation = go.transform.rotation;
         var cat = go.GetComponent<ObjectCategory>();
-        if (cat != null)
-        {
-            objectCategory = cat.category;
-        }
-        else if (objectName == "RoomManager")
+        if (objectName == "RoomManager")
         {
             objectCategory = "room";
+        }
+        else if (cat != null)
+        {
+            objectCategory = cat.category;
         }
         else
         {
