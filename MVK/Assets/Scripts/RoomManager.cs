@@ -18,9 +18,7 @@ public class RoomManager : MonoBehaviour
     private Ray _ray;
     public bool movebool = false;
     public bool pickUp;
-
     private Vector3 movePos;
-    //private MoveObject _moveCTRL;
 
     void TrySelectObject()
     {
@@ -38,6 +36,7 @@ public class RoomManager : MonoBehaviour
             return;
         };
         Debug.Log("Not a room :)");
+        Debug.Log(hit.transform.tag);
         var selectionRenderer = obj.GetComponentInChildren<Renderer>();
         Debug.Log(selectionRenderer);
         if (selectionRenderer == null) return;
@@ -112,6 +111,7 @@ public class RoomManager : MonoBehaviour
                 pickUp = true;
             }
         }
+        
         else if (selectedObject != null && Input.GetKeyDown(KeyCode.Mouse1) && pickUp)
         {
             Debug.Log("Mouse1");
