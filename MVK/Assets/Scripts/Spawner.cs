@@ -18,9 +18,20 @@ public class Spawner : MonoBehaviour
 
     public void SpawnLoadedScene(SceneData sceneData)
     {
+        List<string> unDestructibles = new List<string>()
+        {
+            "Directional Light",
+            "EventSystem",
+            "SpawnerContainer",
+            "SceneHandler",
+            "RoomManager",
+            "UIDocument"
+        };
+        
         foreach (var go in GameObject.FindObjectsOfType<GameObject>())
         {
-            if (go.name == "Directional Light" || go.name == "EventSystem" || go.name == "SpawnerContainer" || go.name == "SceneHandler" || go.name == "RoomManager" || go.name == "UIDocument")
+            // If statement got a bit long so made a list and called .Contains() instead /Gustav
+            if (unDestructibles.Contains(go.name))
             {
                 continue;
             }
