@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2132158662985448807}
   m_Layer: 0
   m_Name: "L\xE5ngmatta_6m"
-  m_TagString: Untagged
+  m_TagString: GameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
