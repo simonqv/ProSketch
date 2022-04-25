@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SceneHandler : MonoBehaviour
 {
@@ -18,15 +20,16 @@ public class SceneHandler : MonoBehaviour
         // TODO: Let user input name of file.
         SceneData sceneData = new SceneData();
         sceneData.SetFileName(_filename);
+        // sceneData.SetFileName("room_name");
         SaveSystem.SaveRoom(sceneData);
     }
 
     // TODO: search for specific file, place objects in scene.
     private void Load()
     {
+        Debug.Log("load :3");
         ChooseFile();
         // May have to wait until "chosenFile" is initialized in ChooseFile()
-        // anrop
         var sceneData = SaveSystem.LoadRoom("room_name");
         if (sceneData != null)
         {
@@ -59,28 +62,31 @@ public class SceneHandler : MonoBehaviour
 
     public void ChooseFile()
     {
-        var dropdown = transform.GetComponent<Dropdown>();
-        dropdown.options.Clear(); 
+        var root = GetComponent<UIDocument>().rootVisualElement;
+        var dropdown = root.Q<DropdownField>("Files-dropdown");
+        // var dropdown = GetComponent<Dropdown>();
+        // dropdown.options.Clear(); 
+        
         var path = SaveSystem.getSaveFolderString();
         string[] folderFiles = System.IO.Directory.GetFiles(path);
-        
-        //fill dropdown with file names
+
+        List<string> field = new List<string>();
+        // fill dropdown with file names
         // exclude every second file (file.txt, file.txt.meta, file2.txt, file2.txt.meta)???
         for (int i = 0; i < folderFiles.Length; i++)
         {
             // if does not containt .meta??
-            dropdown.options.Add(new Dropdown.OptionData()
+            /*dropdown.options.Add(new Dropdown.OptionData()
             {
                 text = folderFiles[i].Replace(path,"")
-            });
+            });*/
+            dropdown.choices.Add(folderFiles[i].Replace(path,""));
         }
-
+/*
         dropdown.onValueChanged.AddListener(delegate
         {
             int index = dropdown.value;
             chosenFile = dropdown.options[index].text;
-        });
+        });*/
     }
-
-   
 }

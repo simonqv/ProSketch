@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -18,16 +19,15 @@ public class Spawner : MonoBehaviour
 
     public void SpawnLoadedScene(SceneData sceneData)
     {
-
         foreach (var go in GameObject.FindObjectsOfType<GameObject>())
         {
-            if (go.name == "Directional Light" || go.name == "EventSystem")
+            if (go.name == "Directional Light" || go.name == "EventSystem" || go.name == "SpawnerContainer" || go.name == "SceneHandler" || go.name == "RoomManager" || go.name == "UIDocument")
             {
                 continue;
             }
             Destroy(go);
         }
-        
+
         foreach (var oi in sceneData.objects)
         {
             if (oi.objectTag == "room")
@@ -35,6 +35,7 @@ public class Spawner : MonoBehaviour
                 RoomClass.Setter((int) oi.objectScale.x, (int) oi.objectScale.z);
             }
         }
+
         foreach (var objectInfo in sceneData.objects)
         {
             string cat = objectInfo.objectCategory;
