@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5761749551230540349}
   - component: {fileID: 3026123530002895319}
   m_Layer: 0
-  m_Name: "B\xE4nk_2.5m "
+  m_Name: "B\xE4nk_2.5m"
   m_TagString: GameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

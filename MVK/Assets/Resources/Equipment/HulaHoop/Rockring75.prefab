@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rockring75
       objectReference: {fileID: 0}
+    - target: {fileID: 3387368729388181582, guid: a4d57124652eb0b45ac3b9d71f40e44c, type: 3}
+      propertyPath: m_TagString
+      value: GameObject
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4d57124652eb0b45ac3b9d71f40e44c, type: 3}
 --- !u!1 &1269857363997146053 stripped

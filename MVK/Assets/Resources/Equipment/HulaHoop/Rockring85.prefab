@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rockring85
       objectReference: {fileID: 0}
+    - target: {fileID: 3894641358803586, guid: bcace37261fb60840aa23fece63dde11, type: 3}
+      propertyPath: m_TagString
+      value: GameObject
+      objectReference: {fileID: 0}
     - target: {fileID: 2511123500588629933, guid: bcace37261fb60840aa23fece63dde11, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
