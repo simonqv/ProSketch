@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2684115764644382330}
   - component: {fileID: 5371109005703756329}
   m_Layer: 0
-  m_Name: BomObject
+  m_Name: Bom
   m_TagString: GameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 604.6504, y: 797.24976, z: 19.216652}
-  m_Center: {x: -301.8252, y: 398.26184, z: -19.690868}
+  m_Size: {x: 604.6504, y: 782.13184, z: 19.216652}
+  m_Center: {x: -301.8252, y: 405.8208, z: -19.690868}
 --- !u!1001 &4963354894262584427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,6 +130,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6662283912741592134, guid: aaeaa268f0406ad41987a86664f81ac0, type: 3}
+      propertyPath: m_TagString
+      value: room
+      objectReference: {fileID: 0}
     - target: {fileID: -1140857973992110230, guid: aaeaa268f0406ad41987a86664f81ac0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -142,9 +146,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: bom
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aaeaa268f0406ad41987a86664f81ac0, type: 3}
+      propertyPath: m_TagString
+      value: GameObject
+      objectReference: {fileID: 0}
     - target: {fileID: 5163613875807306544, guid: aaeaa268f0406ad41987a86664f81ac0, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: room
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaeaa268f0406ad41987a86664f81ac0, type: 3}

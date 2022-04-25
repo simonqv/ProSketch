@@ -108,6 +108,7 @@ public class RoomManager : MonoBehaviour
             Debug.Log("Mouse0");
             if (selectedObject != null)
             {
+                Debug.Log(selectedObject);
                 pickUp = true;
             }
         }
@@ -116,6 +117,7 @@ public class RoomManager : MonoBehaviour
         {
             Debug.Log("Mouse1");
             pickUp = false;
+            movebool = false;
             UnselectObject();
             
         }

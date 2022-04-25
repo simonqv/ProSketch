@@ -41,8 +41,9 @@ public static class IconButtons
         CreateIcon("category-icons/hamburger-menu", "Hamburger", iconName:"HamburgerIcon", true),
         CreateIcon("category-icons/plinth", "_Plinth"),
         CreateIcon("category-icons/hula-hoop", "_HulaHoop"),
-        CreateIcon("category-icons/mat", "_Mat"),
+        CreateIcon("category-icons/mattor", "_Mattor"),
         CreateIcon("category-icons/ball", "_Ball"),
         CreateIcon("category-icons/racket", "_Racket"),
+        CreateIcon("category-icons/ställningar", "_Ställningar"),
     };
 }

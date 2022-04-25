@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b528a8ea8ed774895aa960a7d94f2c0f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2935
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b528a8ea8ed774895aa960a7d94f2c0f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b528a8ea8ed774895aa960a7d94f2c0f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53,7 +53,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b528a8ea8ed774895aa960a7d94f2c0f, type: 3}
       propertyPath: m_Name
-      value: plint7del Variant
+      value: plint7del
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b528a8ea8ed774895aa960a7d94f2c0f, type: 3}
       propertyPath: m_TagString

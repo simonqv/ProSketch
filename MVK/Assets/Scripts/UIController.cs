@@ -217,7 +217,7 @@ public class UIController : MonoBehaviour
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[0];
                     break;
                 case 4:
-                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[6];
+                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[7];
                     break;
             }
         }
