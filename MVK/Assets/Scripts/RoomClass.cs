@@ -1,8 +1,5 @@
 using System;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
 
 public class RoomClass : MonoBehaviour
 {
@@ -10,7 +7,7 @@ public class RoomClass : MonoBehaviour
     private static int _width = 20;
     private double _angle;
     private int _height;
-    private const int Height = 8;
+    private const int Height = 9;
 
     private GameObject _roomPrefab;
     private Camera _camera;
@@ -18,7 +15,6 @@ public class RoomClass : MonoBehaviour
     private float[] _pos;
     private float[] _angles;
 
-    private GameObject _cameraOne;
     private void Start()
     {
         
@@ -39,11 +35,11 @@ public class RoomClass : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && cam.transform.position.x > 0)
         {
-            //MoveCamera(1);
+            MoveCamera(1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && cam.transform.position.x < 0)
         {
-            //MoveCamera(-1);
+            MoveCamera(-1);
         }
     }
 
@@ -52,16 +48,8 @@ public class RoomClass : MonoBehaviour
         try
         {
             _roomPrefab = Resources.Load<GameObject>("Room/Room");
-            
-            //_height = (int)Math.Ceiling(lw / Math.Tan(_angle));
             var room = Instantiate(_roomPrefab);
-            room.transform.localScale = new Vector3(_length, Height, _width); 
-            //var position = room.transform.position;
-            //var xpos = position.x;
-            //var ypos = position.y;
-            //var zpos = position.z;
-            //Debug.Log(xpos + " " + ypos + " " + zpos);
-            
+            room.transform.localScale = new Vector3(_length, Height, _width);
             CreateCamera();
         }
         catch (Exception e)
@@ -76,26 +64,39 @@ public class RoomClass : MonoBehaviour
         // Instansiera kamera, placear i ett hörn, vinkla
         _camera = Resources.Load<Camera>("Room/Camera");
         
-        //var lsq = Mathf.Pow(_length, 2);
-        //var wsq = Mathf.Pow(_width, 2);
-        //var lw = Mathf.Sqrt(lsq + wsq);
-        //var alpha = Mathf.Atan(Height*2/lw) * (180/Mathf.PI); // Rotation around cameras x-axis
-        //var beta = Mathf.Atan((float) _length / _width) * (180/Mathf.PI);    // Rotation around cameras y-axis
-        //_pos = new float[] {(-_length / 2f) * 100 * 3, Height * 100*3, (-_width / 2f) * 100 *3};
-        //_angles = new float[] {alpha, beta};
-        _height = (int)((((float)_width / 2) / Mathf.Tan(30 * Mathf.PI / 180))+Height) * 100;
+        var lsq = Mathf.Pow(_length, 2);
+        var wsq = Mathf.Pow(_width, 2);
+        var lw = Mathf.Sqrt(lsq + wsq);
+        var alpha = Mathf.Atan(Height*2/lw) * (180/Mathf.PI); // Rotation around cameras x-axis
+        var beta = Mathf.Atan((float) _length / _width) * (180/Mathf.PI);    // Rotation around cameras y-axis
+        _pos = new float[] {(-_length / 2f) * 100 * 3, Height * 100*3, (-_width / 2f) * 100 *3};
+        _angles = new float[] {alpha, beta};
+        _height = (int)((float)_width / 2 / Mathf.Tan(30 * Mathf.PI / 180)+Height) * 100;
         cam = Instantiate(_camera);
-        cam.transform.position = new Vector3(0 ,_height, 0 );
-        cam.transform.Rotate(90, 0, 0, Space.Self);
+        cam.transform.position = new Vector3(_pos[0] ,_pos[1], _pos[2] );
+        cam.transform.Rotate(_angles[0], _angles[1], 0f, Space.Self);
         
 
     }
+    
 
+    
     // Input: P = 1 for camera position 1, P = -1 for camera position 2
     private void MoveCamera(int p)
     {
         cam.transform.position = new Vector3(_pos[0] * p,_pos[1], _pos[2] * p);
         cam.transform.Rotate(0, 180, 0, Space.World);
         
+    }
+    
+    public void InvertCamera()
+    {
+        var transform1 = cam.transform;
+        var position = transform1.position;
+        var x = position.x;
+        var y = position.y;
+        var z = position.z;
+        transform1.position = new Vector3(-x, y, -z);
+        transform1.Rotate(0, 180, 0, Space.World);
     }
 }

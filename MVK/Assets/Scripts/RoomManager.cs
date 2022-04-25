@@ -8,9 +8,9 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Camera camera;
+    public new Camera camera;
     public Transform selectedObject = null;
-    private RoomClass _room;
+    public RoomClass Room { get; private set; }
 
     [SerializeField] private Material highlightMaterial;   
     [SerializeField] private Material previousMaterial;
@@ -47,7 +47,7 @@ public class RoomManager : MonoBehaviour
         selectionRenderer.material = highlightMaterial;
         selectedObject.tag = "Selected";
         //pickUp = true;
-        _room = selectedObject.GetComponent<RoomClass>();
+        Room = selectedObject.GetComponent<RoomClass>();
         Debug.Log("Select");
     }
     
@@ -66,7 +66,7 @@ public class RoomManager : MonoBehaviour
         selectionRenderer2.material = highlightMaterial;
         selectedObject.tag = "Selected";
         //pickUp = true;
-        _room = selectedObject.GetComponent<RoomClass>();
+        Room = selectedObject.GetComponent<RoomClass>();
     }
 
     void UnselectObject()
@@ -88,15 +88,15 @@ public class RoomManager : MonoBehaviour
 
     void Start()
     {
-        _room = gameObject.AddComponent<RoomClass>();
-        _room.CreateRoom();
-        camera = _room.cam;
+        Room = gameObject.AddComponent<RoomClass>();
+        Room.CreateRoom();
+        camera = Room.cam;
     }
 
     public void Reset()
     { 
-        _room.CreateRoom();
-        camera = _room.cam;    
+        Room.CreateRoom();
+        camera = Room.cam;    
     }
     
     // Update is called once per frame
