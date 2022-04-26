@@ -282,7 +282,7 @@ public class UIController : MonoBehaviour
     private void ZoomIn()
     {
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        float target = 45;
+        float target = 5;
         float angle = Mathf.Abs((defaultFov / zoomMultiplier) - defaultFov);
         cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
     }
