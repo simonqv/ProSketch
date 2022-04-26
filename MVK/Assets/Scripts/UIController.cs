@@ -182,6 +182,7 @@ public class UIController : MonoBehaviour
         if (_colors.ClassListContains("hidden"))
         {
             _colors.RemoveFromClassList("hidden");
+            _rotateOptions.AddToClassList("hidden");
         }
         else if (!_colors.ClassListContains("hidden"))
         {
@@ -225,10 +226,12 @@ public class UIController : MonoBehaviour
 
     private void HandleRotation()
     {
+       
         if(_roomManager.selectedObject != null){
             if (_rotateOptions.ClassListContains("hidden"))
             {
                 _rotateOptions.RemoveFromClassList("hidden"); //Synlig'
+                _colors.AddToClassList("hidden");
                 rotateBool = true;
             }
             else if (!_rotateOptions.ClassListContains("hidden"))
@@ -262,4 +265,14 @@ public class UIController : MonoBehaviour
         _selectedCategory.AddToClassList("selected");
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (_roomManager.selectedObject == null)
+        {
+            _colors.AddToClassList("hidden");
+            _rotateOptions.AddToClassList("hidden");
+            
+        }
+    }
 }

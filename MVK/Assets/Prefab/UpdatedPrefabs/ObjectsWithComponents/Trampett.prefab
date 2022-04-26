@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3865902273473618847}
   - component: {fileID: 1904380605624265395}
+  - component: {fileID: 5923444539177358889}
   m_Layer: 0
   m_Name: Trampett
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MonoBehaviour:
   prefab: {fileID: 5005093691393453817}
   upperLimit: 330
   lowerLimit: 30
+--- !u!65 &5923444539177358889
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7280237892277928465}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 114.63747, y: 41.967613, z: 116.49324}
+  m_Center: {x: 0.13271332, y: 26.066517, z: 0.06916046}
 --- !u!1001 &1873514363185489867
 PrefabInstance:
   m_ObjectHideFlags: 0
