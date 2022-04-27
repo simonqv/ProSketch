@@ -74,9 +74,6 @@ public class MainMenuController : MonoBehaviour
         {
             Console.WriteLine(e.Message);
         }
-        
-
-
     }
 
     void CancelDimsInputButtonPressed()

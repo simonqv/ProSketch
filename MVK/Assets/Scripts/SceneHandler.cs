@@ -1,18 +1,23 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.UI;
+// using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class SceneHandler : MonoBehaviour
 {
     private static string _filename;
-    public static string chosenFile;  
+    public static string chosenFile;
+
+    private ScrollView _fileList;
+    // public static VisualElement root;
 
     // Start is called before the first frame update
     private void Start()
     {
         Debug.Log("Scene handler start");
+        // root = GetComponent<UIDocument>().rootVisualElement;
+
     }
 
     private static void Save()
@@ -52,6 +57,16 @@ public class SceneHandler : MonoBehaviour
             Debug.Log("Loading file");
             Load();
         }
+
+        var scroll = Input.mouseScrollDelta;
+        if (scroll.y != 0)
+        {
+            var scrollOffset_y = _fileList.scrollOffset.y;
+            var scrollOffset_x = _fileList.scrollOffset.x;
+            Debug.Log(scrollOffset_y);
+            Debug.Log("scroll " + scroll.y);
+            _fileList.scrollOffset = new Vector2(scrollOffset_x, scrollOffset_y + (3 * scroll.y));
+        }
     }
 
     public void ReadInputString(string s)
@@ -64,7 +79,9 @@ public class SceneHandler : MonoBehaviour
     public void ChooseFile()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        var dropdown = root.Q<DropdownField>("Files-dropdown");
+        _fileList = root.Q<ScrollView>("file-names");
+        // var dropdown = root.Q<DropdownField>("Files-dropdown");
+        // dropdown.choices.Clear();
         // var dropdown = GetComponent<Dropdown>();
         // dropdown.options.Clear(); 
         
@@ -81,8 +98,15 @@ public class SceneHandler : MonoBehaviour
             {
                 text = folderFiles[i].Replace(path,"")
             });*/
-            dropdown.choices.Add(folderFiles[i].Replace(path,""));
+            // Debug.Log(folderFiles[i].Replace(path,""));
+            field.Add(folderFiles[i].Replace(path,""));
+            var button = CreateButton(folderFiles[i].Replace(path,""));
+            // Debug.Log("Button " + button.name);
+            _fileList.contentContainer.hierarchy.Add(button);
+            // file_list.verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible;
         }
+
+        // dropdown.choices.Add(field[1]);
 /*
         dropdown.onValueChanged.AddListener(delegate
         {
@@ -90,4 +114,15 @@ public class SceneHandler : MonoBehaviour
             chosenFile = dropdown.options[index].text;
         });*/
     }
+
+    public Button CreateButton(string mes)
+    {
+        var button = new Button();
+        button.name = mes;
+        button.text = mes;
+        button.clickable = new Clickable(() => Debug.Log(mes));
+        //button.clicked += () => { Debug.Log(mes); };
+        return button;
+    }
+    
 }
