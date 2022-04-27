@@ -35,12 +35,13 @@ public class SceneHandler : MonoBehaviour
         Debug.Log("load :3");
         ChooseFile();
         // May have to wait until "chosenFile" is initialized in ChooseFile()
+        /*
         var sceneData = SaveSystem.LoadRoom("room_name");
         if (sceneData != null)
         {
             var spawner = GameObject.Find("SpawnerContainer");
             spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
-        }
+        }*/
     }
     
     // Update is called once per frame
@@ -100,8 +101,22 @@ public class SceneHandler : MonoBehaviour
         var button = new Button();
         button.name = mes;
         button.text = mes;
-        button.clickable = new Clickable(() => chosenFile = button.name);
+        button.clickable = new Clickable(() => Loader(button.name) /*chosenFile = button.name*/);
         //button.clicked += () => { Debug.Log(mes); };
         return button;
+    }
+
+    private void Loader(string fileName)
+    {
+        var sceneData = SaveSystem.LoadRoom(fileName);
+        if (sceneData != null)
+        {
+            foreach (var x in sceneData.objects)
+            {
+                Debug.Log(x.objectName);
+            }
+            var spawner = GameObject.Find("SpawnerContainer");
+            spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
+        }
     }
 }
