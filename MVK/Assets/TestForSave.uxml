@@ -1,3 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:DropdownField label="Filnamn" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="Files-dropdown" style="font-size: 25px;" />
+    <Style src="project://database/Assets/UI-Styles/Style.uss?fileID=7433441132597879392&amp;guid=dd925ea8c01f54191a385109a3edbb10&amp;type=3#Style" />
+    <ui:VisualElement name="Container" class="container" style="width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: row;">
+        <ui:DropdownField label="Filnamn" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="Files-dropdown" style="font-size: 25px; display: none;" />
+        <ui:VisualElement style="align-items: center; justify-content: center; height: 65%; width: 35%; background-color: rgb(214, 29, 29); visibility: visible; display: flex; overflow: hidden;">
+            <ui:ListView focusable="true" name="file-name" style="flex-grow: 0; height: 100%; width: 80%; background-color: rgb(68, 229, 36);" />
+        </ui:VisualElement>
+        <ui:VisualElement style="width: 35%; height: 65%; background-color: rgb(233, 56, 56); align-items: center;">
+            <ui:ScrollView name="file-names" style="color: rgb(0, 0, 0); height: 100%; background-color: rgba(93, 204, 53, 255); width: 65%; overflow: hidden;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
