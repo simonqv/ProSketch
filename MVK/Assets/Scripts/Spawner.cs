@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
@@ -32,11 +33,10 @@ public class Spawner : MonoBehaviour
         foreach (var go in GameObject.FindObjectsOfType<GameObject>())
         {
             // If statement got a bit long so made a list and called .Contains() instead /Gustav
-            if (unDestructibles.Contains(go.name))
+            if (go.CompareTag("GameObject") || go.CompareTag("room") || go.name == "Camera(Clone)")
             {
-                continue;
+                Destroy(go);
             }
-            Destroy(go);
         }
 
         foreach (var oi in sceneData.objects)
@@ -67,6 +67,7 @@ public class Spawner : MonoBehaviour
                     instance.transform.rotation = objectInfo.objectRotation;
                     instance.transform.localScale = objectInfo.objectScale;
                     instance.tag = objectInfo.objectTag;
+                    instance.AddComponent<ObjectCategory>().category = cat;
                 }
             }
         }

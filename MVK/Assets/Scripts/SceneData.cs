@@ -32,6 +32,4 @@ public class SceneData
     {
         fileName = name;
     }
-
-    
 }
