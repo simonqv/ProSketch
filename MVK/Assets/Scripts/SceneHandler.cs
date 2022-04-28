@@ -42,12 +42,6 @@ public class SceneHandler : MonoBehaviour
 
     private static void Save()
     {
-        // TODO: Let user input name of file.
-        // SceneData sceneData = new SceneData();
-        // sceneData.SetFileName("lol");
-        // sceneData.SetFileName("room_name");
-        // SaveSystem.SaveRoom(sceneData);
-        
         _fileNameInputWindow.style.display = DisplayStyle.Flex;
     }
 
@@ -73,7 +67,7 @@ public class SceneHandler : MonoBehaviour
     }
     
     // TODO: search for specific file, place objects in scene.
-    private void Load()
+    public void Load()
     {
         _chooseFileWindow.style.display = DisplayStyle.Flex;
         ChooseFile();
@@ -121,7 +115,7 @@ public class SceneHandler : MonoBehaviour
         button.AddToClassList("button-style");
         button.name = mes;
         button.text = mes;
-        button.clickable = new Clickable(() => Loader(button.name) /*chosenFile = button.name*/);
+        button.clickable = new Clickable(() => Loader(button.name));
         return button;
     }
 
@@ -130,8 +124,16 @@ public class SceneHandler : MonoBehaviour
         var sceneData = SaveSystem.LoadRoom(fileName);
         if (sceneData != null)
         {
-            var spawner = GameObject.Find("SpawnerContainer");
-            spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
+            if (SceneManager.GetActiveScene().name == "StartMenu")
+            {
+                LoadSave.Setter(sceneData);
+                SceneManager.LoadScene("NewSampleScene");
+            }
+            else
+            {
+                var spawner = GameObject.Find("SpawnerContainer");
+                spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
+            }
         }
         _fileList.contentContainer.Clear();
         _chooseFileWindow.style.display = DisplayStyle.None;
