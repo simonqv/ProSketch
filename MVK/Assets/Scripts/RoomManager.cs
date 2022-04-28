@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviour
     public Transform selectedObject = null;
     public RoomClass Room { get; private set; }
 
-    [SerializeField] private Material highlightMaterial;   
+    public Material highlightMaterial;   
     [SerializeField] private Material previousMaterial;
 
     private Ray _ray;
@@ -41,8 +41,9 @@ public class RoomManager : MonoBehaviour
         if (selectedObject != null)
         {
             var selectionRenderer = selectedObject.GetComponentInChildren<Renderer>();
-            if (selectionRenderer == null) return;
-            selectionRenderer.material = previousMaterial;
+
+            selectionRenderer.material = selectedObject.GetComponent<ObjProperties>().mainColor;
+
             selectedObject.tag = "GameObject";
             //pickUp = false;
         }
@@ -52,7 +53,7 @@ public class RoomManager : MonoBehaviour
         previousMaterial = selectionRenderer2.material;
         selectionRenderer2.material = highlightMaterial;
         selectedObject.tag = "Selected";
-        //pickUp = true;
+        pickUp = true;
         Room = selectedObject.GetComponent<RoomClass>();
     }
 
@@ -104,6 +105,15 @@ public class RoomManager : MonoBehaviour
             movebool = false;
             UnselectObject();
             
+        }
+
+        if (selectedObject != null)
+        {
+            var selectionRenderer2 = selectedObject.GetComponentInChildren<Renderer>();
+            previousMaterial = selectionRenderer2.material;
+            selectionRenderer2.material = highlightMaterial;
+            selectedObject.tag = "Selected";
+            pickUp = true;
         }
         Move();
         //Rotate();
