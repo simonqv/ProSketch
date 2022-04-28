@@ -1,3 +1,4 @@
+using System.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -25,6 +26,7 @@ public class UIController : MonoBehaviour
     private static Button _yellow;
     private static Button _leftRotateBtn;
     private static Button _rightRotateBtn;
+    private static Button _deleteButton;
     private Button moveButton;
     private Button selectButton;
     private Button _cameraButton;
@@ -105,6 +107,7 @@ public class UIController : MonoBehaviour
         _cameraButton = root.Q<Button>("Camera_Button");
         moveButton = root.Q<Button>("Hand_Button");
         selectButton = root.Q<Button>("Select_Button");
+        _deleteButton = root.Q<Button>("Delete_Button");
         _roomManager = FindObjectOfType<RoomManager>(); 
         
         _plus = root.Q<Button>("Plus_Button");
@@ -135,6 +138,7 @@ public class UIController : MonoBehaviour
         _yellow.clicked += () => ChoseColor(4);
         _plus.clicked += ZoomIn;
         _minus.clicked += ZoomOut;
+        _deleteButton.clicked += DeleteClicked;
 
     }
 
@@ -168,6 +172,12 @@ public class UIController : MonoBehaviour
         {
             _roomManager.Rotate(-10f);
         }
+    }
+    
+    // Delete selected object from room
+    private void DeleteClicked()
+    {
+        _roomManager.Delete();
     }
 
     public static void SetButton(Button button)

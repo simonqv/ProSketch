@@ -151,10 +151,16 @@ public class RoomManager : MonoBehaviour
     {
         if (selectedObject != null)
         {
-           
-                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,dir);
-            
-            
+            selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,dir);
+        }
+    }
+    
+    // Function that deletes a selected object in scene.
+    public void Delete()
+    {
+        if (selectedObject != null)
+        {
+            Destroy(selectedObject.gameObject);
         }
     }
 }
