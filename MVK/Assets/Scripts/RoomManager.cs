@@ -18,6 +18,7 @@ public class RoomManager : MonoBehaviour
     private Ray _ray;
     public bool movebool = false;
     public bool pickUp;
+    private UIController _uiController;
     private Vector3 movePos;
 
     void TrySelectObject()
@@ -66,6 +67,7 @@ public class RoomManager : MonoBehaviour
         var prevMat = selectedObject.GetComponent<ObjProperties>().mainColor;
         selectionRenderer.material = prevMat;
         
+        GameObject.Find("Sidebar").GetComponent<UIController>().UnselectTool();
         selectedObject = null;
 
     }

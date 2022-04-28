@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
 {
     public Button[] CategoryButtons;
 
+    private Button selectedTool;
     private static Button _selectedCategory;
     private static Button _savedSelection;
     private Button _hamburgerButton;
@@ -78,6 +79,12 @@ public class UIController : MonoBehaviour
             _itemList.hierarchy.Add(button);
         }
     }
+
+    public void UnselectTool(){
+        if(selectedTool != null){
+            selectedTool.style.backgroundColor = Color.clear;
+        }
+    }
     
     // Start is called before the first frame update
     private void Start()
@@ -124,12 +131,17 @@ public class UIController : MonoBehaviour
         
         _hamburgerButton.clicked += ToggleItemList;
         _cameraButton.clicked += InvertCamera;
+        _cameraButton.clicked += () => ChooseButton(_cameraButton);
         _paintButton.clicked += HandleColors;
+        _paintButton.clicked += () => ChooseButton(_paintButton);
         _rotateButton.clicked += HandleRotation;
+        _rotateButton.clicked += () => ChooseButton(_rotateButton);
         _rightRotateBtn.clicked += RotateRight;
         _leftRotateBtn.clicked += RotateLeft;
-        moveButton.clicked += HandMove;
-        selectButton.clicked += SelectTool;
+        moveButton.clicked +=  () => {_roomManager.movebool = true;};
+        moveButton.clicked += () => ChooseButton(moveButton);
+        selectButton.clicked += () => {_roomManager.movebool = false;};
+        selectButton.clicked += () => ChooseButton(selectButton);
         _red.clicked += () => ChoseColor(0);
         _orange.clicked += () => ChoseColor(1);
         _green.clicked += () => ChoseColor(2);
@@ -137,19 +149,17 @@ public class UIController : MonoBehaviour
         _yellow.clicked += () => ChoseColor(4);
         _plus.clicked += ZoomIn;
         _minus.clicked += ZoomOut;
-        _deleteButton.clicked += DeleteClicked;
+        _deleteButton.clicked += () => {_roomManager.Delete();};
+        _deleteButton.clicked += () => ChooseButton(_deleteButton);
 
     }
 
-    private void SelectTool()
-    {
-        _roomManager.movebool = false;
-    }
+    private void ChooseButton(Button btnToSelect){
+        UnselectTool();
+        btnToSelect.style.backgroundColor = new Color(0.14509803921f, 0.40784313725f, 0.85490196078f);
+        selectedTool = btnToSelect;
+    }   
 
-    private void HandMove()
-    {
-        _roomManager.movebool = true;
-    }
     
     private static void InvertCamera()
     {
@@ -171,11 +181,6 @@ public class UIController : MonoBehaviour
         }
     }
     
-    // Delete selected object from room
-    private void DeleteClicked()
-    {
-        _roomManager.Delete();
-    }
 
     public static void SetButton(Button button)
     {
