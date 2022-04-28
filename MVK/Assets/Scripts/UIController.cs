@@ -29,6 +29,14 @@ public class UIController : MonoBehaviour
     private Button selectButton;
     private Button _cameraButton;
     private RoomClass _room;
+    
+    public static Button _plus;
+    public static Button _minus;
+
+    public Camera cam;
+    float zoomMultiplier = 2;
+    float defaultFov = 3600;
+    float zoomDuration = 2;
 
     public bool rotateBool = false;
 
@@ -98,6 +106,9 @@ public class UIController : MonoBehaviour
         moveButton = root.Q<Button>("Hand_Button");
         selectButton = root.Q<Button>("Select_Button");
         _roomManager = FindObjectOfType<RoomManager>(); 
+        
+        _plus = root.Q<Button>("Plus_Button");
+        _minus = root.Q<Button>("Minus_Button");
             
         SpawnerContainer = GameObject.Find("SpawnerContainer");
 
@@ -122,6 +133,8 @@ public class UIController : MonoBehaviour
         _green.clicked += () => ChoseColor(2);
         _blue.clicked += () => ChoseColor(3);
         _yellow.clicked += () => ChoseColor(4);
+        _plus.clicked += ZoomIn;
+        _minus.clicked += ZoomOut;
 
     }
 
@@ -264,6 +277,23 @@ public class UIController : MonoBehaviour
         _selectedCategory = _savedSelection;
         _savedSelection = null;
         _selectedCategory.AddToClassList("selected");
+    }
+    
+    
+    private void ZoomIn()
+    {
+        cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        float target = 5;
+        float angle = Mathf.Abs((defaultFov / zoomMultiplier) - defaultFov);
+        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
+    }
+
+    private void ZoomOut()
+    {
+        cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        float target = 180;
+        float angle = Mathf.Abs((defaultFov / zoomMultiplier) - defaultFov);
+        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
     }
 
     // Update is called once per frame
