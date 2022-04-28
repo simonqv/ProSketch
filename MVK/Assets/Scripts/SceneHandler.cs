@@ -9,26 +9,56 @@ public class SceneHandler : MonoBehaviour
     private static string _filename;
     public static string chosenFile;
 
+    private Button SaveFileWithNameButton;
+    private Button CancelSaveFileWithNameButton;
+    
     private ScrollView _fileList;
-    // public static VisualElement root;
+    VisualElement root;
+
+    private static GroupBox _fileNameInputWindow;
 
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Scene handler start");
-        // root = GetComponent<UIDocument>().rootVisualElement;
+        root = GetComponent<UIDocument>().rootVisualElement;
+        _fileNameInputWindow = root.Q<GroupBox>("Set-file-name-window");
+        _fileNameInputWindow.style.display = DisplayStyle.None;
+        
+        SaveFileWithNameButton = root.Q<Button>("Confirm-file-input-button");
+        CancelSaveFileWithNameButton = root.Q<Button>("Cancel-file-input-button");
 
+        SaveFileWithNameButton.clicked += SaveFileWithNameButtonClicked;
+        CancelSaveFileWithNameButton.clicked += CancelSaveFileWithNameButtonClicked;
+        
+        Debug.Log("Scene handler started");
     }
 
     private static void Save()
     {
         // TODO: Let user input name of file.
-        SceneData sceneData = new SceneData();
-        sceneData.SetFileName(_filename);
+        // SceneData sceneData = new SceneData();
+        // sceneData.SetFileName("lol");
         // sceneData.SetFileName("room_name");
-        SaveSystem.SaveRoom(sceneData);
+        // SaveSystem.SaveRoom(sceneData);
+        
+        _fileNameInputWindow.style.display = DisplayStyle.Flex;
     }
 
+    private void SaveFileWithNameButtonClicked()
+    {
+        var fileNameField = root.Q<TextField>("File-name-input").value;
+        SceneData sceneData = new SceneData();
+        sceneData.SetFileName(fileNameField);
+        SaveSystem.SaveRoom(sceneData);
+        _fileNameInputWindow.style.display = DisplayStyle.None;
+    }
+
+    private void CancelSaveFileWithNameButtonClicked()
+    {
+        GetComponent<UIDocument>().rootVisualElement.Q<TextField>("File-name-input").value = "";
+        _fileNameInputWindow.style.display = DisplayStyle.None;
+    }
+    
     // TODO: search for specific file, place objects in scene.
     private void Load()
     {
@@ -58,27 +88,11 @@ public class SceneHandler : MonoBehaviour
             Debug.Log("Loading file");
             Load();
         }
-/*
-        var scroll = Input.mouseScrollDelta;
-        if (scroll.y != 0)
-        {
-            var scrollOffset_y = _fileList.scrollOffset.y;
-            var scrollOffset_x = _fileList.scrollOffset.x;
-            Debug.Log(scrollOffset_y);
-            Debug.Log("scroll " + scroll.y);
-            _fileList.scrollOffset = new Vector2(scrollOffset_x, scrollOffset_y + (3 * scroll.y));
-        }*/
     }
 
-    public void ReadInputString(string s)
-    {
-        _filename = s;
-    }
-    
     // User can choose which scene/file to open from a dropdown  
     public void ChooseFile()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
         _fileList = root.Q<ScrollView>("file-names");
         var path = SaveSystem.getSaveFolderString();
         string[] folderFiles = System.IO.Directory.GetFiles(path);
@@ -99,6 +113,7 @@ public class SceneHandler : MonoBehaviour
     public Button CreateButton(string mes)
     {
         var button = new Button();
+        button.AddToClassList("button-style");
         button.name = mes;
         button.text = mes;
         button.clickable = new Clickable(() => Loader(button.name) /*chosenFile = button.name*/);
@@ -111,10 +126,6 @@ public class SceneHandler : MonoBehaviour
         var sceneData = SaveSystem.LoadRoom(fileName);
         if (sceneData != null)
         {
-            foreach (var x in sceneData.objects)
-            {
-                Debug.Log(x.objectName);
-            }
             var spawner = GameObject.Find("SpawnerContainer");
             spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
         }

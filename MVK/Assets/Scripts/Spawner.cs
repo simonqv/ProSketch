@@ -57,7 +57,8 @@ public class Spawner : MonoBehaviour
             else
             {
                 cat = char.ToUpper(cat[0]) + cat.Substring(1);
-                var variableForInstance = Resources.Load("Equipment/" + cat + "/" + objectInfo.objectName) as GameObject;
+                var name = objectInfo.objectName.Replace("(Clone)", "");
+                var variableForInstance = Resources.Load("Equipment/" + cat + "/" + name) as GameObject;
                 if (variableForInstance != null)
                 {
                     var instance = Instantiate(variableForInstance);
