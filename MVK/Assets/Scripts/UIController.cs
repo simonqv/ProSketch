@@ -132,7 +132,6 @@ public class UIController : MonoBehaviour
         
         _hamburgerButton.clicked += ToggleItemList;
         _cameraButton.clicked += InvertCamera;
-        _cameraButton.clicked += () => ChooseButton(_cameraButton);
         _paintButton.clicked += HandleColors;
         _paintButton.clicked += () => ChooseButton(_paintButton);
         _rotateButton.clicked += HandleRotation;
