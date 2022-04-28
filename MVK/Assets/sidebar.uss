@@ -1,5 +1,5 @@
 .item-list {
-    width: 300px;
+    width: 270px;
     background-color: white;
     height: 100%;
     flex-direction: row;
@@ -12,8 +12,8 @@
 }
 
 .equipment-button {
-    width: 150px;
-    height: 150px;
+    width: 135px;
+    height: 135px;
     padding: 5px;
     display: flex;
     justify-content: center;

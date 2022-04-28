@@ -43,7 +43,7 @@ public static class IconButtons
         CreateIcon("category-icons/hula-hoop", "_HulaHoop"),
         CreateIcon("category-icons/mattor", "_Mattor"),
         CreateIcon("category-icons/ball", "_Ball"),
-        CreateIcon("category-icons/racket", "_Racket"),
+        CreateIcon("category-icons/bench", "_Bench"),
         CreateIcon("category-icons/ställningar", "_Ställningar"),
     };
 }
