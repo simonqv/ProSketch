@@ -7,14 +7,16 @@ using UnityEngine.UIElements;
 public class SceneHandler : MonoBehaviour
 {
     private static string _filename;
-    public static string chosenFile;
 
     private Button SaveFileWithNameButton;
     private Button CancelSaveFileWithNameButton;
+
+    private Button CancelChooseFileButton;
     
     private ScrollView _fileList;
     VisualElement root;
 
+    private static GroupBox _chooseFileWindow;
     private static GroupBox _fileNameInputWindow;
 
     // Start is called before the first frame update
@@ -24,12 +26,16 @@ public class SceneHandler : MonoBehaviour
         _fileNameInputWindow = root.Q<GroupBox>("Set-file-name-window");
         _fileNameInputWindow.style.display = DisplayStyle.None;
         
+        _chooseFileWindow = root.Q<GroupBox>("Choose-file-window");
+        _chooseFileWindow.style.display = DisplayStyle.None;
+        
         SaveFileWithNameButton = root.Q<Button>("Confirm-file-input-button");
         CancelSaveFileWithNameButton = root.Q<Button>("Cancel-file-input-button");
-
+        CancelChooseFileButton = root.Q<Button>("Cancel-choose-file");
+        
         SaveFileWithNameButton.clicked += SaveFileWithNameButtonClicked;
         CancelSaveFileWithNameButton.clicked += CancelSaveFileWithNameButtonClicked;
-        
+        CancelChooseFileButton.clicked += CancelChooseFileButtonClicked;
         Debug.Log("Scene handler started");
     }
 
@@ -58,20 +64,18 @@ public class SceneHandler : MonoBehaviour
         GetComponent<UIDocument>().rootVisualElement.Q<TextField>("File-name-input").value = "";
         _fileNameInputWindow.style.display = DisplayStyle.None;
     }
+
+    private void CancelChooseFileButtonClicked()
+    {
+        _fileList.contentContainer.Clear();
+        _chooseFileWindow.style.display = DisplayStyle.None;
+    }
     
     // TODO: search for specific file, place objects in scene.
     private void Load()
     {
-        Debug.Log("load :3");
+        _chooseFileWindow.style.display = DisplayStyle.Flex;
         ChooseFile();
-        // May have to wait until "chosenFile" is initialized in ChooseFile()
-        /*
-        var sceneData = SaveSystem.LoadRoom("room_name");
-        if (sceneData != null)
-        {
-            var spawner = GameObject.Find("SpawnerContainer");
-            spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
-        }*/
     }
     
     // Update is called once per frame
@@ -117,7 +121,6 @@ public class SceneHandler : MonoBehaviour
         button.name = mes;
         button.text = mes;
         button.clickable = new Clickable(() => Loader(button.name) /*chosenFile = button.name*/);
-        //button.clicked += () => { Debug.Log(mes); };
         return button;
     }
 
@@ -129,5 +132,7 @@ public class SceneHandler : MonoBehaviour
             var spawner = GameObject.Find("SpawnerContainer");
             spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
         }
+        _fileList.contentContainer.Clear();
+        _chooseFileWindow.style.display = DisplayStyle.None;
     }
 }
