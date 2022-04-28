@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 // using UnityEngine.UI;
 using UnityEngine.UIElements;
 
@@ -138,5 +139,6 @@ public class SceneHandler : MonoBehaviour
         }
         _fileList.contentContainer.Clear();
         _chooseFileWindow.style.display = DisplayStyle.None;
+
     }
 }

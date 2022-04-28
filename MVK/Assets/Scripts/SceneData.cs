@@ -33,6 +33,4 @@ public class SceneData
         fileName = name;
         Debug.Log(name);
     }
-
-    
 }
