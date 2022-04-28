@@ -6,7 +6,7 @@ public class ObjProperties : MonoBehaviour
 {
     public GameObject prefab;
     public Material mainColor;
-    public Color selectColor;
+    public Material selectColor;
 
     public Renderer pre;
     // Start is called before the first frame update
