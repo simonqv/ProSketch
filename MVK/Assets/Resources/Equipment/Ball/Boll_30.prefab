@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4992773851191695870}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7280936600355952920}
   - component: {fileID: 2299843550841648465}
+  - component: {fileID: 8781082449882500058}
   m_Layer: 0
   m_Name: Boll_30
   m_TagString: Untagged
@@ -132,3 +133,16 @@ MonoBehaviour:
   mainColor: {fileID: 2100000, guid: e7d1782cce262cf489a77585cd75320e, type: 2}
   selectColor: {r: 0, g: 0, b: 0, a: 0}
   pre: {fileID: 0}
+--- !u!135 &8781082449882500058
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7944567375300068258}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 15
+  m_Center: {x: 0, y: 15, z: 0}
