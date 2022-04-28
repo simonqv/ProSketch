@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviour
     public Transform selectedObject = null;
     public RoomClass Room { get; private set; }
 
-    [SerializeField] private Material highlightMaterial;   
+    public Material highlightMaterial;   
     [SerializeField] private Material previousMaterial;
 
     private Ray _ray;

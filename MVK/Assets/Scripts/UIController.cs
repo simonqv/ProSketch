@@ -40,6 +40,7 @@ public class UIController : MonoBehaviour
     float defaultFov = 300;
     float zoomDuration = 2;
 
+
     public bool rotateBool = false;
 
 
@@ -114,7 +115,7 @@ public class UIController : MonoBehaviour
         _minus = root.Q<Button>("Minus_Button");
             
         SpawnerContainer = GameObject.Find("SpawnerContainer");
-
+        
         _rotateOptions = root.Q<VisualElement>("Rotate_Options");
         _colors = root.Q<VisualElement>("Colors");
         _red = root.Q<Button>("Red");
@@ -229,19 +230,24 @@ public class UIController : MonoBehaviour
                 case 0:
                     Debug.Log("RED");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[4];
+                    _roomManager.highlightMaterial = (Material) _materials[4];
                     break;
                 case 1:
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[3];
+                    _roomManager.highlightMaterial = (Material) _materials[3];
                     break;
                 case 2:
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[2];
+                    _roomManager.highlightMaterial = (Material) _materials[2];
                     break;
                 case 3:
                     Debug.Log("Blue");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[0];
+                    _roomManager.highlightMaterial = (Material) _materials[0];
                     break;
                 case 4:
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[7];
+                    _roomManager.highlightMaterial = (Material) _materials[7];
                     break;
             }
         }
@@ -313,7 +319,7 @@ public class UIController : MonoBehaviour
         {
             _colors.AddToClassList("hidden");
             _rotateOptions.AddToClassList("hidden");
-            
+            _roomManager.highlightMaterial = (Material) _materials[5];
         }
 
         //Enable scrolling using mouse
