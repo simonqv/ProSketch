@@ -64,7 +64,7 @@ public class RoomManager : MonoBehaviour
         previousMaterial = selectionRenderer2.material;
         selectionRenderer2.material = highlightMaterial;
         selectedObject.tag = "Selected";
-        //pickUp = true;
+        pickUp = true;
         Room = selectedObject.GetComponent<RoomClass>();
     }
 
@@ -106,6 +106,7 @@ public class RoomManager : MonoBehaviour
         {   
             TrySelectObject();
             Debug.Log("Mouse0");
+            Debug.Log(selectedObject);
             if (selectedObject != null)
             {
                 Debug.Log(selectedObject);
@@ -120,6 +121,15 @@ public class RoomManager : MonoBehaviour
             movebool = false;
             UnselectObject();
             
+        }
+
+        if (selectedObject != null)
+        {
+            var selectionRenderer2 = selectedObject.GetComponentInChildren<Renderer>();
+            previousMaterial = selectionRenderer2.material;
+            selectionRenderer2.material = highlightMaterial;
+            selectedObject.tag = "Selected";
+            pickUp = true;
         }
         Move();
         //Rotate();
