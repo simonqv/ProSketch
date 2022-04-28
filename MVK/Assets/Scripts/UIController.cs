@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour
 
     public Camera cam;
     float zoomMultiplier = 2;
-    float defaultFov = 3600;
+    float defaultFov = 300;
     float zoomDuration = 2;
 
     public bool rotateBool = false;
