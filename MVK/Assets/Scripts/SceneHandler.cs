@@ -54,7 +54,6 @@ public class SceneHandler : MonoBehaviour
     public void ReadInputString(string s)
     {
         _filename = s;
-        Debug.Log(_filename);
     }
     
 

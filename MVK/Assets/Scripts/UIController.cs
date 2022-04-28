@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
 {
     public Button[] CategoryButtons;
 
+    private Button selectedTool;
     private static Button _selectedCategory;
     private static Button _savedSelection;
     private Button _hamburgerButton;
@@ -71,13 +72,18 @@ public class UIController : MonoBehaviour
     {
         if (category[0] != '_')
         {
-            Debug.Log("too bad");
             return;
         };
         ClearItemList();
         foreach (var button in ListedItems.GetAllItemsInCategory(category.ToLower()[1..]))
         {
             _itemList.hierarchy.Add(button);
+        }
+    }
+
+    public void UnselectTool(){
+        if(selectedTool != null){
+            selectedTool.style.backgroundColor = Color.clear;
         }
     }
     
@@ -126,12 +132,17 @@ public class UIController : MonoBehaviour
         
         _hamburgerButton.clicked += ToggleItemList;
         _cameraButton.clicked += InvertCamera;
+        _cameraButton.clicked += () => ChooseButton(_cameraButton);
         _paintButton.clicked += HandleColors;
+        _paintButton.clicked += () => ChooseButton(_paintButton);
         _rotateButton.clicked += HandleRotation;
+        _rotateButton.clicked += () => ChooseButton(_rotateButton);
         _rightRotateBtn.clicked += RotateRight;
         _leftRotateBtn.clicked += RotateLeft;
-        moveButton.clicked += HandMove;
-        selectButton.clicked += SelectTool;
+        moveButton.clicked +=  () => {_roomManager.movebool = true;};
+        moveButton.clicked += () => ChooseButton(moveButton);
+        selectButton.clicked += () => {_roomManager.movebool = false;};
+        selectButton.clicked += () => ChooseButton(selectButton);
         _red.clicked += () => ChoseColor(0);
         _orange.clicked += () => ChoseColor(1);
         _green.clicked += () => ChoseColor(2);
@@ -139,19 +150,17 @@ public class UIController : MonoBehaviour
         _yellow.clicked += () => ChoseColor(4);
         _plus.clicked += ZoomIn;
         _minus.clicked += ZoomOut;
-        _deleteButton.clicked += DeleteClicked;
+        _deleteButton.clicked += () => {_roomManager.Delete();};
+        _deleteButton.clicked += () => ChooseButton(_deleteButton);
 
     }
 
-    private void SelectTool()
-    {
-        _roomManager.movebool = false;
-    }
+    private void ChooseButton(Button btnToSelect){
+        UnselectTool();
+        btnToSelect.style.backgroundColor = new Color(0.14509803921f, 0.40784313725f, 0.85490196078f);
+        selectedTool = btnToSelect;
+    }   
 
-    private void HandMove()
-    {
-        _roomManager.movebool = true;
-    }
     
     private static void InvertCamera()
     {
@@ -160,7 +169,6 @@ public class UIController : MonoBehaviour
 
     public void RotateRight()
     {
-        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
             _roomManager.Rotate(10f);
@@ -168,18 +176,12 @@ public class UIController : MonoBehaviour
     }
     private void RotateLeft()
     {
-        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
             _roomManager.Rotate(-10f);
         }
     }
     
-    // Delete selected object from room
-    private void DeleteClicked()
-    {
-        _roomManager.Delete();
-    }
 
     public static void SetButton(Button button)
     {
@@ -203,7 +205,6 @@ public class UIController : MonoBehaviour
 
     private static void HandleColors()
     {
-        Debug.Log(_materials[0]);
         if (_colors.ClassListContains("hidden"))
         {
             _colors.RemoveFromClassList("hidden");
@@ -217,18 +218,15 @@ public class UIController : MonoBehaviour
 
     private void ChoseColor(int n)
     {
-        Debug.Log("Color");
         if (_colors.ClassListContains("hidden"))
         {
             return;
         }
         else
         {
-            Debug.Log("Color");
             switch (n)
             {
                 case 0:
-                    Debug.Log("RED");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[4];
                     _roomManager.highlightMaterial = (Material) _materials[4];
                     break;
@@ -241,7 +239,6 @@ public class UIController : MonoBehaviour
                     _roomManager.highlightMaterial = (Material) _materials[2];
                     break;
                 case 3:
-                    Debug.Log("Blue");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[0];
                     _roomManager.highlightMaterial = (Material) _materials[0];
                     break;
@@ -271,7 +268,6 @@ public class UIController : MonoBehaviour
             }
         }
         else{
-            Debug.Log("Inget objekt selected");
         }
     }
 

@@ -30,7 +30,6 @@ public static class IconButtons
         backgroundElement.style.backgroundImage = new StyleBackground(backgroundImage);
         if(!disableSetButton)
         {
-            Debug.Log(containerName);
             element.clicked += () => UIController.SetButton(element);
         }
         element.Add(backgroundElement);

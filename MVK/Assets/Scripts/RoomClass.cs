@@ -54,7 +54,6 @@ public class RoomClass : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("CLASS");
             Console.WriteLine(e.Message);        
         }
     }

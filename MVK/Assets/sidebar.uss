@@ -38,6 +38,9 @@
     display: none;
 }
 
+.toolselected{
+    background-color: rgb(219, 250, 0);
+}
 
 .icon {
     background-color: rgb(37, 104, 218);
@@ -127,7 +130,6 @@
 .ButtonTemplate {
     width: 4%;
     height: 65%;
-    background-color: rgba(37, 104, 218, 0);
     left: auto;
     position: absolute;
     top: 20%;

@@ -32,7 +32,6 @@ public static class ListedItems
         foreach (var prefab in prefabs)
         {
             fileData = System.IO.File.ReadAllBytes("Assets/Resources/Equipment/"+ category + "/"+ (prefab as GameObject).transform.name.Replace(" (UnityEngine.GameObject)","")+".jpg");
-            Debug.Log(fileData);
             tex = new Texture2D(2, 2);
             tex.LoadImage(fileData);
 
@@ -50,7 +49,6 @@ public static class ListedItems
             item.clicked += () =>
             {
                 s.Spawn(prefab as GameObject, category);
-                //Debug.Log(s);
             };
             item.Add(buttonImage);
             item.AddToClassList("equipment-button");

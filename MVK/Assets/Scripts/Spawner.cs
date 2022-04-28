@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
             .FindGameObjectWithTag("roomManager")
             .GetComponent<RoomManager>()
             .SetSelectedObject(instance.transform);
+            
         instance.AddComponent<ObjectCategory>().category = category;
 
     }
@@ -36,17 +37,14 @@ public class Spawner : MonoBehaviour
         }
         foreach (var objectInfo in sceneData.objects)
         {
-            Debug.Log(objectInfo.objectName);
             string cat = objectInfo.objectCategory;
             if (cat == "room")
             {
-                Debug.Log("Room????");
                 FindObjectOfType<RoomManager>().Reset();
             }
             else
             {
                 cat = char.ToUpper(cat[0]) + cat.Substring(1);
-                Debug.Log("cat " + cat);
                 var variableForInstance = Resources.Load("Equipment/" + cat + "/" + objectInfo.objectName) as GameObject;
                 if (variableForInstance != null)
                 {
