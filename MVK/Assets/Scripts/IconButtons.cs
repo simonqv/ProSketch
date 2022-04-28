@@ -44,6 +44,6 @@ public static class IconButtons
         CreateIcon("category-icons/mattor", "_Mattor"),
         CreateIcon("category-icons/ball", "_Ball"),
         CreateIcon("category-icons/bench", "_Bench"),
-        CreateIcon("category-icons/ställningar", "_Ställningar"),
+        CreateIcon("category-icons/stallningar", "_Stallningar"),
     };
 }
