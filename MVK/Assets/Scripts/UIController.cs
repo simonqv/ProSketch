@@ -321,6 +321,22 @@ public class UIController : MonoBehaviour
             _rotateOptions.AddToClassList("hidden");
             _roomManager.highlightMaterial = (Material) _materials[5];
         }
+        else
+        {
+            if (Input.GetKeyDown("d"))
+            {
+                _roomManager.Delete();
+            }else if (Input.GetKeyDown("m"))
+            {
+                _roomManager.movebool = true;
+            }else if (Input.GetKeyDown("right"))
+            {
+                _roomManager.Rotate(10f);   
+            }else if (Input.GetKeyDown("left"))
+            {
+                _roomManager.Rotate(-10f);
+            }
+        }
 
         //Enable scrolling using mouse
         var scrolling = Input.mouseScrollDelta.y;
@@ -331,5 +347,7 @@ public class UIController : MonoBehaviour
         {
             ZoomIn();
         }
+        
+        
     }
 }
