@@ -73,7 +73,8 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Application.targetFrameRate = 50;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 30;
         var root = GetComponent<UIDocument>().rootVisualElement;
         var categoryButtons = root.Q<VisualElement>("CategoryButtons");
         foreach (Button categoryButton in IconButtons.CategoryButtons)
