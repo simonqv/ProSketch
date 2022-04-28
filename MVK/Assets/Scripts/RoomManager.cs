@@ -55,7 +55,7 @@ public class RoomManager : MonoBehaviour
         if (selectedObject != null)
         {
             var selectionRenderer = selectedObject.GetComponentInChildren<Renderer>();
-            selectionRenderer.material = previousMaterial;
+            selectionRenderer.material = selectedObject.GetComponent<ObjProperties>().mainColor;
             selectedObject.tag = "GameObject";
             //pickUp = false;
         }
