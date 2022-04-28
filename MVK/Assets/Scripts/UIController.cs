@@ -315,5 +315,15 @@ public class UIController : MonoBehaviour
             _rotateOptions.AddToClassList("hidden");
             
         }
+
+        //Enable scrolling using mouse
+        var scrolling = Input.mouseScrollDelta.y;
+        if (scrolling < 0)
+        {
+            ZoomOut();
+        }else if (scrolling > 0)
+        {
+            ZoomIn();
+        }
     }
 }
