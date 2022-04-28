@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 // using UnityEngine.UI;
 using UnityEngine.UIElements;
+using System.Text.RegularExpressions;
 
 public class SceneHandler : MonoBehaviour
 {
@@ -54,10 +55,15 @@ public class SceneHandler : MonoBehaviour
     private void SaveFileWithNameButtonClicked()
     {
         var fileNameField = root.Q<TextField>("File-name-input").value;
-        SceneData sceneData = new SceneData();
-        sceneData.SetFileName(fileNameField);
-        SaveSystem.SaveRoom(sceneData);
-        _fileNameInputWindow.style.display = DisplayStyle.None;
+        // fileName can only contain numbers, letters a-z, underscore(_), Hyphen-minus (-)
+        if (Regex.IsMatch(fileNameField, @"^(([a-z]|[A-Z]|\d|-|_)+)$"))
+        {
+            SceneData sceneData = new SceneData();
+            sceneData.SetFileName(fileNameField);
+            SaveSystem.SaveRoom(sceneData);
+            _fileNameInputWindow.style.display = DisplayStyle.None;
+        }
+
     }
 
     private void CancelSaveFileWithNameButtonClicked()
