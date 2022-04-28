@@ -70,7 +70,6 @@ public class UIController : MonoBehaviour
     {
         if (category[0] != '_')
         {
-            Debug.Log("too bad");
             return;
         };
         ClearItemList();
@@ -159,7 +158,6 @@ public class UIController : MonoBehaviour
 
     public void RotateRight()
     {
-        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
             _roomManager.Rotate(10f);
@@ -167,7 +165,6 @@ public class UIController : MonoBehaviour
     }
     private void RotateLeft()
     {
-        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
             _roomManager.Rotate(-10f);
@@ -202,7 +199,6 @@ public class UIController : MonoBehaviour
 
     private static void HandleColors()
     {
-        Debug.Log(_materials[0]);
         if (_colors.ClassListContains("hidden"))
         {
             _colors.RemoveFromClassList("hidden");
@@ -216,18 +212,15 @@ public class UIController : MonoBehaviour
 
     private void ChoseColor(int n)
     {
-        Debug.Log("Color");
         if (_colors.ClassListContains("hidden"))
         {
             return;
         }
         else
         {
-            Debug.Log("Color");
             switch (n)
             {
                 case 0:
-                    Debug.Log("RED");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[4];
                     break;
                 case 1:
@@ -237,7 +230,6 @@ public class UIController : MonoBehaviour
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[2];
                     break;
                 case 3:
-                    Debug.Log("Blue");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[0];
                     break;
                 case 4:
@@ -265,7 +257,6 @@ public class UIController : MonoBehaviour
             }
         }
         else{
-            Debug.Log("Inget objekt selected");
         }
     }
 
