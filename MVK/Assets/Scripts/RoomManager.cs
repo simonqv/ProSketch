@@ -125,7 +125,9 @@ public class RoomManager : MonoBehaviour
         if (selectedObject == null) return;
         
         _ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(_ray, out RaycastHit raycastHit) && movebool) {
+        if (Physics.Raycast(_ray, out RaycastHit raycastHit) && movebool)
+        {
+            if (raycastHit.transform.CompareTag("Selected")) return;
                 
             //Lägg till att kolla om current pos n+ next pos har intersecting colliders,
             //skapa trigger: Om det blir intersect ignore action
