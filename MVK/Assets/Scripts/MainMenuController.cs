@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
@@ -9,42 +6,51 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
 
-    public Button CreateNewLessonButton;
-    public Button LoadLessonButton;
+    // Buttons for main menu
+    private Button _createNewLessonButton;
+    private Button _loadLessonButton;
 
-    public Button ContinueToSceneButton;
-    public Button CancelDimsInputButton;
+    private Button _continueToSceneButton;
+    private Button _cancelDimsInputButton;
 
+    // GroupBox for popup when creating new scene
     private GroupBox _setDimsBox;
     
     
-   
     // Start is called before the first frame update
     void Start()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
 
-        CreateNewLessonButton = root.Q<Button>("Create-new-lesson-button");
-        LoadLessonButton = root.Q<Button>("Load-lesson-button");
-        ContinueToSceneButton = root.Q<Button>("Confirm-input-button");
-        CancelDimsInputButton = root.Q<Button>("Cancel-input-button");
+        // Gets buttons
+        _createNewLessonButton = root.Q<Button>("Create-new-lesson-button");
+        _loadLessonButton = root.Q<Button>("Load-lesson-button");
+        _continueToSceneButton = root.Q<Button>("Confirm-input-button");
+        _cancelDimsInputButton = root.Q<Button>("Cancel-input-button");
         
+        // Initializes input popup window as invisible
         _setDimsBox = root.Q<GroupBox>("Set-dims-box");
         _setDimsBox.style.display = DisplayStyle.None;
-
-
-        CreateNewLessonButton.clicked += CreateNewLessonButtonPressed;
-        LoadLessonButton.clicked += LoadLessonButtonPressed;
-        ContinueToSceneButton.clicked += ContinueToSceneButtonPressed;
-        CancelDimsInputButton.clicked += CancelDimsInputButtonPressed;
+        
+        // Assigns functions for buttons
+        _createNewLessonButton.clicked += CreateNewLessonButtonPressed;
+        _loadLessonButton.clicked += LoadLessonButtonPressed;
+        _continueToSceneButton.clicked += ContinueToSceneButtonPressed;
+        _cancelDimsInputButton.clicked += CancelDimsInputButtonPressed;
     }
 
+    /*
+     * When pressed, make room dimensions input window visible
+     */
     void CreateNewLessonButtonPressed()
     {
         _setDimsBox.style.display = DisplayStyle.Flex;
-
     }
 
+    /*
+     * Read input fields and creates a new room with dimensions from user input.
+     * Dimensions must be integers and cannot be too small or too big.
+     */
     void ContinueToSceneButtonPressed()
     {
         var widthField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-width-input").value;
@@ -57,14 +63,8 @@ public class MainMenuController : MonoBehaviour
             
             if (length is < 151 and > 9 && width is < 151 and > 9)
             {
-                // TODO: with Celina create new scene
                 RoomClass.Setter(length, width);
                 SceneManager.LoadScene("Scenes/UI");
-                
-                //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                
-                //cube.transform.position = new Vector3(0, 0, 0);
-                
             }
         }
         catch (FormatException e)
@@ -72,7 +72,10 @@ public class MainMenuController : MonoBehaviour
             Console.WriteLine(e.Message);
         }
     }
-
+    
+    /*
+     * When pressed, empty the textfield and close the popup window
+     */
     void CancelDimsInputButtonPressed()
     {
         GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-width-input").value = "";
@@ -81,9 +84,11 @@ public class MainMenuController : MonoBehaviour
         _setDimsBox.style.display = DisplayStyle.None;
     }
 
+    /*
+     * Display the window with the list of saved files
+     */
     void LoadLessonButtonPressed()
     {
-        var x = GameObject.Find("UIDocument").GetComponent<SceneHandler>();
-        x.Load();
+        GameObject.Find("UIDocument").GetComponent<SceneHandler>().Load();
     }
 }

@@ -18,28 +18,35 @@ public class Spawner : MonoBehaviour
 
     }
 
+    /*
+     * Clears a scene of every GameObject, excluding things like the light source and such.
+     * Populates the scene with saved GameObjects in the save file.
+     * Argument: SceneData containing the GameObjects to spawn.
+     */
     public void SpawnLoadedScene(SceneData sceneData)
     {
+        // Destroys GameObjects in active scene.
         foreach (var go in GameObject.FindObjectsOfType<GameObject>())
         {
-            // If statement got a bit long so made a list and called .Contains() instead /Gustav
             if (go.CompareTag("GameObject") || go.CompareTag("room") || go.name == "Camera(Clone)")
             {
                 Destroy(go);
             }
         }
 
+        // Special case for room, needed to set its size before spawning it.
         foreach (var oi in sceneData.objects)
         {
-            if (oi.objectTag == "room")
+            if (oi.GetTag() == "room")
             {
-                RoomClass.Setter((int) oi.objectScale.x, (int) oi.objectScale.z);
+                RoomClass.Setter((int) oi.GetObjectScale().x, (int) oi.GetObjectScale().z);
             }
         }
 
+        // Iterate over all objects and spawn them accordingly.
         foreach (var objectInfo in sceneData.objects)
         {
-            string cat = objectInfo.objectCategory;
+            string cat = objectInfo.GetObjectCategory();
             if (cat == "room")
             {
                 FindObjectOfType<RoomManager>().Reset();
@@ -47,16 +54,15 @@ public class Spawner : MonoBehaviour
             else
             {
                 cat = char.ToUpper(cat[0]) + cat.Substring(1);
-                Debug.Log(cat + "          " + objectInfo.objectName);
-                var obName = objectInfo.objectName.Replace("(Clone)", "");
+                var obName = objectInfo.GetName().Replace("(Clone)", "");
                 var variableForInstance = Resources.Load("Equipment/" + cat + "/" + obName) as GameObject;
                 if (variableForInstance != null)
                 {
                     var instance = Instantiate(variableForInstance);
-                    instance.transform.position = objectInfo.objectPosition;
-                    instance.transform.rotation = objectInfo.objectRotation;
-                    instance.transform.localScale = objectInfo.objectScale;
-                    instance.tag = objectInfo.objectTag;
+                    instance.transform.position = objectInfo.GetObjectPosition();
+                    instance.transform.rotation = objectInfo.GetObjectRotation();
+                    instance.transform.localScale = objectInfo.GetObjectScale();
+                    instance.tag = objectInfo.GetTag();
                     instance.AddComponent<ObjectCategory>().category = cat;
                 }
             }

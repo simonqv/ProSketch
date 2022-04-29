@@ -19,7 +19,7 @@ public class UIController : MonoBehaviour
     private RoomManager _roomManager;
     private static Button _paintButton;
     private static Button _rotateButton;
-    private static VisualElement _rotateOptions;             //Tog bort static
+    private static VisualElement _rotateOptions;
     private static VisualElement _colors;
     private static Button _red;
     private static Button _orange;
@@ -45,6 +45,7 @@ public class UIController : MonoBehaviour
 
     public bool rotateBool = false;
 
+    // Buttons on the top left of the screen. Used for saving and loading 
     private static Button _saveButton;
     private static Button _loadButton;
 
@@ -157,6 +158,8 @@ public class UIController : MonoBehaviour
         _minus.clicked += ZoomOut;
         _deleteButton.clicked += () => {_roomManager.Delete();};
         _deleteButton.clicked += () => ChooseButton(_deleteButton);
+        
+        // When Load or Save button clicked, display corresponding "popup" window.
         _loadButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Load();};
         _saveButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Save();};
 
@@ -329,28 +332,29 @@ public class UIController : MonoBehaviour
             if (Input.GetKeyDown("d"))
             {
                 _roomManager.Delete();
-            }else if (Input.GetKeyDown("m"))
+            } else if (Input.GetKeyDown("m"))
             {
                 _roomManager.movebool = true;
-            }else if (Input.GetKeyDown("right"))
+            } else if (Input.GetKeyDown("right"))
             {
                 _roomManager.Rotate(10f);   
-            }else if (Input.GetKeyDown("left"))
+            } else if (Input.GetKeyDown("left"))
             {
                 _roomManager.Rotate(-10f);
             }
         }
 
-        //Enable scrolling using mouse
-        var scrolling = Input.mouseScrollDelta.y;
-        if (scrolling < 0)
+        // Scrolling with scrollwheel or trackpad when no popup is shown.
+        if (GetComponent<UIDocument>().rootVisualElement.Q<GroupBox>("Set-file-name-window").style.display.value == DisplayStyle.None && GetComponent<UIDocument>().rootVisualElement.Q<GroupBox>("Choose-file-window").style.display.value == DisplayStyle.None)
         {
-            ZoomOut();
-        }else if (scrolling > 0)
-        {
-            ZoomIn();
+            var scrolling = Input.mouseScrollDelta.y;
+            if (scrolling < 0)
+            {                        
+                ZoomOut();           
+            } else if (scrolling > 0) 
+            {                        
+                ZoomIn();            
+            }
         }
-        
-        
     }
 }

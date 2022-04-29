@@ -1,53 +1,63 @@
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-// using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class SceneHandler : MonoBehaviour
 {
+    // Name of file when saving
     private static string _filename;
 
-    private Button SaveFileWithNameButton;
-    private Button CancelSaveFileWithNameButton;
+    // Buttons for Save window
+    private Button _saveFileWithNameButton;
+    private Button _cancelSaveFileWithNameButton;
 
-    private Button CancelChooseFileButton;
+    // Button for Load window
+    private Button _cancelChooseFileButton;
     
+    // Scrollable list of all files 
     private ScrollView _fileList;
-    VisualElement root;
+    
+    private VisualElement _root;
 
-    private static GroupBox _chooseFileWindow;
+    // Save and Load windows 
     private static GroupBox _fileNameInputWindow;
+    private static GroupBox _chooseFileWindow;
 
     // Start is called before the first frame update
     private void Start()
     {
-        root = GetComponent<UIDocument>().rootVisualElement;
-        _fileNameInputWindow = root.Q<GroupBox>("Set-file-name-window");
+        _root = GetComponent<UIDocument>().rootVisualElement;
+        
+        _fileNameInputWindow = _root.Q<GroupBox>("Set-file-name-window");
         _fileNameInputWindow.style.display = DisplayStyle.None;
         
-        _chooseFileWindow = root.Q<GroupBox>("Choose-file-window");
+        _chooseFileWindow = _root.Q<GroupBox>("Choose-file-window");
         _chooseFileWindow.style.display = DisplayStyle.None;
         
-        SaveFileWithNameButton = root.Q<Button>("Confirm-file-input-button");
-        CancelSaveFileWithNameButton = root.Q<Button>("Cancel-file-input-button");
-        CancelChooseFileButton = root.Q<Button>("Cancel-choose-file");
+        _saveFileWithNameButton = _root.Q<Button>("Confirm-file-input-button");
+        _cancelSaveFileWithNameButton = _root.Q<Button>("Cancel-file-input-button");
+        _cancelChooseFileButton = _root.Q<Button>("Cancel-choose-file");
         
-        SaveFileWithNameButton.clicked += SaveFileWithNameButtonClicked;
-        CancelSaveFileWithNameButton.clicked += CancelSaveFileWithNameButtonClicked;
-        CancelChooseFileButton.clicked += CancelChooseFileButtonClicked;
-        Debug.Log("Scene handler started");
+        _saveFileWithNameButton.clicked += SaveFileWithNameButtonClicked;
+        _cancelSaveFileWithNameButton.clicked += CancelSaveFileWithNameButtonClicked;
+        _cancelChooseFileButton.clicked += CancelChooseFileButtonClicked;
     }
 
+    /*
+     * Displays Save window.
+     */
     public void Save()
     {
         _fileNameInputWindow.style.display = DisplayStyle.Flex;
     }
 
+    /*
+     * Called when Save button clicked after user input file name.
+     * Reads user input and creates a new Save file containing GameObject information.
+     */
     private void SaveFileWithNameButtonClicked()
     {
-        var fileNameField = root.Q<TextField>("File-name-input").value;
+        var fileNameField = _root.Q<TextField>("File-name-input").value;
         SceneData sceneData = new SceneData();
         sceneData.SetFileName(fileNameField);
         SaveSystem.SaveRoom(sceneData);
@@ -66,51 +76,33 @@ public class SceneHandler : MonoBehaviour
         _chooseFileWindow.style.display = DisplayStyle.None;
     }
     
-    // TODO: search for specific file, place objects in scene.
+    /*
+     * Displays window with scrollable file list.
+     */
     public void Load()
     {
-        Debug.Log("Choose file: " + _chooseFileWindow.name);
         _chooseFileWindow.style.display = DisplayStyle.Flex;
         ChooseFile();
     }
     
-    // Update is called once per frame
-    private void Update()
+    // User can choose which scene/file to open from a Scroll list  
+    private void ChooseFile()
     {
-        // TODO: make the pop-up for saving first
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("Saving file");
-            Save();
-        } 
-        else if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log("Loading file");
-            Load();
-        }
-    }
-
-    // User can choose which scene/file to open from a dropdown  
-    public void ChooseFile()
-    {
-        _fileList = root.Q<ScrollView>("file-names");
-        var path = SaveSystem.getSaveFolderString();
+        _fileList = _root.Q<ScrollView>("file-names");
+        var path = SaveSystem.GetSaveFolderString();
         string[] folderFiles = System.IO.Directory.GetFiles(path);
-        var fileName = "";
-        for (int i = 0; i < folderFiles.Length; i++)
+        foreach (var fileName in folderFiles)
         {
-            fileName = folderFiles[i];
             if (!fileName.EndsWith(".meta"))
             {
                 var button = CreateButton(fileName.Replace(path,"").Replace(".txt",""));
                 _fileList.contentContainer.hierarchy.Add(button);
-                // file_list.verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible;
             }
         }
     }
 
-    // Creates a button for the load file/scene dropdown 
-    public Button CreateButton(string mes)
+    // Creates a button for the load file/scene Scroll list 
+    private Button CreateButton(string mes)
     {
         var button = new Button();
         button.AddToClassList("button-style");
@@ -120,6 +112,9 @@ public class SceneHandler : MonoBehaviour
         return button;
     }
 
+    /*
+     * When file button is pressed, load that file and spawn the scene.
+     */
     private void Loader(string fileName)
     {
         var sceneData = SaveSystem.LoadRoom(fileName);
@@ -138,6 +133,5 @@ public class SceneHandler : MonoBehaviour
         }
         _fileList.contentContainer.Clear();
         _chooseFileWindow.style.display = DisplayStyle.None;
-
     }
 }
