@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
     guid: d5e3187441a6741dc81ca535a2960a8e
@@ -20,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Celina Test.unity
     guid: 2a6d2471565cf45a28c0c0cc4afc1f55
+  - enabled: 1
+    path: Assets/Scenes/NewSampleScene.unity
+    guid: 240f5fd17cfea4a4a80ff548e3c67b41
   m_configObjects: {}

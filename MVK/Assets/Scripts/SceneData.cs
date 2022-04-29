@@ -31,6 +31,5 @@ public class SceneData
     public void SetFileName(string name)
     {
         fileName = name;
-        Debug.Log(name);
     }
 }

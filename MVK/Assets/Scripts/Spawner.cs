@@ -13,22 +13,13 @@ public class Spawner : MonoBehaviour
             .FindGameObjectWithTag("roomManager")
             .GetComponent<RoomManager>()
             .SetSelectedObject(instance.transform);
+            
         instance.AddComponent<ObjectCategory>().category = category;
 
     }
 
     public void SpawnLoadedScene(SceneData sceneData)
     {
-        List<string> unDestructibles = new List<string>()
-        {
-            "Directional Light",
-            "EventSystem",
-            "SpawnerContainer",
-            "SceneHandler",
-            "RoomManager",
-            "UIDocument"
-        };
-        
         foreach (var go in GameObject.FindObjectsOfType<GameObject>())
         {
             // If statement got a bit long so made a list and called .Contains() instead /Gustav

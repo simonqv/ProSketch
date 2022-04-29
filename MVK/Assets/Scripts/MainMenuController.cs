@@ -50,15 +50,12 @@ public class MainMenuController : MonoBehaviour
         var widthField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-width-input").value;
         var lengthField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("Room-length-input").value;
         
-        Debug.Log(widthField);
-        Debug.Log(lengthField);
-        
         try
         {
             int width = Int32.Parse(widthField);
             int length = Int32.Parse(lengthField);
             
-            if (length is < 150 and > 15 && width is < 100 and > 15)
+            if (length is < 151 and > 9 && width is < 151 and > 9)
             {
                 // TODO: with Celina create new scene
                 RoomClass.Setter(length, width);
@@ -86,6 +83,7 @@ public class MainMenuController : MonoBehaviour
 
     void LoadLessonButtonPressed()
     {
-        throw new Exception("not implemented");
+        var x = GameObject.Find("UIDocument").GetComponent<SceneHandler>();
+        x.Load();
     }
 }

@@ -1,25 +1,24 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/sidebar.uss?fileID=7433441132597879392&amp;guid=7e1ac6c554c4b4bb3ab0234257569343&amp;type=3#sidebar" />
+    <Style src="project://database/Assets/UI-Styles/Style.uss?fileID=7433441132597879392&amp;guid=dd925ea8c01f54191a385109a3edbb10&amp;type=3#Style" />
     <ui:VisualElement name="Container" class="fullscreen">
-        <ui:VisualElement name="Header" class="header">
-            <ui:VisualElement name="Fil" style="top: 25%; left: 4%; height: 50%; width: 10%; position: absolute; font-size: 12%;">
-                <ui:DropdownField index="-1" choices="System.Collections.Generic.List`1[System.String]" focusable="true" label=" " class="dropDown_button" style="-unity-background-image-tint-color: rgb(0, 33, 255);" />
-                <ui:Label text="Fil" display-tooltip-when-elided="true" enable-rich-text="true" style="-unity-text-align: middle-center; width: 100%; height: 100%; font-size: 17%; -unity-font-style: bold; -unity-text-outline-color: rgb(255, 255, 255); color: rgb(255, 255, 255); position: absolute;" />
+        <ui:VisualElement name="Header" class="header" style="height: 10%;">
+            <ui:VisualElement name="Save-load-button-container" style="position: absolute; left: 4%; top: 25%; width: 20%; height: 50%; flex-direction: row; align-items: center; justify-content: center;">
+                <ui:Button text="Öppna fil" display-tooltip-when-elided="true" name="Header-load-button123" class="confirm-cancel-style" style="display: none;" />
+                <ui:Button text="Spara" display-tooltip-when-elided="true" name="Header-save-button123" class="confirm-cancel-style spara" style="display: none;" />
+                <ui:Button text="Öppna fil" display-tooltip-when-elided="true" name="Header-load-button" class="open-save" />
+                <ui:Button text="Spara" display-tooltip-when-elided="true" name="Header-save-button" class="open-save" />
             </ui:VisualElement>
-            <ui:VisualElement name="Exportera" style="height: 50%; width: 10%; right: auto; left: 86%; top: 25%; position: absolute;">
-                <ui:Button text="Exportera Vyn" display-tooltip-when-elided="true" class="dropDown_button" style="font-size: 12%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+            <ui:VisualElement name="Mouse" class="ButtonTemplate" style="left: 27%; top: 20%;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" name="Select_Button" class="clickButton" style="position: absolute; max-height: none; border-top-left-radius: 12px; border-bottom-left-radius: 12px; border-top-right-radius: 12px; border-bottom-right-radius: 12px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/mouse_icon&apos;); -unity-slice-left: 8; -unity-slice-top: 4; -unity-slice-right: 6; -unity-slice-bottom: 4;" />
             </ui:VisualElement>
-            <ui:VisualElement name="Mouse" class="ButtonTemplate" style="left: 17%; top: 20%;">
-                <ui:VisualElement name="Button" class="unity-button unity-text-element" style="height: 75%; width: 50%; left: 11px; right: auto; top: 4px; bottom: auto; background-image: resource(&apos;category-icons/mouse_icon&apos;); position: absolute; background-color: rgba(88, 88, 88, 0); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0;" />
-                <ui:Button text="Button" display-tooltip-when-elided="true" name="Select_Button" class="clickButton" style="position: absolute; max-height: none; border-top-left-radius: 12px; border-bottom-left-radius: 12px; border-top-right-radius: 12px; border-bottom-right-radius: 12px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
-            </ui:VisualElement>
-            <ui:VisualElement name="Hand" class="ButtonTemplate" style="left: 22%; top: 20%;">
+            <ui:VisualElement name="Hand" class="ButtonTemplate" style="left: 32%; top: 20%;">
                 <ui:Button text="Button" display-tooltip-when-elided="true" name="Hand_Button" class="clickButton" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/hand_icon&apos;);" />
             </ui:VisualElement>
-            <ui:VisualElement name="Rotate" class="ButtonTemplate" style="left: 27%; top: 20%;">
+            <ui:VisualElement name="Rotate" class="ButtonTemplate" style="left: 37%; top: 20%;">
                 <ui:Button text="Button" display-tooltip-when-elided="true" name="Rotate_Button" class="clickButton" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/rotate_icon&apos;);" />
             </ui:VisualElement>
-            <ui:VisualElement name="Bucket" class="ButtonTemplate" style="left: 32%;">
+            <ui:VisualElement name="Bucket" class="ButtonTemplate" style="left: 42%;">
                 <ui:Button text="Button" name="Paint_Button" display-tooltip-when-elided="true" class="clickButton" style="-unity-text-align: middle-center; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/paint_bucket&apos;);" />
             </ui:VisualElement>
             <ui:VisualElement name="Plus" class="ButtonTemplate" style="left: 80%;">
@@ -31,11 +30,11 @@
             <ui:VisualElement name="Camera" class="ButtonTemplate" style="left: 65%; height: 65%; right: 323px; width: 4%; top: 20%;">
                 <ui:Button text="Button" display-tooltip-when-elided="true" name="Camera_Button" class="clickButton" style="border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/rotate_camera&apos;);" />
             </ui:VisualElement>
-            <ui:VisualElement name="Hammer" class="ButtonTemplate" style="left: 37%;">
-                <ui:Button text="Button" display-tooltip-when-elided="true" name="Hammer_Button" class="clickButton" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/hammer&apos;);" />
+            <ui:VisualElement name="Delete" class="ButtonTemplate" style="left: 47%;">
+                <ui:Button text="Button" display-tooltip-when-elided="true" name="Delete_Button" class="clickButton" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-image: resource(&apos;category-icons/Trash_can&apos;);" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="SidebarContainer" class="container">
+        <ui:VisualElement name="SidebarContainer" class="container" style="height: 90%;">
             <ui:VisualElement name="CategoryButtons" class="icon-stack" style="justify-content: flex-start;" />
             <ui:VisualElement name="Rotate_Options" class="hidden" style="width: 5%; height: 5%; bottom: auto; position: absolute; top: 0; left: 27%; overflow: visible;">
                 <ui:Button display-tooltip-when-elided="true" name="LeftRotate_Button" style="width: 17%; background-color: rgba(255, 0, 0, 0); height: 100%; position: absolute; left: 0; background-image: resource(&apos;category-icons/left_arrow&apos;);" />
@@ -48,7 +47,32 @@
                 <ui:Button display-tooltip-when-elided="true" name="Green" style="width: 17%; background-color: rgb(0, 255, 0); height: 100%; position: absolute; left: 55%;" />
                 <ui:Button display-tooltip-when-elided="true" name="Blue" style="width: 17%; background-color: rgb(0, 0, 255); height: 100%; position: absolute; left: 73%;" />
             </ui:VisualElement>
-            <ui:ListView focusable="true" name="ItemList" class="item-list" />
+            <ui:ListView focusable="true" name="ItemList" class="item-list hidden" />
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Bontainer" picking-mode="Ignore" class="container" style="width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: row; position: absolute; display: flex; top: 0; left: 0;">
+        <ui:GroupBox name="Choose-file-window" style="width: 100%; height: 100%; align-items: center; justify-content: center; display: none; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+            <ui:VisualElement name="Shadow" class="shadow" />
+            <ui:VisualElement name="File-list-window" class="window" style="justify-content: center; top: auto; left: auto; position: relative; height: 85%; flex-direction: row; flex-grow: 0; flex-shrink: 1;">
+                <ui:VisualElement style="height: 100%; width: 80%; align-items: center; justify-content: center;">
+                    <ui:VisualElement name="list-container" class="window" style="width: 55%; height: 80%; background-color: rgb(118, 142, 180); align-items: center; top: 5%; left: auto; position: relative;">
+                        <ui:ScrollView name="file-names" style="color: rgb(0, 0, 0); height: 100%; background-color: rgba(93, 204, 53, 0); width: 85%; overflow: hidden;" />
+                    </ui:VisualElement>
+                    <ui:Label text="Välj en fil" display-tooltip-when-elided="true" style="font-size: 27px; -unity-text-align: upper-center; -unity-font-style: bold; top: 2%; position: absolute;" />
+                </ui:VisualElement>
+                <ui:Button text="Avbryt" display-tooltip-when-elided="true" name="Cancel-choose-file" class="confirm-cancel-style cancel-button-style" style="align-items: stretch; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 20%; height: 10%; left: auto; right: 8%;" />
+            </ui:VisualElement>
+        </ui:GroupBox>
+        <ui:GroupBox name="Set-file-name-window" style="width: 100%; height: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; opacity: 1; position: absolute; align-items: center; justify-content: center; top: auto; display: none; visibility: visible; overflow: visible;">
+            <ui:VisualElement name="Shadow" class="shadow" style="width: 100%; height: 100%; position: absolute; -unity-text-outline-color: rgba(0, 0, 0, 0.16);" />
+            <ui:VisualElement focusable="false" name="File-name-input-window" class="window">
+                <ui:Label text="Ange filnamn (utan filtyp)" display-tooltip-when-elided="true" style="font-size: 27px; -unity-text-align: upper-center; -unity-font-style: bold; top: 8%;" />
+                <ui:TextField picking-mode="Ignore" name="File-name-input" password="false" is-delayed="false" class="room-input-field-style" />
+                <ui:GroupBox style="flex-direction: row; top: 20%; width: 30%; height: 8%; max-width: 500px; max-height: 75px; min-width: 250px; min-height: 40px;">
+                    <ui:Button text="Spara" display-tooltip-when-elided="true" name="Confirm-file-input-button" class="confirm-cancel-style" />
+                    <ui:Button text="Avbryt" display-tooltip-when-elided="true" enable-rich-text="true" name="Cancel-file-input-button" class="confirm-cancel-style cancel-button-style" />
+                </ui:GroupBox>
+            </ui:VisualElement>
+        </ui:GroupBox>
     </ui:VisualElement>
 </ui:UXML>

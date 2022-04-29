@@ -1,11 +1,14 @@
+using System.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
     public Button[] CategoryButtons;
 
+    private Button selectedTool;
     private static Button _selectedCategory;
     private static Button _savedSelection;
     private Button _hamburgerButton;
@@ -25,13 +28,25 @@ public class UIController : MonoBehaviour
     private static Button _yellow;
     private static Button _leftRotateBtn;
     private static Button _rightRotateBtn;
+    private static Button _deleteButton;
     private Button moveButton;
     private Button selectButton;
     private Button _cameraButton;
     private RoomClass _room;
+    
+    public static Button _plus;
+    public static Button _minus;
+
+    public Camera cam;
+    float zoomMultiplier = 2;
+    float defaultFov = 300;
+    float zoomDuration = 2;
+
 
     public bool rotateBool = false;
 
+    private static Button _saveButton;
+    private static Button _loadButton;
 
     private static void ToggleItemList()
     {
@@ -60,7 +75,6 @@ public class UIController : MonoBehaviour
     {
         if (category[0] != '_')
         {
-            Debug.Log("too bad");
             return;
         };
         ClearItemList();
@@ -69,11 +83,18 @@ public class UIController : MonoBehaviour
             _itemList.hierarchy.Add(button);
         }
     }
+
+    public void UnselectTool(){
+        if(selectedTool != null){
+            selectedTool.style.backgroundColor = Color.clear;
+        }
+    }
     
     // Start is called before the first frame update
     private void Start()
     {
-        Application.targetFrameRate = 50;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 30;
         var root = GetComponent<UIDocument>().rootVisualElement;
         var categoryButtons = root.Q<VisualElement>("CategoryButtons");
         foreach (Button categoryButton in IconButtons.CategoryButtons)
@@ -96,10 +117,14 @@ public class UIController : MonoBehaviour
         _cameraButton = root.Q<Button>("Camera_Button");
         moveButton = root.Q<Button>("Hand_Button");
         selectButton = root.Q<Button>("Select_Button");
+        _deleteButton = root.Q<Button>("Delete_Button");
         _roomManager = FindObjectOfType<RoomManager>(); 
+        
+        _plus = root.Q<Button>("Plus_Button");
+        _minus = root.Q<Button>("Minus_Button");
             
         SpawnerContainer = GameObject.Find("SpawnerContainer");
-
+        
         _rotateOptions = root.Q<VisualElement>("Rotate_Options");
         _colors = root.Q<VisualElement>("Colors");
         _red = root.Q<Button>("Red");
@@ -107,32 +132,42 @@ public class UIController : MonoBehaviour
         _orange = root.Q<Button>("Orange");
         _green = root.Q<Button>("Green");
         _yellow = root.Q<Button>("Yellow");
+
+        _saveButton = root.Q<Button>("Header-save-button");
+        _loadButton = root.Q<Button>("Header-load-button");
         
         _hamburgerButton.clicked += ToggleItemList;
         _cameraButton.clicked += InvertCamera;
         _paintButton.clicked += HandleColors;
+        _paintButton.clicked += () => ChooseButton(_paintButton);
         _rotateButton.clicked += HandleRotation;
+        _rotateButton.clicked += () => ChooseButton(_rotateButton);
         _rightRotateBtn.clicked += RotateRight;
         _leftRotateBtn.clicked += RotateLeft;
-        moveButton.clicked += HandMove;
-        selectButton.clicked += SelectTool;
+        moveButton.clicked +=  () => {_roomManager.movebool = true;};
+        moveButton.clicked += () => ChooseButton(moveButton);
+        selectButton.clicked += () => {_roomManager.movebool = false;};
+        selectButton.clicked += () => ChooseButton(selectButton);
         _red.clicked += () => ChoseColor(0);
         _orange.clicked += () => ChoseColor(1);
         _green.clicked += () => ChoseColor(2);
         _blue.clicked += () => ChoseColor(3);
         _yellow.clicked += () => ChoseColor(4);
+        _plus.clicked += ZoomIn;
+        _minus.clicked += ZoomOut;
+        _deleteButton.clicked += () => {_roomManager.Delete();};
+        _deleteButton.clicked += () => ChooseButton(_deleteButton);
+        _loadButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Load();};
+        _saveButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Save();};
 
     }
 
-    private void SelectTool()
-    {
-        _roomManager.movebool = false;
-    }
+    private void ChooseButton(Button btnToSelect){
+        UnselectTool();
+        btnToSelect.style.backgroundColor = new Color(0.14509803921f, 0.40784313725f, 0.85490196078f);
+        selectedTool = btnToSelect;
+    }   
 
-    private void HandMove()
-    {
-        _roomManager.movebool = true;
-    }
     
     private static void InvertCamera()
     {
@@ -141,7 +176,6 @@ public class UIController : MonoBehaviour
 
     public void RotateRight()
     {
-        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
             _roomManager.Rotate(10f);
@@ -149,12 +183,12 @@ public class UIController : MonoBehaviour
     }
     private void RotateLeft()
     {
-        Debug.Log(_roomManager.selectedObject);
         if (rotateBool)
         {
             _roomManager.Rotate(-10f);
         }
     }
+    
 
     public static void SetButton(Button button)
     {
@@ -178,7 +212,6 @@ public class UIController : MonoBehaviour
 
     private static void HandleColors()
     {
-        Debug.Log(_materials[0]);
         if (_colors.ClassListContains("hidden"))
         {
             _colors.RemoveFromClassList("hidden");
@@ -192,32 +225,33 @@ public class UIController : MonoBehaviour
 
     private void ChoseColor(int n)
     {
-        Debug.Log("Color");
         if (_colors.ClassListContains("hidden"))
         {
             return;
         }
         else
         {
-            Debug.Log("Color");
             switch (n)
             {
                 case 0:
-                    Debug.Log("RED");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[4];
+                    _roomManager.highlightMaterial = (Material) _materials[4];
                     break;
                 case 1:
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[3];
+                    _roomManager.highlightMaterial = (Material) _materials[3];
                     break;
                 case 2:
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[2];
+                    _roomManager.highlightMaterial = (Material) _materials[2];
                     break;
                 case 3:
-                    Debug.Log("Blue");
                     _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[0];
+                    _roomManager.highlightMaterial = (Material) _materials[0];
                     break;
                 case 4:
-                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[6];
+                    _roomManager.selectedObject.GetComponent<ObjProperties>().mainColor = (Material) _materials[7];
+                    _roomManager.highlightMaterial = (Material) _materials[7];
                     break;
             }
         }
@@ -241,7 +275,6 @@ public class UIController : MonoBehaviour
             }
         }
         else{
-            Debug.Log("Inget objekt selected");
         }
     }
 
@@ -264,6 +297,23 @@ public class UIController : MonoBehaviour
         _savedSelection = null;
         _selectedCategory.AddToClassList("selected");
     }
+    
+    
+    private void ZoomIn()
+    {
+        cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        float target = 5;
+        float angle = Mathf.Abs((defaultFov / zoomMultiplier) - defaultFov);
+        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
+    }
+
+    private void ZoomOut()
+    {
+        cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        float target = 180;
+        float angle = Mathf.Abs((defaultFov / zoomMultiplier) - defaultFov);
+        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
+    }
 
     // Update is called once per frame
     void Update()
@@ -272,7 +322,35 @@ public class UIController : MonoBehaviour
         {
             _colors.AddToClassList("hidden");
             _rotateOptions.AddToClassList("hidden");
-            
+            _roomManager.highlightMaterial = (Material) _materials[5];
         }
+        else
+        {
+            if (Input.GetKeyDown("d"))
+            {
+                _roomManager.Delete();
+            }else if (Input.GetKeyDown("m"))
+            {
+                _roomManager.movebool = true;
+            }else if (Input.GetKeyDown("right"))
+            {
+                _roomManager.Rotate(10f);   
+            }else if (Input.GetKeyDown("left"))
+            {
+                _roomManager.Rotate(-10f);
+            }
+        }
+
+        //Enable scrolling using mouse
+        var scrolling = Input.mouseScrollDelta.y;
+        if (scrolling < 0)
+        {
+            ZoomOut();
+        }else if (scrolling > 0)
+        {
+            ZoomIn();
+        }
+        
+        
     }
 }

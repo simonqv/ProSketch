@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,14 +40,8 @@ public class SceneHandler : MonoBehaviour
         Debug.Log("Scene handler started");
     }
 
-    private static void Save()
+    public void Save()
     {
-        // TODO: Let user input name of file.
-        // SceneData sceneData = new SceneData();
-        // sceneData.SetFileName("lol");
-        // sceneData.SetFileName("room_name");
-        // SaveSystem.SaveRoom(sceneData);
-        
         _fileNameInputWindow.style.display = DisplayStyle.Flex;
     }
 
@@ -63,7 +56,6 @@ public class SceneHandler : MonoBehaviour
             SaveSystem.SaveRoom(sceneData);
             _fileNameInputWindow.style.display = DisplayStyle.None;
         }
-
     }
 
     private void CancelSaveFileWithNameButtonClicked()
@@ -79,7 +71,7 @@ public class SceneHandler : MonoBehaviour
     }
     
     // TODO: search for specific file, place objects in scene.
-    private void Load()
+    public void Load()
     {
         _chooseFileWindow.style.display = DisplayStyle.Flex;
         ChooseFile();
@@ -127,7 +119,7 @@ public class SceneHandler : MonoBehaviour
         button.AddToClassList("button-style");
         button.name = mes;
         button.text = mes;
-        button.clickable = new Clickable(() => Loader(button.name) /*chosenFile = button.name*/);
+        button.clickable = new Clickable(() => Loader(button.name));
         return button;
     }
 
@@ -136,12 +128,16 @@ public class SceneHandler : MonoBehaviour
         var sceneData = SaveSystem.LoadRoom(fileName);
         if (sceneData != null)
         {
-            foreach (var x in sceneData.objects)
+            if (SceneManager.GetActiveScene().name == "StartMenu")
             {
-                Debug.Log("Loader " + x.objectName);
+                LoadSave.Setter(sceneData);
+                SceneManager.LoadScene("NewSampleScene");
             }
-            var spawner = GameObject.Find("SpawnerContainer");
-            spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
+            else
+            {
+                var spawner = GameObject.Find("SpawnerContainer");
+                spawner.GetComponent<Spawner>().SpawnLoadedScene(sceneData);
+            }
         }
         _fileList.contentContainer.Clear();
         _chooseFileWindow.style.display = DisplayStyle.None;

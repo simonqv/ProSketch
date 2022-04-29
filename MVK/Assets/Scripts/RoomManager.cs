@@ -12,12 +12,13 @@ public class RoomManager : MonoBehaviour
     public Transform selectedObject = null;
     public RoomClass Room { get; private set; }
 
-    [SerializeField] private Material highlightMaterial;   
+    public Material highlightMaterial;   
     [SerializeField] private Material previousMaterial;
 
     private Ray _ray;
     public bool movebool = false;
     public bool pickUp;
+    private UIController _uiController;
     private Vector3 movePos;
 
     void TrySelectObject()
@@ -25,29 +26,14 @@ public class RoomManager : MonoBehaviour
         if (selectedObject != null) return;
         _ray = camera.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(_ray, out RaycastHit hit)) return;
-        Debug.Log("Hit");
         //Get object from hit
         Transform obj = hit.transform;
-        Debug.Log(hit.transform.name);
         if (hit.transform.CompareTag("room") ||hit.transform == null)
         {
-            Debug.Log("Hit the room!");
             //pickUp = false;
             return;
         };
-        Debug.Log("Not a room :)");
-        Debug.Log(hit.transform.tag);
-        var selectionRenderer = obj.GetComponentInChildren<Renderer>();
-        Debug.Log(selectionRenderer);
-        if (selectionRenderer == null) return;
-        selectedObject = obj;
-        Debug.Log("Renderer");
-        previousMaterial = selectionRenderer.material;
-        selectionRenderer.material = highlightMaterial;
-        selectedObject.tag = "Selected";
-        //pickUp = true;
-        Room = selectedObject.GetComponent<RoomClass>();
-        Debug.Log("Select");
+        SetSelectedObject(obj);
     }
     
     public void SetSelectedObject(Transform obj)
@@ -55,23 +41,25 @@ public class RoomManager : MonoBehaviour
         if (selectedObject != null)
         {
             var selectionRenderer = selectedObject.GetComponentInChildren<Renderer>();
-            selectionRenderer.material = previousMaterial;
+
+            selectionRenderer.material = selectedObject.GetComponent<ObjProperties>().mainColor;
+
             selectedObject.tag = "GameObject";
             //pickUp = false;
         }
         selectedObject = obj;
         var selectionRenderer2 = selectedObject.GetComponentInChildren<Renderer>();
+        if (selectionRenderer2 == null) return;
         previousMaterial = selectionRenderer2.material;
         selectionRenderer2.material = highlightMaterial;
         selectedObject.tag = "Selected";
-        //pickUp = true;
+        pickUp = true;
         Room = selectedObject.GetComponent<RoomClass>();
     }
 
     void UnselectObject()
     {
         if(selectedObject == null) return;
-        Debug.Log("Deselect init");
         selectedObject.tag = "GameObject";
         
         
@@ -79,8 +67,8 @@ public class RoomManager : MonoBehaviour
         if (selectionRenderer == null) return;
         var prevMat = selectedObject.GetComponent<ObjProperties>().mainColor;
         selectionRenderer.material = prevMat;
-        Debug.Log("Deselect");
         
+        GameObject.Find("Sidebar").GetComponent<UIController>().UnselectTool();
         selectedObject = null;
 
     }
@@ -90,6 +78,11 @@ public class RoomManager : MonoBehaviour
         Room = gameObject.AddComponent<RoomClass>();
         Room.CreateRoom();
         camera = Room.cam;
+        if (LoadSave.GetLoad())
+        {
+            var spawner = GameObject.Find("SpawnerContainer");
+            spawner.GetComponent<Spawner>().SpawnLoadedScene(LoadSave.GetSceneData());
+        }
     }
 
     public void Reset()
@@ -105,7 +98,6 @@ public class RoomManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && !pickUp)
         {   
             TrySelectObject();
-            Debug.Log("Mouse0");
             if (selectedObject != null)
             {
                 pickUp = true;
@@ -114,10 +106,19 @@ public class RoomManager : MonoBehaviour
         
         else if (selectedObject != null && Input.GetKeyDown(KeyCode.Mouse1) && pickUp)
         {
-            Debug.Log("Mouse1");
             pickUp = false;
+            movebool = false;
             UnselectObject();
             
+        }
+
+        if (selectedObject != null)
+        {
+            var selectionRenderer2 = selectedObject.GetComponentInChildren<Renderer>();
+            previousMaterial = selectionRenderer2.material;
+            selectionRenderer2.material = highlightMaterial;
+            selectedObject.tag = "Selected";
+            pickUp = true;
         }
         Move();
         //Rotate();
@@ -125,12 +126,13 @@ public class RoomManager : MonoBehaviour
 
     private void Move()
     {
-        //Debug.Log(selectedObject);
         
         if (selectedObject == null) return;
         
         _ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(_ray, out RaycastHit raycastHit) && movebool) {
+        if (Physics.Raycast(_ray, out RaycastHit raycastHit) && movebool)
+        {
+            if (raycastHit.transform.CompareTag("Selected")) return;
                 
             //Lägg till att kolla om current pos n+ next pos har intersecting colliders,
             //skapa trigger: Om det blir intersect ignore action
@@ -140,7 +142,6 @@ public class RoomManager : MonoBehaviour
                     
             selectedObject.position = new Vector3(raycastHit.point.x,0.2f,raycastHit.point.z);
             //}
-            // Debug.Log(Input.mousePosition); // Debug print out mouseposition when moving mouse
         }
         
     }
@@ -149,10 +150,18 @@ public class RoomManager : MonoBehaviour
     {
         if (selectedObject != null)
         {
-           
-                selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,dir);
-            
-            
+            selectedObject.transform.RotateAround(selectedObject.position,selectedObject.up,dir);
+        }
+    }
+    
+    // Function that deletes a selected object in scene.
+    public void Delete()
+    {
+        if (selectedObject != null)
+        {
+            Destroy(selectedObject.gameObject);
+            pickUp = false;
+            UnselectObject();
         }
     }
 }

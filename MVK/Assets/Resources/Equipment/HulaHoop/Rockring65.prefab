@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6120105998787830507
+--- !u!1 &3250861174578106372
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6120105998787830506}
-  - component: {fileID: 8342649710276092853}
-  - component: {fileID: 309425922272418531}
+  - component: {fileID: 3250861174578106373}
+  - component: {fileID: 9059227895808026636}
+  - component: {fileID: 2852055040199603387}
   m_Layer: 0
   m_Name: Rockring65
   m_TagString: GameObject
@@ -18,58 +18,57 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6120105998787830506
+--- !u!4 &3250861174578106373
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6120105998787830507}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3359.7, y: 17, z: -0.00015258789}
+  m_GameObject: {fileID: 3250861174578106372}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1000, y: 1, z: 1000}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6009000952960270851}
+  - {fileID: 3069159710000443628}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &8342649710276092853
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6120105998787830507}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1865056248366311061, guid: aabc10eff07634699ba84a1f896e3b8f, type: 3}
---- !u!114 &309425922272418531
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &9059227895808026636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6120105998787830507}
+  m_GameObject: {fileID: 3250861174578106372}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2791ddeaf296bb34eb7f62c0fb43ab72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6120105998787830507}
+  prefab: {fileID: 3250861174578106372}
   mainColor: {fileID: 2100000, guid: 9b1dad2432e9d6e4a9183a92f1611f4d, type: 2}
   selectColor: {r: 0, g: 0, b: 0, a: 0}
   pre: {fileID: 0}
---- !u!1001 &6120105998671881704
+--- !u!65 &2852055040199603387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250861174578106372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12801994, y: 126.89742, z: 0.005927558}
+  m_Center: {x: -0.0008431645, y: 63.8342, z: 0.00011016024}
+--- !u!1001 &3250861174752352007
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 6120105998787830506}
+    m_TransformParent: {fileID: 3250861174578106373}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: aabc10eff07634699ba84a1f896e3b8f, type: 3}
       propertyPath: m_RootOrder
@@ -133,8 +132,8 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9b1dad2432e9d6e4a9183a92f1611f4d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aabc10eff07634699ba84a1f896e3b8f, type: 3}
---- !u!4 &6009000952960270851 stripped
+--- !u!4 &3069159710000443628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aabc10eff07634699ba84a1f896e3b8f, type: 3}
-  m_PrefabInstance: {fileID: 6120105998671881704}
+  m_PrefabInstance: {fileID: 3250861174752352007}
   m_PrefabAsset: {fileID: 0}

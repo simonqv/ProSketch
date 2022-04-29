@@ -30,7 +30,6 @@ public static class IconButtons
         backgroundElement.style.backgroundImage = new StyleBackground(backgroundImage);
         if(!disableSetButton)
         {
-            Debug.Log(containerName);
             element.clicked += () => UIController.SetButton(element);
         }
         element.Add(backgroundElement);
@@ -41,8 +40,9 @@ public static class IconButtons
         CreateIcon("category-icons/hamburger-menu", "Hamburger", iconName:"HamburgerIcon", true),
         CreateIcon("category-icons/plinth", "_Plinth"),
         CreateIcon("category-icons/hula-hoop", "_HulaHoop"),
-        CreateIcon("category-icons/mat", "_Mat"),
+        CreateIcon("category-icons/mattor", "_Mattor"),
         CreateIcon("category-icons/ball", "_Ball"),
-        CreateIcon("category-icons/racket", "_Racket"),
+        CreateIcon("category-icons/bench", "_Bench"),
+        CreateIcon("category-icons/stallningar", "_Stallningar"),
     };
 }
