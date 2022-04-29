@@ -16,10 +16,12 @@ public static class SaveSystem
         {
             Directory.CreateDirectory(SaveFolder);
         }
-        
+        Debug.Log("hellurr");
         // Translate scene data to json format and write file
         var json = JsonUtility.ToJson(sceneData);
+        
         File.WriteAllText(SaveFolder + sceneData.fileName + ".txt", json);
+        // File.WriteAllText(SaveFolder + s + ".txt", json);
     }
 
     public static string getSaveFolderString()

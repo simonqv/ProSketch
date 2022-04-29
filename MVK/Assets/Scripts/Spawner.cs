@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Spawner : MonoBehaviour
 {
@@ -18,16 +20,15 @@ public class Spawner : MonoBehaviour
 
     public void SpawnLoadedScene(SceneData sceneData)
     {
-
         foreach (var go in GameObject.FindObjectsOfType<GameObject>())
         {
-            if (go.name == "Directional Light" || go.name == "EventSystem")
+            // If statement got a bit long so made a list and called .Contains() instead /Gustav
+            if (go.CompareTag("GameObject") || go.CompareTag("room") || go.name == "Camera(Clone)")
             {
-                continue;
+                Destroy(go);
             }
-            Destroy(go);
         }
-        
+
         foreach (var oi in sceneData.objects)
         {
             if (oi.objectTag == "room")
@@ -35,6 +36,7 @@ public class Spawner : MonoBehaviour
                 RoomClass.Setter((int) oi.objectScale.x, (int) oi.objectScale.z);
             }
         }
+
         foreach (var objectInfo in sceneData.objects)
         {
             string cat = objectInfo.objectCategory;
@@ -45,7 +47,9 @@ public class Spawner : MonoBehaviour
             else
             {
                 cat = char.ToUpper(cat[0]) + cat.Substring(1);
-                var variableForInstance = Resources.Load("Equipment/" + cat + "/" + objectInfo.objectName) as GameObject;
+                Debug.Log(cat + "          " + objectInfo.objectName);
+                var obName = objectInfo.objectName.Replace("(Clone)", "");
+                var variableForInstance = Resources.Load("Equipment/" + cat + "/" + obName) as GameObject;
                 if (variableForInstance != null)
                 {
                     var instance = Instantiate(variableForInstance);
@@ -53,6 +57,7 @@ public class Spawner : MonoBehaviour
                     instance.transform.rotation = objectInfo.objectRotation;
                     instance.transform.localScale = objectInfo.objectScale;
                     instance.tag = objectInfo.objectTag;
+                    instance.AddComponent<ObjectCategory>().category = cat;
                 }
             }
         }

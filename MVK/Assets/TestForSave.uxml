@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI-Styles/Style.uss?fileID=7433441132597879392&amp;guid=dd925ea8c01f54191a385109a3edbb10&amp;type=3#Style" />
+    <ui:VisualElement name="Container" class="container" style="width: 100%; height: 100%; align-items: center; justify-content: center; flex-direction: row;">
+        <ui:GroupBox name="Choose-file-window" style="width: 100%; height: 100%; align-items: center; justify-content: center; display: none; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+            <ui:VisualElement name="Shadow" class="shadow" />
+            <ui:VisualElement name="File-list-window" class="window" style="justify-content: center; top: auto; left: auto; position: relative; height: 85%; flex-direction: row;">
+                <ui:VisualElement style="height: 100%; width: 80%; align-items: center; justify-content: center;">
+                    <ui:VisualElement name="list-container" class="window" style="width: 55%; height: 80%; background-color: rgb(118, 142, 180); align-items: center; top: 5%; left: auto; position: relative;">
+                        <ui:ScrollView name="file-names" style="color: rgb(0, 0, 0); height: 100%; background-color: rgba(93, 204, 53, 0); width: 85%; overflow: hidden;" />
+                    </ui:VisualElement>
+                    <ui:Label text="Välj en fil" display-tooltip-when-elided="true" style="font-size: 27px; -unity-text-align: upper-center; -unity-font-style: bold; top: 2%; position: absolute;" />
+                </ui:VisualElement>
+                <ui:Button text="Avbryt" display-tooltip-when-elided="true" name="Cancel-choose-file" class="confirm-cancel-style cancel-button-style" style="align-items: stretch; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; width: 20%; height: 10%; left: auto; right: 8%;" />
+            </ui:VisualElement>
+        </ui:GroupBox>
+        <ui:GroupBox name="Set-file-name-window" style="width: 100%; height: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; opacity: 1; position: absolute; align-items: center; justify-content: center; top: auto; display: none; visibility: visible; overflow: visible;">
+            <ui:VisualElement name="Shadow" class="shadow" />
+            <ui:VisualElement focusable="false" name="File-name-input-window" class="window">
+                <ui:Label text="Ange filnamn (utan filtyp)" display-tooltip-when-elided="true" style="font-size: 27px; -unity-text-align: upper-center; -unity-font-style: bold; top: 8%;" />
+                <ui:TextField picking-mode="Ignore" name="File-name-input" password="false" is-delayed="false" class="room-input-field-style" />
+                <ui:GroupBox style="flex-direction: row; top: 20%; width: 30%; height: 8%; max-width: 500px; max-height: 75px; min-width: 250px; min-height: 40px;">
+                    <ui:Button text="Spara" display-tooltip-when-elided="true" name="Confirm-file-input-button" class="confirm-cancel-style" />
+                    <ui:Button text="Avbryt" display-tooltip-when-elided="true" enable-rich-text="true" name="Cancel-file-input-button" class="confirm-cancel-style cancel-button-style" />
+                </ui:GroupBox>
+            </ui:VisualElement>
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

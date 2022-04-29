@@ -71,9 +71,6 @@ public class MainMenuController : MonoBehaviour
         {
             Console.WriteLine(e.Message);
         }
-        
-
-
     }
 
     void CancelDimsInputButtonPressed()
@@ -86,6 +83,7 @@ public class MainMenuController : MonoBehaviour
 
     void LoadLessonButtonPressed()
     {
-        throw new Exception("not implemented");
+        var x = GameObject.Find("UIDocument").GetComponent<SceneHandler>();
+        x.Load();
     }
 }

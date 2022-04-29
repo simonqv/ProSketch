@@ -78,6 +78,11 @@ public class RoomManager : MonoBehaviour
         Room = gameObject.AddComponent<RoomClass>();
         Room.CreateRoom();
         camera = Room.cam;
+        if (LoadSave.GetLoad())
+        {
+            var spawner = GameObject.Find("SpawnerContainer");
+            spawner.GetComponent<Spawner>().SpawnLoadedScene(LoadSave.GetSceneData());
+        }
     }
 
     public void Reset()
