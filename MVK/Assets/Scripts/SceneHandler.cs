@@ -107,7 +107,6 @@ public class SceneHandler : MonoBehaviour
             {
                 var button = CreateButton(fileName.Replace(path,"").Replace(".txt",""));
                 _fileList.contentContainer.hierarchy.Add(button);
-                // file_list.verticalScrollerVisibility = ScrollerVisibility.AlwaysVisible;
             }
         }
     }
