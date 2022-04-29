@@ -3,12 +3,15 @@ using UnityEngine;
 
 public static class SaveSystem
 {
+    public const string FileExt = ".json";
+    
     // Change to this one later
     // public static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
     private static readonly string SaveFolder = Application.dataPath + "/Saves/";
-    
-    
-    // TODO: Let user input file name
+
+    /*
+     * Saves room/scene as a json file in folder "Saves" 
+     */
     public static void SaveRoom(SceneData sceneData)
     {
         // Test to see if save folder exists
@@ -16,33 +19,32 @@ public static class SaveSystem
         {
             Directory.CreateDirectory(SaveFolder);
         }
-        Debug.Log("hellurr");
+
         // Translate scene data to json format and write file
         var json = JsonUtility.ToJson(sceneData);
         
-        File.WriteAllText(SaveFolder + sceneData.fileName + ".txt", json);
-        // File.WriteAllText(SaveFolder + s + ".txt", json);
+        File.WriteAllText(SaveFolder + sceneData.fileName + FileExt, json);
     }
-
-    public static string getSaveFolderString()
+    
+    public static string GetSaveFolderString()
     {
         return SaveFolder;
     }
     
-    // TODO: Let user see all files and choose one.
-    // TODO: Place all objects in scene.
+    /*
+     * Loads room/scene from file 
+     */
     public static SceneData LoadRoom(string name)
     { 
         // If file exists: open and read file
-        if (File.Exists(SaveFolder + name + ".txt")) {
-            var saveString = File.ReadAllText(SaveFolder + name + ".txt");
+        if (File.Exists(SaveFolder + name + FileExt)) {
+            var saveString = File.ReadAllText(SaveFolder + name + FileExt);
             var sceneData = JsonUtility.FromJson<SceneData>(saveString);
-            // GameObject.FindObjectOfType<Spawner>().SpawnLoadedScene(sceneData);
             return sceneData;
         } 
         else
         {
-            Debug.Log("Save file not found in " + SaveFolder + name+ ".txt" );
+            Debug.Log("Save file not found in " + SaveFolder + name+ FileExt );
             return null;
         }
     }

@@ -6,13 +6,8 @@ public class Movement : MonoBehaviour
 {
   public float moveSpeed = 1f;
   public Transform movePoint;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
+  // Update is called once per frame
     void Update()
     {
       if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f) {

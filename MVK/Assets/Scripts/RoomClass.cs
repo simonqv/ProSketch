@@ -15,16 +15,9 @@ public class RoomClass : MonoBehaviour
     private float[] _pos;
     private float[] _angles;
 
-    private void Start()
-    {
-        
-    }
-
-    // public int GetLength() { return _length; }
-
-    // public int GetWidth() { return _width; }
-
-    // public int GetHeight() { return Height; }
+    /*
+     * Set length and width of room
+     */
     public static void Setter(int len, int wid)
     {
         _length = len;
@@ -43,6 +36,9 @@ public class RoomClass : MonoBehaviour
         }
     }
 
+    /*
+     * Finds room prefab, alters the width and length according to the setter, and spawns camera.
+     */
     public void CreateRoom()
     {
         try

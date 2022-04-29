@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+/*
+ * Used to be able to switch scene from main menu to a loaded scene
+ */
 public class LoadSave
 {
     private static bool _load;
