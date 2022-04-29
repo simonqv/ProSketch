@@ -1,6 +1,7 @@
 using System.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
@@ -44,6 +45,8 @@ public class UIController : MonoBehaviour
 
     public bool rotateBool = false;
 
+    private static Button _saveButton;
+    private static Button _loadButton;
 
     private static void ToggleItemList()
     {
@@ -129,6 +132,9 @@ public class UIController : MonoBehaviour
         _orange = root.Q<Button>("Orange");
         _green = root.Q<Button>("Green");
         _yellow = root.Q<Button>("Yellow");
+
+        _saveButton = root.Q<Button>("Header-save-button");
+        _loadButton = root.Q<Button>("Header-load-button");
         
         _hamburgerButton.clicked += ToggleItemList;
         _cameraButton.clicked += InvertCamera;
@@ -151,6 +157,8 @@ public class UIController : MonoBehaviour
         _minus.clicked += ZoomOut;
         _deleteButton.clicked += () => {_roomManager.Delete();};
         _deleteButton.clicked += () => ChooseButton(_deleteButton);
+        _loadButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Load();};
+        _saveButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Save();};
 
     }
 

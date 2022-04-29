@@ -40,7 +40,7 @@ public class SceneHandler : MonoBehaviour
         Debug.Log("Scene handler started");
     }
 
-    private static void Save()
+    public void Save()
     {
         _fileNameInputWindow.style.display = DisplayStyle.Flex;
     }
@@ -69,6 +69,7 @@ public class SceneHandler : MonoBehaviour
     // TODO: search for specific file, place objects in scene.
     public void Load()
     {
+        Debug.Log("Choose file: " + _chooseFileWindow.name);
         _chooseFileWindow.style.display = DisplayStyle.Flex;
         ChooseFile();
     }
