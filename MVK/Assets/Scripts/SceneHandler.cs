@@ -74,22 +74,6 @@ public class SceneHandler : MonoBehaviour
         ChooseFile();
     }
     
-    // Update is called once per frame
-    private void Update()
-    {
-        // TODO: make the pop-up for saving first
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("Saving file");
-            Save();
-        } 
-        else if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log("Loading file");
-            Load();
-        }
-    }
-
     // User can choose which scene/file to open from a dropdown  
     public void ChooseFile()
     {
@@ -128,7 +112,7 @@ public class SceneHandler : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "StartMenu")
             {
                 LoadSave.Setter(sceneData);
-                SceneManager.LoadScene("NewSampleScene");
+                SceneManager.LoadScene("UI");
             }
             else
             {
