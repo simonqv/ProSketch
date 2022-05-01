@@ -87,6 +87,7 @@ public class SceneHandler : MonoBehaviour
      */
     public void Load()
     {
+        Debug.Log("Choose file: " + _chooseFileWindow.name);
         _chooseFileWindow.style.display = DisplayStyle.Flex;
         ChooseFile();
     }
@@ -95,7 +96,7 @@ public class SceneHandler : MonoBehaviour
     private void ChooseFile()
     {
         _fileList = _root.Q<ScrollView>("file-names");
-        var path = SaveSystem.GetSaveFolderString();
+        var path = SaveSystem.getSaveFolderString();
         string[] folderFiles = System.IO.Directory.GetFiles(path);
         foreach (var fileName in folderFiles)
         {
@@ -129,7 +130,7 @@ public class SceneHandler : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "StartMenu")
             {
                 LoadSave.Setter(sceneData);
-                SceneManager.LoadScene("NewSampleScene");
+                SceneManager.LoadScene("UI");
             }
             else
             {
