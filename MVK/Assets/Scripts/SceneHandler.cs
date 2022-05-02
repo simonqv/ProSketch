@@ -96,7 +96,7 @@ public class SceneHandler : MonoBehaviour
     private void ChooseFile()
     {
         _fileList = _root.Q<ScrollView>("file-names");
-        var path = SaveSystem.getSaveFolderString();
+        var path = SaveSystem.GetSaveFolderString();
         string[] folderFiles = System.IO.Directory.GetFiles(path);
         foreach (var fileName in folderFiles)
         {

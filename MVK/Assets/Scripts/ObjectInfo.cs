@@ -9,45 +9,34 @@ using UnityEngine;
 [Serializable]
 public class ObjectInfo
 {
-    private string _objectTag;
-    private string _objectName;
-    private Vector3 _objectPosition;
-    private Vector3 _objectScale;
-    private Quaternion _objectRotation;
-    private string _objectCategory;
+    public string objectTag;
+    public string objectName;
+    public Vector3 objectPosition;
+    public Vector3 objectScale;
+    public Quaternion objectRotation;
+    public string objectCategory;
     
-    public string GetTag() {return _objectTag;}
-
-    public string GetName() {return _objectName;}
-
-    public Vector3 GetObjectPosition() {return _objectPosition;}
-
-    public Vector3 GetObjectScale() {return _objectScale;}
-
-    public Quaternion GetObjectRotation() {return _objectRotation;}
-
-    public string GetObjectCategory() {return _objectCategory;}
     
     // TODO: Store texture somehow
     public ObjectInfo(GameObject go)
     {
-        _objectTag = go.tag;
-        _objectName = go.name;
-        _objectPosition = go.transform.position;
-        _objectScale = go.transform.lossyScale;
-        _objectRotation = go.transform.rotation;
+        objectTag = go.tag;
+        objectName = go.name;
+        objectPosition = go.transform.position;
+        objectScale = go.transform.lossyScale;
+        objectRotation = go.transform.rotation;
         var cat = go.GetComponent<ObjectCategory>();
-        if (_objectName == "RoomManager")
+        if (objectName == "RoomManager")
         {
-            _objectCategory = "room";
+            objectCategory = "room";
         }
         else if (cat != null)
         {
-            _objectCategory = cat.category;
+            objectCategory = cat.category;
         }
         else
         {
-            _objectCategory = "_";
+            objectCategory = "_";
         }
     }
 }
