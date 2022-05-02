@@ -34,16 +34,15 @@ public class UIController : MonoBehaviour
     private Button _cameraButton;
     private RoomClass _room;
     
-    public static Button _plus;
-    public static Button _minus;
+    private static Button _plus;
+    private static Button _minus;
 
     public Camera cam;
-    float zoomMultiplier = 2;
-    float defaultFov = 300;
-    float zoomDuration = 2;
+    private const float ZoomMultiplier = 2F;
+    private const float DefaultFov = 300F;
+    private const float ZoomDuration = 2F;
 
-
-    public bool rotateBool = false;
+    public bool rotateBool;
 
     // Buttons on the top left of the screen. Used for saving and loading 
     private static Button _saveButton;
@@ -61,12 +60,9 @@ public class UIController : MonoBehaviour
             _itemList.AddToClassList("hidden");
             UnsetButton();
         }
-        
     }
-
-
+    
     private static void ClearItemList()
-
     {
         if (_itemList.hierarchy.childCount <= 0) return;
         _itemList.hierarchy.Clear();
@@ -74,10 +70,8 @@ public class UIController : MonoBehaviour
 
     private static void PopulateItemList(string category)
     {
-        if (category[0] != '_')
-        {
-            return;
-        };
+        if (category[0] != '_') return;
+        
         ClearItemList();
         foreach (var button in ListedItems.GetAllItemsInCategory(category.ToLower()[1..]))
         {
@@ -104,11 +98,9 @@ public class UIController : MonoBehaviour
                 categoryButton);
         }
         
-
         _materials = Resources.LoadAll("material/");
-        
         _selectedCategory = categoryButtons[1] as Button;
-
+        
         _itemList = root.Q<VisualElement>("ItemList");
         _hamburgerButton = root.Q<Button>("Hamburger");
         _paintButton = root.Q<Button>("Paint_Button");
@@ -162,7 +154,6 @@ public class UIController : MonoBehaviour
         // When Load or Save button clicked, display corresponding "popup" window.
         _loadButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Load();};
         _saveButton.clicked += () => {GameObject.Find("Sidebar").GetComponent<SceneHandler>().Save();};
-
     }
 
     private void ChooseButton(Button btnToSelect){
@@ -170,7 +161,6 @@ public class UIController : MonoBehaviour
         btnToSelect.style.backgroundColor = new Color(0.14509803921f, 0.40784313725f, 0.85490196078f);
         selectedTool = btnToSelect;
     }   
-
     
     private static void InvertCamera()
     {
@@ -191,7 +181,6 @@ public class UIController : MonoBehaviour
             _roomManager.Rotate(-10f);
         }
     }
-    
 
     public static void SetButton(Button button)
     {
@@ -259,11 +248,9 @@ public class UIController : MonoBehaviour
             }
         }
     }
-
-
+    
     private void HandleRotation()
     {
-       
         if(_roomManager.selectedObject != null){
             if (_rotateOptions.ClassListContains("hidden"))
             {
@@ -277,8 +264,6 @@ public class UIController : MonoBehaviour
                 rotateBool = false;
             }
         }
-        else{
-        }
     }
 
     private static void UnsetButton()
@@ -288,9 +273,7 @@ public class UIController : MonoBehaviour
             _savedSelection = _selectedCategory;
             _selectedCategory.RemoveFromClassList("selected");
         }
-
         _selectedCategory = null;
-
     }
 
     private static void SetButtonToSaved()
@@ -301,21 +284,20 @@ public class UIController : MonoBehaviour
         _selectedCategory.AddToClassList("selected");
     }
     
-    
     private void ZoomIn()
     {
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         float target = 5;
-        float angle = Mathf.Abs((defaultFov / zoomMultiplier) - defaultFov);
-        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
+        float angle = Mathf.Abs((DefaultFov / ZoomMultiplier) - DefaultFov);
+        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / ZoomDuration * Time.deltaTime);
     }
 
     private void ZoomOut()
     {
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         float target = 180;
-        float angle = Mathf.Abs((defaultFov / zoomMultiplier) - defaultFov);
-        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / zoomDuration * Time.deltaTime);
+        float angle = Mathf.Abs((DefaultFov / ZoomMultiplier) - DefaultFov);
+        cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, angle / ZoomDuration * Time.deltaTime);
     }
 
     // Update is called once per frame

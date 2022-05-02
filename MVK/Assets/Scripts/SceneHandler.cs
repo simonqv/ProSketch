@@ -60,6 +60,7 @@ public class SceneHandler : MonoBehaviour
     private void SaveFileWithNameButtonClicked()
     {
         var fileNameField = _root.Q<TextField>("File-name-input").value;
+        
         // fileName can only contain numbers, letters a-z, underscore(_), Hyphen-minus (-)
         if (Regex.IsMatch(fileNameField, @"^(([a-z]|[A-Z]|\d|-|_)+)$"))
         {
