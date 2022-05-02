@@ -6,12 +6,11 @@ public class RoomClass : MonoBehaviour
     private static int _length = 20;
     private static int _width = 20;
     private double _angle;
-    private int _height;
     private const int Height = 9;
 
     private GameObject _roomPrefab;
-    private Camera _camera;
-    public Camera cam;
+    private Camera _camera; // Fetching camera prefab from Resources
+    public Camera cam; // Instantiate camera that is fetched from _camera
     private float[] _pos;
     private float[] _angles;
 
@@ -28,11 +27,11 @@ public class RoomClass : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && cam.transform.position.x > 0)
         {
-            MoveCamera(1);
+            InvertCamera();
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2) && cam.transform.position.x < 0)
         {
-            MoveCamera(-1);
+            InvertCamera();
         }
     }
 
@@ -56,7 +55,7 @@ public class RoomClass : MonoBehaviour
 
     private void CreateCamera()
     {
-        // Instansiera kamera, placear i ett hörn, vinkla
+        // Instantiate camera, places in a corner and angles it.
         _camera = Resources.Load<Camera>("Room/Camera");
         
         var lsq = Mathf.Pow(_length, 2);
@@ -66,22 +65,9 @@ public class RoomClass : MonoBehaviour
         var beta = Mathf.Atan((float) _length / _width) * (180/Mathf.PI);    // Rotation around cameras y-axis
         _pos = new float[] {(-_length / 2f) * 100 * 3, Height * 100*3, (-_width / 2f) * 100 *3};
         _angles = new float[] {alpha, beta};
-        _height = (int)((float)_width / 2 / Mathf.Tan(30 * Mathf.PI / 180)+Height) * 100;
         cam = Instantiate(_camera);
         cam.transform.position = new Vector3(_pos[0] ,_pos[1], _pos[2] );
         cam.transform.Rotate(_angles[0], _angles[1], 0f, Space.Self);
-        
-
-    }
-    
-
-    
-    // Input: P = 1 for camera position 1, P = -1 for camera position 2
-    private void MoveCamera(int p)
-    {
-        cam.transform.position = new Vector3(_pos[0] * p,_pos[1], _pos[2] * p);
-        cam.transform.Rotate(0, 180, 0, Space.World);
-        
     }
     
     public void InvertCamera()

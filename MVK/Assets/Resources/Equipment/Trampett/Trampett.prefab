@@ -41,7 +41,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4019078211851373468}
-  - component: {fileID: 1733160069279531696}
   - component: {fileID: 5788425800563310122}
   - component: {fileID: 2937832809893339386}
   - component: {fileID: 7374879247381206195}
@@ -70,21 +69,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1733160069279531696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7451287214685448722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b601a727f5615ca418ffd9cc8a2687f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 5122134041979700986}
-  upperLimit: 330
-  lowerLimit: 30
 --- !u!65 &5788425800563310122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -112,7 +96,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7451287214685448722}
   mainColor: {fileID: 2100000, guid: 9113a317ba9fcb840bec33c03f94e400, type: 2}
-  selectColor: {fileID: 0}
   pre: {fileID: 0}
 --- !u!64 &7374879247381206195
 MeshCollider:

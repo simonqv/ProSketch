@@ -16,7 +16,6 @@ public class ObjectInfo
     public Quaternion objectRotation;
     public string objectCategory;
     
-    
     // TODO: Store texture somehow
     public ObjectInfo(GameObject go)
     {

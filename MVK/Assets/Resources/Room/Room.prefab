@@ -125,10 +125,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8604242008482583136}
-  - component: {fileID: 7087690911001795932}
-  - component: {fileID: 6926152569641314145}
-  - component: {fileID: 5994575502558353839}
-  - component: {fileID: 2606716375240690544}
   - component: {fileID: 2563993598754842091}
   m_Layer: 0
   m_Name: Colider
@@ -152,58 +148,6 @@ Transform:
   m_Father: {fileID: 7089435400354471570}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7087690911001795932
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9181738796847926519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 0.1}
-  m_Center: {x: 0, y: 50, z: 50}
---- !u!65 &6926152569641314145
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9181738796847926519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 0.1}
-  m_Center: {x: 0, y: 50, z: -50}
---- !u!65 &5994575502558353839
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9181738796847926519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 100, z: 100}
-  m_Center: {x: 50, y: 50, z: 0}
---- !u!65 &2606716375240690544
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9181738796847926519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 100, z: 100}
-  m_Center: {x: -50, y: 50, z: 0}
 --- !u!65 &2563993598754842091
 BoxCollider:
   m_ObjectHideFlags: 0

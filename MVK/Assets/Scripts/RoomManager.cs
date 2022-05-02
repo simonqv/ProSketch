@@ -7,32 +7,30 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     public new Camera camera;
-    public Transform selectedObject = null;
+    public Transform selectedObject;
     public RoomClass Room { get; private set; }
 
     public Material highlightMaterial;   
     [SerializeField] private Material previousMaterial;
 
     private Ray _ray;
-    public bool movebool = false;
+    public bool movebool;
     public bool pickUp;
     private UIController _uiController;
-    private Vector3 movePos;
 
     void TrySelectObject()
     {
         if (selectedObject != null) return;
+        
         _ray = camera.ScreenPointToRay(Input.mousePosition);
+        
         if (!Physics.Raycast(_ray, out RaycastHit hit)) return;
+        
         //Get object from hit
         Transform obj = hit.transform;
-        if (hit.transform.CompareTag("room") ||hit.transform == null)
-        {
-            //pickUp = false;
-            return;
-        };
+        if (hit.transform.CompareTag("room") ||hit.transform == null) return;
+        
         SetSelectedObject(obj);
     }
     
@@ -41,17 +39,19 @@ public class RoomManager : MonoBehaviour
         if (selectedObject != null)
         {
             var selectionRenderer = selectedObject.GetComponentInChildren<Renderer>();
-
             selectionRenderer.material = selectedObject.GetComponent<ObjProperties>().mainColor;
 
             selectedObject.tag = "GameObject";
-            //pickUp = false;
         }
+        
         selectedObject = obj;
         var selectionRenderer2 = selectedObject.GetComponentInChildren<Renderer>();
+        
         if (selectionRenderer2 == null) return;
+        
         previousMaterial = selectionRenderer2.material;
         selectionRenderer2.material = highlightMaterial;
+        
         selectedObject.tag = "Selected";
         pickUp = true;
         Room = selectedObject.GetComponent<RoomClass>();
@@ -62,15 +62,15 @@ public class RoomManager : MonoBehaviour
         if(selectedObject == null) return;
         selectedObject.tag = "GameObject";
         
-        
         var selectionRenderer = selectedObject.GetComponentInChildren<Renderer>();
+        
         if (selectionRenderer == null) return;
+        
         var prevMat = selectedObject.GetComponent<ObjProperties>().mainColor;
         selectionRenderer.material = prevMat;
         
         GameObject.Find("Sidebar").GetComponent<UIController>().UnselectTool();
         selectedObject = null;
-
     }
 
     void Start()
@@ -84,7 +84,10 @@ public class RoomManager : MonoBehaviour
             spawner.GetComponent<Spawner>().SpawnLoadedScene(LoadSave.GetSceneData());
         }
     }
-
+    
+    /*
+     * Works like Start, but is callable
+     */
     public void Reset()
     { 
         Room = gameObject.AddComponent<RoomClass>();
@@ -95,7 +98,6 @@ public class RoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.Mouse0) && !pickUp)
         {   
             TrySelectObject();
@@ -110,7 +112,6 @@ public class RoomManager : MonoBehaviour
             pickUp = false;
             movebool = false;
             UnselectObject();
-            
         }
 
         if (selectedObject != null)
@@ -122,29 +123,20 @@ public class RoomManager : MonoBehaviour
             pickUp = true;
         }
         Move();
-        //Rotate();
     }
 
     private void Move()
     {
-        
         if (selectedObject == null) return;
         
         _ray = camera.ScreenPointToRay(Input.mousePosition);
+        
         if (Physics.Raycast(_ray, out RaycastHit raycastHit) && movebool)
         {
             if (raycastHit.transform.CompareTag("Selected")) return;
-                
-            //Lägg till att kolla om current pos n+ next pos har intersecting colliders,
-            //skapa trigger: Om det blir intersect ignore action
-    
-            // Avoid selectedObject collider
-            //if (raycastHit.collider != selectedObject.gameObject.GetComponent<Collider>()) {
-                    
+            
             selectedObject.position = new Vector3(raycastHit.point.x,0.2f,raycastHit.point.z);
-            //}
         }
-        
     }
 
     public void Rotate(float dir)
