@@ -87,6 +87,7 @@ public class SceneHandler : MonoBehaviour
      */
     public void Load()
     {
+        Debug.Log("Choose file: " + _chooseFileWindow.name);
         _chooseFileWindow.style.display = DisplayStyle.Flex;
         ChooseFile();
     }
@@ -129,7 +130,7 @@ public class SceneHandler : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "StartMenu")
             {
                 LoadSave.Setter(sceneData);
-                SceneManager.LoadScene("NewSampleScene");
+                SceneManager.LoadScene("UI");
             }
             else
             {

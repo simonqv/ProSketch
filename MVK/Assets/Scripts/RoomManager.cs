@@ -87,6 +87,7 @@ public class RoomManager : MonoBehaviour
 
     public void Reset()
     { 
+        Room = gameObject.AddComponent<RoomClass>();
         Room.CreateRoom();
         camera = Room.cam;    
     }

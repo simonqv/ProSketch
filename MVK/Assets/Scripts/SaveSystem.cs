@@ -3,10 +3,10 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    public const string FileExt = ".json";
+    public const string FileExt = ".txt";
     
     // Change to this one later
-    // public static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
+    // public static readonly string SaveFolder = Application.persistentDataPath + "/Saves/";
     private static readonly string SaveFolder = Application.dataPath + "/Saves/";
 
     /*
