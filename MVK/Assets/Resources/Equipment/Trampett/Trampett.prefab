@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5788425800563310122}
   - component: {fileID: 2937832809893339386}
   - component: {fileID: 7374879247381206195}
+  - component: {fileID: -5901275487350411091}
   m_Layer: 0
   m_Name: Trampett
   m_TagString: GameObject
@@ -111,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7451287214685448722}
   mainColor: {fileID: 2100000, guid: 9113a317ba9fcb840bec33c03f94e400, type: 2}
-  selectColor: {r: 0, g: 0, b: 0, a: 0}
+  selectColor: {fileID: 0}
   pre: {fileID: 0}
 --- !u!64 &7374879247381206195
 MeshCollider:
@@ -127,6 +128,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &-5901275487350411091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451287214685448722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a680a403296864cbc8ce9d7d47d8231d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  category: trampett
 --- !u!1001 &1756646396920827848
 PrefabInstance:
   m_ObjectHideFlags: 0
